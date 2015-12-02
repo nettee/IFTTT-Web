@@ -1,0 +1,174 @@
+@charset "UTF-8";
+label {
+    width: 240px;
+    margin: 14px auto;
+    height: 33px;
+    text-align: left;
+    transition: margin .2s ease,transform .4s ease,opacity .4s linear,height .2s ease
+}
+.login {
+    color: #fff;
+    text-align: center;
+}
+label>span {
+    z-index: 3;
+    pointer-events: none;
+    top: 10px;
+    left: 10px;
+    font-size: 13px;
+    opacity: .5;
+}
+span:hover {
+
+}
+.login-form {
+    width: 320px;
+    height: 320px;
+    left: 50%;
+    top: 50%;
+    margin-left: -160px;
+    margin-top: -160px;
+    text-align: center;
+    position: absolute;
+}
+form {
+    left: 0;
+    width: 100%;
+    margin-top: -25px;
+}
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #6e7f8d;
+    border-radius: 5px;
+    box-shadow: none;
+    border: none;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 33px;
+    line-height: 33px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 10px;
+    font-size: 13px;
+    color: #fff;
+    -webkit-transition: background-color .2s linear;
+    -moz-transition: background-color .2s linear;
+    transition: background-color .2s linear;
+}
+button, input, select, textarea {
+    font-family: Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.btn.disabled, .btn[disabled] {
+    opacity: .6;
+    color: #fff;
+    background-image: none;
+    box-shadow: none;
+    pointer-events: none;
+}
+.btn-primary {
+              color: #fff!important;
+              background-color: #0095ff;
+              background-image: -webkit-linear-gradient(270deg,rgba(255,255,255,.3) 0,rgba(255,255,255,0) 100%);
+              background-image: -moz-linear-gradient(270deg,rgba(255,255,255,.3) 0,rgba(255,255,255,0) 100%);
+              background-image: linear-gradient(rgba(255,255,255,.3) 0,rgba(255,255,255,0) 100%);
+              box-shadow: 0 1px 1px 0 rgba(34,36,38,.25),inset 0 1px 0 0 rgba(255,255,255,.15);
+          }
+.btn {
+              font-size: 14px;
+              display: inline-block;
+              padding: .6em 1em;
+              clear: both;
+              border-radius: 5px;
+              color: #fff;
+              line-height: 1.1em;
+          }
+.btn, .create a, h2 {
+              font-weight: 500;
+          }
+.btn, .create a {
+              cursor: pointer;
+              font-weight: 500;
+          }
+.btn-primary, .btn-success {
+              text-shadow: 0 1px 1px rgba(0,0,0,.15);
+          }
+button {
+              -webkit-user-select: initial;
+              -moz-user-select: initial;
+              -ms-user-select: initial;
+              user-select: initial;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              border: none;
+              cursor: pointer;
+              box-sizing: border-box;
+              width: 240px;
+              position: relative;
+              line-height: 130%!important;
+          }
+.error-message, button {
+              -moz-box-sizing: border-box;
+          }
+form>* {
+              -webkit-transition: -webkit-transform .4s ease,opacity .4s linear;
+              -moz-transition: -moz-transform .4s ease,opacity .4s linear;
+              transition: transform .4s ease,opacity .4s linear;
+          }
+.avatar, .login, button {
+              overflow: hidden;
+          }
+button, input, select, textarea {
+              font-family: Avenir,"Helvetica Neue",Helvetica,Arial,sans-serif;
+          }
+ button {
+     padding: 1px 6px;
+     align-items: flex-start;
+     text-align: center;
+     cursor: default;
+     color: buttontext;
+     border-image-source: initial;
+     border-image-slice: initial;
+     border-image-width: initial;
+     border-image-outset: initial;
+     border-image-repeat: initial;
+     background-color: buttonface;
+     box-sizing: border-box;
+     padding: 2px 6px 3px;
+     border: 2px outset buttonface;
+ }
+textarea, keygen, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 13.3333px Arial;
+}
+textarea, keygen, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb;
+}
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.create, .forgot, .forgot~p, .lost, .lost~p {
+    text-shadow: 0 0 3px rgba(0,0,0,.2);
+}
+.forgot, .lost {
+    margin-top: 20px;
+    opacity: .4;
+    cursor: pointer;
+}
