@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 .mymetadata
+WebRoot/WEB-INF/classes/
 # External tool builders
 .externalToolBuilders/
 
