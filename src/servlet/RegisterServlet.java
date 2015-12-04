@@ -44,8 +44,13 @@ public class RegisterServlet extends HttpServlet {
 				username, password));
 
 		UserDao userDao = new UserDao();
-		if (!userDao.containsUser(username)) {
+		
+		if (userDao.containsUser(username)) {
+			logger.info("username already exists!");
+			response.sendRedirect("/register.html");
+		} else {
 			userDao.addUser(username, password);
+			logger.info(String.format("register succeeded, username=%s", username));
 		}
 		userDao.close();
 	}
