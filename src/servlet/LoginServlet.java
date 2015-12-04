@@ -45,17 +45,19 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
 		if (userDao.validPassword(username, password)) {
 			logger.info(String.format("logged in, username=%s, password=%s",
 					username, password));
-			
+			String userHomePage = getServletContext().getInitParameter("user home page");
+			response.sendRedirect(userHomePage);
 		} else {
 			logger.info("cannot log in, invalid username or password");
-			response.sendRedirect("/login.html");
+			String loginPage = getServletContext().getInitParameter("login page");
+			response.sendRedirect(loginPage);
 		}
 
 	}

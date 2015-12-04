@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +49,9 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		logger.info("doPost");
+		
+		ServletContext servletContext = getServletContext();
+		logger.info("register page = " + servletContext.getAttribute("login page"));
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -57,11 +61,14 @@ public class RegisterServlet extends HttpServlet {
 
 		if (userDao.containsUser(username)) {
 			logger.info("username already exists!");
-			response.sendRedirect("/register.html");
+			String registerPage = getServletContext().getInitParameter("register page");
+			response.sendRedirect(registerPage);
 		} else {
 			userDao.addUser(username, password);
 			logger.info(String.format("register succeeded, username=%s",
 					username));
+			String loginPage = getServletContext().getInitParameter("login page");
+			response.sendRedirect(loginPage);
 		}
 	}
 
