@@ -17,6 +17,18 @@ public class RegisterServlet extends HttpServlet {
 	private static final Logger logger = Logger
 			.getLogger(RegisterServlet.class);
 
+	private UserDao userDao;
+
+	@Override
+	public void init() throws ServletException {
+		userDao = new UserDao();
+	}
+
+	@Override
+	public void destroy() {
+		userDao.close();
+	}
+
 	/**
 	 * The doPost method of the servlet. <br>
 	 * 
@@ -43,16 +55,14 @@ public class RegisterServlet extends HttpServlet {
 		logger.info(String.format("register: username=%s, password=%s",
 				username, password));
 
-		UserDao userDao = new UserDao();
-		
 		if (userDao.containsUser(username)) {
 			logger.info("username already exists!");
 			response.sendRedirect("/register.html");
 		} else {
 			userDao.addUser(username, password);
-			logger.info(String.format("register succeeded, username=%s", username));
+			logger.info(String.format("register succeeded, username=%s",
+					username));
 		}
-		userDao.close();
 	}
 
 }
