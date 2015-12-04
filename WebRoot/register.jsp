@@ -55,7 +55,7 @@
 				<div class="warning" style="display: none"
 					id="confirmwarning">Opps! Confirm don't agree.</div>
 
-				<form action="/register.do" method="POST" id="register" onsubmit="return register_validate(this)">
+				<form action="/dashboard.jsp" method="POST" id="register" onsubmit="return register_validate(this)">
 
 					<div class="mdl-textfield mdl-js-textfield">
 						<input class="mdl-textfield__input" type="username" id="u"
