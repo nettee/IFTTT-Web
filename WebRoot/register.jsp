@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="./css/material.css">
@@ -38,27 +40,7 @@
 </noscript>
 
 <div class="demo-layout-transparent mdl-layout mdl-js-layout">
-    <header class="mdl-layout__header mdl-layout__header--transparent">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">Register</span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation -->
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Home</a>
-                <a class="mdl-navigation__link" href="/about">About</a>
-            </nav>
-        </div>
-    </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Register</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="/">Home</a>
-            <a class="mdl-navigation__link" href="/about">About</a>
-        </nav>
-    </div>
-
+    <%@include file="component/nav.jsp" %>
     <main class="mdl-layout__content">
         <div class="demo-card-wide mdl-card mdl-shadow--2dp" >
             <div class="mdl-card__title">
@@ -84,7 +66,7 @@
                 </form>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <input class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"type="submit" value="Get　Started" form="register" >
+                <input class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"type="submit" value="Get Started" form="register" >
                 </input>
 
             </div>

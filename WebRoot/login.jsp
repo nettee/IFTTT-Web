@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Sign in</title>
@@ -14,6 +17,9 @@
     .demo-layout-transparent .mdl-layout__drawer-button {
         color: white;
     }
+    button{
+    	margin:10px;
+    }
 </style>
 
 
@@ -25,35 +31,14 @@
       &lt;p&gt;You must enable JavaScript in order to use GoSquared.&lt;/p&gt;
     &lt;/div&gt;
   </noscript>
-
   <div class="demo-layout-transparent mdl-layout mdl-js-layout">
-      <header class="mdl-layout__header mdl-layout__header--transparent">
-          <div class="mdl-layout__header-row">
-              <!-- Title -->
-              <span class="mdl-layout-title">Sign In</span>
-              <!-- Add spacer, to align navigation to the right -->
-              <div class="mdl-layout-spacer"></div>
-              <!-- Navigation -->
-              <nav class="mdl-navigation">
-                  <a class="mdl-navigation__link" href="">Home</a>
-                  <a class="mdl-navigation__link" href="/about">About</a>
-              </nav>
-          </div>
-      </header>
-      <div class="mdl-layout__drawer">
-          <span class="mdl-layout-title">Sign In</span>
-          <nav class="mdl-navigation">
-              <a class="mdl-navigation__link" href="/">Home</a>
-              <a class="mdl-navigation__link" href="/about">About</a>
-          </nav>
-      </div>
-
+  <%@include file="component/nav.jsp" %>
       <main class="mdl-layout__content">
           <div class="login">
               <div class="login-form">
                   <div class="image">
                       <div>
-                          <img src="./assets/120_120.png" class="logo"> </img>
+                          <img src="./assets/120_120.png" class="logo">
                       </div>
                   </div>
                   <form action="/login.do" method="POST" id="login">
@@ -71,7 +56,7 @@
                       </button>
                       <div class="create">
                           <span>Don't have an account yet?</span>
-                          <a href="/register.html">Create an account</a>
+                          <a href="/register.jsp">Create an account</a>
                       </div>
                   </form>
               </div>
