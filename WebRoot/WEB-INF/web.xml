@@ -11,7 +11,7 @@
 	</welcome-file-list>
 
 	<servlet>
-		<servlet-name>Log4jInit</servlet-name>
+		<servlet-name>log4j init</servlet-name>
 		<servlet-class>servlet.Log4jInit</servlet-class>
 		<init-param>
 			<param-name>log4j</param-name>
@@ -21,27 +21,27 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>RegisterServlet</servlet-name>
+		<servlet-name>register servlet</servlet-name>
 		<servlet-class>servlet.RegisterServlet</servlet-class>
 	</servlet>
 
 	<servlet>
-		<servlet-name>LoginServlet</servlet-name>
+		<servlet-name>login servlet</servlet-name>
 		<servlet-class>servlet.LoginServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>Log4jInit</servlet-name>
+		<servlet-name>log4j init</servlet-name>
 		<url-pattern>/servlet/Log4jInit</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>RegisterServlet</servlet-name>
+		<servlet-name>register servlet</servlet-name>
 		<url-pattern>/register.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
+		<servlet-name>login servlet</servlet-name>
 		<url-pattern>/login.do</url-pattern>
 	</servlet-mapping>
 
