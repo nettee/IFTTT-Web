@@ -62,7 +62,8 @@ public class RegisterServlet extends HttpServlet {
 		if (userDao.containsUser(username)) {
 			logger.info("username already exists!");
 			String registerPage = getServletContext().getInitParameter("register page");
-			response.sendRedirect(registerPage);
+			String registerPage_exist=registerPage+"?exist=yes";
+			response.sendRedirect(registerPage_exist);
 		} else {
 			userDao.addUser(username, password);
 			logger.info(String.format("register succeeded, username=%s",

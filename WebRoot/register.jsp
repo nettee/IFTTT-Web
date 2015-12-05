@@ -14,6 +14,7 @@
 	background: url('./assets/Android-L-Material-Design-Wallpapers-5.png')
 		center/cover;
 }
+
 .demo-card-wide.mdl-card {
 	width: 512px;
 	text-align: center;
@@ -28,8 +29,9 @@
 .demo-card-wide>.mdl-card__menu {
 	color: #fff;
 }
-.warning{
-	 color: rgb(239,83,80) !important;
+
+.warning {
+	color: rgb(239, 83, 80) !important;
 }
 </style>
 <body>
@@ -48,14 +50,17 @@
 				<h2 class="mdl-card__title-text mdl-color-text--black">Welcome</h2>
 			</div>
 			<div class="mdl-card__supporting-text">
-				<div class="warning" style="display: none"
-					id="emailwarning">Please enter your email.</div>
-				<div class="warning" style="display: none"
-					id="passwordwarning">Opps! Password too short.</div>
-				<div class="warning" style="display: none"
-					id="confirmwarning">Opps! Confirm don't agree.</div>
+				<div class="warning" style="display: none" id="existwarning">Opps!username
+					already exist.</div>
+				<div class="warning" style="display: none" id="usernamewarning">Please
+					enter your email.</div>
+				<div class="warning" style="display: none" id="passwordwarning">Opps!
+					Password too short.</div>
+				<div class="warning" style="display: none" id="confirmwarning">Opps!
+					Confirm don't agree.</div>
 
-				<form action="/register.do" method="POST" id="register" onsubmit="return register_validate(this)">
+				<form action="/register.do" method="POST" id="register"
+					onsubmit="return register_validate(this)">
 
 					<div class="mdl-textfield mdl-js-textfield">
 						<input class="mdl-textfield__input" type="username" id="u"
@@ -87,14 +92,19 @@
 		</main>
 
 	</div>
-	<script>		
+	<script>
+		var exist='<%=request.getParameter("exist")%>';
+		if(exist=='yes'){
+			clear();
+			$("#existwarning").fadeIn();
+		}
 		function register_validate(thisform){
 			/*clear all existing warnings*/
 			clear();
 			/*validate input params*/
 			with (thisform){
 				if (username.value.length == 0){
-					$("#emailwarning").fadeIn();
+					$("#usernamewarning").fadeIn();
 					return false;
 				} else if(password.value.length < 6){
 					$("#passwordwarning").fadeIn();
@@ -108,9 +118,8 @@
 			}
 		}
 		function clear(){
-			$("#logwarning").fadeOut(0);
-			$("#registerwarning").fadeOut(0);
-			$("#emailwarning").fadeOut(0);
+			$("#existwarning").fadeOut(0);
+			$("#usernamewarning").fadeOut(0);
 			$("#passwordwarning").fadeOut(0);
 			$("#confirmwarning").fadeOut(0);
 		}

@@ -57,7 +57,8 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			logger.info("cannot log in, invalid username or password");
 			String loginPage = getServletContext().getInitParameter("login page");
-			response.sendRedirect(loginPage);
+			String loginPage_Invalid = loginPage+"?valid=no";
+			response.sendRedirect(loginPage_Invalid);
 		}
 
 	}
