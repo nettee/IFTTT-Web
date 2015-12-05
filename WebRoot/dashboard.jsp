@@ -22,6 +22,9 @@
 	margin-bottom: 40px;
 	z-index: 900;
 }
+a{
+	text-decoration:none;
+}
 </style>
 </head>
 <body>
@@ -51,11 +54,9 @@
 					class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right"
 					for="hdrbtn">
 
-					<li class="mdl-menu__item"><a href="/about">About</a>
-					</li>
+					<li class="mdl-menu__item"><a href="/about">About</a></li>
 
-					<li class="mdl-menu__item"><a href="/login.jsp">Log Out</a>
-					</li>
+					<li class="mdl-menu__item"><a href="/login.jsp">Log Out</a></li>
 
 				</ul>
 			</div>
@@ -75,8 +76,8 @@
 					<ul
 						class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
 						for="accbtn">
-						<li class="mdl-menu__item"><i class="material-icons">add</i>Add
-							another account...</li>
+						<li class="mdl-menu__item"><a href="login.jsp"><i class="material-icons">add</i>Add
+							another account...</a></li>
 					</ul>
 				</div>
 			</header>
@@ -140,23 +141,19 @@
 							<li><label for="chkbox1"
 								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
 									<input type="checkbox" id="chkbox1" class="mdl-checkbox__input">
-									<span class="mdl-checkbox__label">Click per object</span> </label>
-							</li>
+									<span class="mdl-checkbox__label">Click per object</span> </label></li>
 							<li><label for="chkbox2"
 								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
 									<input type="checkbox" id="chkbox2" class="mdl-checkbox__input">
-									<span class="mdl-checkbox__label">Views per object</span> </label>
-							</li>
+									<span class="mdl-checkbox__label">Views per object</span> </label></li>
 							<li><label for="chkbox3"
 								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
 									<input type="checkbox" id="chkbox3" class="mdl-checkbox__input">
-									<span class="mdl-checkbox__label">Objects selected</span> </label>
-							</li>
+									<span class="mdl-checkbox__label">Objects selected</span> </label></li>
 							<li><label for="chkbox4"
 								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
 									<input type="checkbox" id="chkbox4" class="mdl-checkbox__input">
-									<span class="mdl-checkbox__label">Objects viewed</span> </label>
-							</li>
+									<span class="mdl-checkbox__label">Objects viewed</span> </label></li>
 						</ul>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
