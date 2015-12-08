@@ -38,7 +38,7 @@ a {
 		<header
 			class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
 			<div class="mdl-layout__header-row">
-				<span class="mdl-layout-title"><%String pageName=request.getParameter("page");%><%=pageName %></span>
+				<span class="mdl-layout-title"><%String pageName=request.getParameter("page");if(pageName!=null){%><%=pageName %><%}else{%>Home<%} %></span>
 				<div class="mdl-layout-spacer"></div>
 				<div
 					class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
