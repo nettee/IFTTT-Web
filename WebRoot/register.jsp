@@ -53,7 +53,7 @@
 				<div class="warning" style="display: none" id="existwarning">Opps!username
 					already exist.</div>
 				<div class="warning" style="display: none" id="usernamewarning">Please
-					enter your email.</div>
+					enter your username.</div>
 				<div class="warning" style="display: none" id="passwordwarning">Opps!
 					Password too short.</div>
 				<div class="warning" style="display: none" id="confirmwarning">Opps!

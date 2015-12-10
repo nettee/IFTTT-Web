@@ -22,7 +22,11 @@
 	margin-bottom: 40px;
 	z-index: 900;
 }
-
+.parent {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
 a {
 	text-decoration: none;
 }
@@ -34,7 +38,7 @@ a {
 		<header
 			class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
 			<div class="mdl-layout__header-row">
-				<span class="mdl-layout-title">Home</span>
+				<span class="mdl-layout-title"><%String pageName=request.getParameter("page");if(pageName!=null){%><%=pageName %><%}else{%>Home<%} %></span>
 				<div class="mdl-layout-spacer"></div>
 				<div
 					class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
@@ -108,16 +112,15 @@ a {
 				</a>
 			</nav>
 		</div>
-		<main class="mdl-layout__content mdl-color--grey-100">
+		<main class="mdl-layout__content mdl-color--grey-100 parent">
 		
-		<%String pagex=request.getParameter("page");
-		if(pagex!=null){
-		 if(pagex.equals("Task")){ %><%@include file="component/Task_Sub.jsp" %><% }
-		 else if(pagex.equals("Inbox")){%><%@include file="component/Inbox_Sub.jsp" %><% } 
-		 else if(pagex.equals("Setting")){%><%@include file="component/Setting_Sub.jsp" %><% }
-		 else if(pagex.equals("Report")){%><%@include file="component/Report_Sub.jsp" %><% }
-		 else if(pagex.equals("Purchase")){%><%@include file="component/Purch_Sub.jsp" %><% }
-		 else if(pagex.equals("Help")){%><%@include file="component/Help_Sub.jsp" %><% }
+		<%if(pageName!=null){
+		 if(pageName.equals("Task")){ %><%@include file="component/Task_Sub.jsp" %><% }
+		 else if(pageName.equals("Inbox")){%><%@include file="component/Inbox_Sub.jsp" %><% } 
+		 else if(pageName.equals("Setting")){%><%@include file="component/Setting_Sub.jsp" %><% }
+		 else if(pageName.equals("Report")){%><%@include file="component/Report_Sub.jsp" %><% }
+		 else if(pageName.equals("Purchase")){%><%@include file="component/Purch_Sub.jsp" %><% }
+		 else if(pageName.equals("Help")){%><%@include file="component/Help_Sub.jsp" %><% }
 		 else {%><%@include file="component/Home_Sub.jsp" %><% }
 		}else{ %><%@include file="component/Home_Sub.jsp" %><%}%>
 		</main>
