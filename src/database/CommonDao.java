@@ -101,8 +101,18 @@ public abstract class CommonDao {
 
 		return result;
 	}
+	
+	public final Map<String, Object> queryOneLine(String sql, List<?> params) {
+		List<Map<String, Object>> results = query(sql, params);
+		if (results.isEmpty()) {
+			throw new DatabaseException("data not exist");
+		} else if (results.size() > 1) {
+			throw new DatabaseException("data not unique");
+		}
+		return results.get(0);
+	}
 
-	public Object queryOne(String sql, List<?> params) throws DatabaseException {
+	public Object queryOneObject(String sql, List<?> params) throws DatabaseException {
 
 		List<Map<String, Object>> results = query(sql, params);
 

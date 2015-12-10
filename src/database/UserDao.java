@@ -15,30 +15,14 @@ public class UserDao extends CommonDao {
 	public User getUserById(int id) {
 		String sql = "SELECT * FROM user WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
-		List<Map<String, Object>> results = query(sql, params);
-		if (results.isEmpty()) {
-			throw new IllegalStateException(String.format(
-					"user id '%d' does not exist", id));
-		} else if (results.size() > 1) {
-			throw new IllegalStateException(String.format(
-					"user id '%d' is not unique", id));
-		}
-		Map<String, Object> line = results.get(0);
+		Map<String, Object> line = queryOneLine(sql, params);
 		return getUserFromLine(line);
 	}
 
 	public User getUserByName(String name) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(name);
-		List<Map<String, Object>> results = query(sql, params);
-		if (results.isEmpty()) {
-			throw new IllegalStateException(String.format(
-					"username '%s' does not exist", name));
-		} else if (results.size() > 1) {
-			throw new IllegalStateException(String.format(
-					"username '%s' is not unique", name));
-		}
-		Map<String, Object> line = results.get(0);
+		Map<String, Object> line = queryOneLine(sql, params);
 		return getUserFromLine(line);
 	}
 	
@@ -77,7 +61,7 @@ public class UserDao extends CommonDao {
 
 		String sql = "SELECT password FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
-		String password2 = (String) queryOne(sql, params);
+		String password2 = (String) queryOneObject(sql, params);
 		logger.info(String.format(
 				"validPassword: username=%s, password=%s, original=%s",
 				username, password, password2));
