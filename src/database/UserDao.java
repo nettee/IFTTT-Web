@@ -1,6 +1,8 @@
 package database;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +41,18 @@ public class UserDao extends CommonDao {
 		user.setPassword((String) line.get("password"));
 		user.setBalance((Integer) line.get("balance"));
 		return user;
+	}
+	
+	public List<Integer> getAllIds() {
+		String sql = "SELECT id FROM user";
+		List<String> params = Collections.emptyList();
+		List<Map<String, Object>> lines = query(sql, params);
+		List<Integer> idList = new ArrayList<Integer>();
+		for (Map<String, Object> line : lines) {
+			Integer id = (Integer) line.get("id");
+			idList.add(id);
+		}
+		return idList;
 	}
 
 	public boolean existsUser(String username) {

@@ -2,6 +2,10 @@ package database;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
+import java.util.List;
+
 import model.User;
 
 import org.junit.After;
@@ -49,7 +53,13 @@ public class UserDaoTest {
 	}
 
 	@Test
-	public void testContainsUser() {
+	public void testGetAllIds() {
+		List<Integer> allIds = userDao.getAllIds();
+		System.out.println(Arrays.toString(allIds.toArray()));
+	}
+
+	@Test
+	public void testExistsUser() {
 		assertTrue(userDao.existsUser(dog.getName()));
 	}
 
