@@ -8,6 +8,12 @@ import model.User;
 
 import org.apache.log4j.Logger;
 
+/**
+ * User Data Access and Operation
+ * 
+ * @see User
+ *
+ */
 public class UserDao extends CommonDao {
 
 	private static final Logger logger = Logger.getLogger(UserDao.class);
@@ -16,17 +22,17 @@ public class UserDao extends CommonDao {
 		String sql = "SELECT * FROM user WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
 		Map<String, Object> line = queryOneLine(sql, params);
-		return getUserFromLine(line);
+		return newUserFromLine(line);
 	}
 
 	public User getUserByName(String name) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(name);
 		Map<String, Object> line = queryOneLine(sql, params);
-		return getUserFromLine(line);
+		return newUserFromLine(line);
 	}
 	
-	private User getUserFromLine(Map<String, Object> line) {
+	private User newUserFromLine(Map<String, Object> line) {
 		User user = new User();
 		user.setId((Integer) line.get("id"));
 		user.setName((String) line.get("name"));
@@ -35,7 +41,7 @@ public class UserDao extends CommonDao {
 		return user;
 	}
 
-	public boolean containsUser(String username) {
+	public boolean existsUser(String username) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
 		List<Map<String, Object>> results = query(sql, params);
@@ -55,7 +61,7 @@ public class UserDao extends CommonDao {
 
 	public boolean validPassword(String username, String password) {
 
-		if (!containsUser(username)) {
+		if (!existsUser(username)) {
 			return false;
 		}
 

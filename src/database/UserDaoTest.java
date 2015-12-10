@@ -50,7 +50,7 @@ public class UserDaoTest {
 
 	@Test
 	public void testContainsUser() {
-		assertTrue(userDao.containsUser(dog.getName()));
+		assertTrue(userDao.existsUser(dog.getName()));
 	}
 
 	@Test

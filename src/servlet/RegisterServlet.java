@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
 		logger.info(String.format("register: username=%s, password=%s",
 				username, password));
 
-		if (userDao.containsUser(username)) {
+		if (userDao.existsUser(username)) {
 			logger.info("username already exists!");
 			String registerPage = getServletContext().getInitParameter("register page");
 			String registerPage_exist=registerPage+"?exist=yes";
