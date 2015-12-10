@@ -68,15 +68,4 @@ public class UserDao extends CommonDao {
 
 		return password.equals(password2);
 	}
-
-	public static void main(String[] args) {
-		UserDao userDao = new UserDao();
-		User user = userDao.getUserByName("dog");
-		System.out.println(user);
-		User user2 = userDao.getUserById(1);
-		System.out.println(user2);
-		User user3 = new User();
-		user3.setThisById(1);
-		System.out.println(user3);
-	}
 }

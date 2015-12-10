@@ -12,7 +12,7 @@ import database.UserDao;
  * <li>password
  * <li>balance
  * </ul>
- *
+ * 
  */
 public class User implements Bean {
 
@@ -20,7 +20,7 @@ public class User implements Bean {
 	private String name;
 	private String password;
 	private int balance;
-	
+
 	public User() {
 	}
 
@@ -55,31 +55,46 @@ public class User implements Bean {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-	
+
 	/**
 	 * Used by JSP
 	 * <p>
 	 * <strong>NOTE:</strong> This is not a property
 	 * <p>
 	 * Set the attributes of this user according to id
-	 * @param id the id of user
+	 * 
+	 * @param id
+	 *            the id of user
 	 */
 	public void setThisById(int id) {
 		UserDao dao = new UserDao();
 		User tempUser = dao.getUserById(id);
 		setThisFromUser(tempUser);
 	}
-	
+
 	private void setThisFromUser(User that) {
 		setId(that.id);
 		setName(that.name);
 		setPassword(that.password);
 		setBalance(that.balance);
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof User) {
+			User that = (User) o;
+			return id == that.id && name.equals(that.name)
+					&& password.equals(that.password)
+					&& balance == that.balance;
+		} else {
+			return false;
+		}
+	}
+
 	@Override
 	public String toString() {
-		return String.format("User(id=%d, name=%s, password=%s, balance=%d)", id, name, password, balance);
+		return String.format("User(id=%d, name=%s, password=%s, balance=%d)",
+				id, name, password, balance);
 	}
 
 }

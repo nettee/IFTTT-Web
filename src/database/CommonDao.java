@@ -112,7 +112,7 @@ public abstract class CommonDao {
 		return results.get(0);
 	}
 
-	public Object queryOneObject(String sql, List<?> params)
+	public final Object queryOneObject(String sql, List<?> params)
 			throws DatabaseException {
 		Map<String, Object> line = queryOneLine(sql, params);
 		if (line.isEmpty()) {
