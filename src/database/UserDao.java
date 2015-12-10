@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import model.User;
+
 import org.apache.log4j.Logger;
 
 public class UserDao extends CommonDao {
@@ -41,6 +43,15 @@ public class UserDao extends CommonDao {
 				username, password, password2));
 
 		return password.equals(password2);
+	}
+	
+	public User getUserByName(String username) {
+		
+		String sql = "SELECT * FROM user WHERE name=?";
+		List<String> params = Arrays.asList(username);
+		List<Map<String, Object>> results = query(sql, params);
+		
+		return null;
 	}
 
 	public static void main(String[] args) {

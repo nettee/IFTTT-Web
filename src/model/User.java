@@ -41,5 +41,13 @@ public class User implements Bean {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
+	
+	/**
+	 * set the attributes of this user according to id
+	 * @param id the id of user
+	 */
+	public void setThisById(int id) {
+		throw new AssertionError("method not implemented");
+	}
 
 }

@@ -6,6 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.User;
 
 import org.apache.log4j.Logger;
 
@@ -52,6 +55,11 @@ public class LoginServlet extends HttpServlet {
 		if (userDao.validPassword(username, password)) {
 			logger.info(String.format("logged in, username=%s, password=%s",
 					username, password));
+
+			HttpSession session = request.getSession();
+			User user = userDao.getUserByName(username);
+			session.setAttribute("userId", user.getId());
+			
 			String userHomePage = getServletContext().getInitParameter("user home page");
 			response.sendRedirect(userHomePage);
 		} else {
