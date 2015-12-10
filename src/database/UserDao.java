@@ -24,12 +24,7 @@ public class UserDao extends CommonDao {
 					"user id '%d' is not unique", id));
 		}
 		Map<String, Object> line = results.get(0);
-		User user = new User();
-		user.setId((Integer) line.get("id"));
-		user.setName((String) line.get("name"));
-		user.setPassword((String) line.get("password"));
-		user.setBalance((Integer) line.get("balance"));
-		return user;
+		return getUserFromLine(line);
 	}
 
 	public User getUserByName(String name) {
@@ -44,6 +39,10 @@ public class UserDao extends CommonDao {
 					"username '%s' is not unique", name));
 		}
 		Map<String, Object> line = results.get(0);
+		return getUserFromLine(line);
+	}
+	
+	private User getUserFromLine(Map<String, Object> line) {
 		User user = new User();
 		user.setId((Integer) line.get("id"));
 		user.setName((String) line.get("name"));
