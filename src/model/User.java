@@ -2,6 +2,18 @@ package model;
 
 import database.UserDao;
 
+/**
+ * Javabean class
+ * <p>
+ * Properties:
+ * <ul>
+ * <li>id
+ * <li>name
+ * <li>password
+ * <li>balance
+ * </ul>
+ *
+ */
 public class User implements Bean {
 
 	private int id;
@@ -45,7 +57,11 @@ public class User implements Bean {
 	}
 	
 	/**
-	 * set the attributes of this user according to id
+	 * Used by JSP
+	 * <p>
+	 * <strong>NOTE:</strong> This is not a property
+	 * <p>
+	 * Set the attributes of this user according to id
 	 * @param id the id of user
 	 */
 	public void setThisById(int id) {
