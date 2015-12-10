@@ -26,7 +26,7 @@ public class MessageDao extends CommonDao {
 		Map<String, Object> line = queryOneLine(sql, params);
 		return newMessageFromLine(line);
 	}
-	
+
 	public List<Message> getMessagesByUserId(int userId) {
 		String sql = "SELECT * FROM message WHERE userId=?";
 		List<Integer> params = Arrays.asList(userId);
@@ -50,7 +50,7 @@ public class MessageDao extends CommonDao {
 		return message;
 	}
 
-	public void addMessage(Integer userId, String content) {
+	private void addMessage(Integer userId, String content) {
 		String digest = content.length() <= 60 ? content : content.substring(0,
 				40);
 		String sql = "INSERT INTO message(userId, digest, content) VALUES(?, ?, ?)";
@@ -58,6 +58,20 @@ public class MessageDao extends CommonDao {
 		execute(sql, params);
 		logger.info(String.format("addMessage: userId=%d, content=%s", userId,
 				content));
+	}
+
+	public void sendMessageTo(Integer userId, String content) {
+		addMessage(userId, content);
+		logger.info(String.format("send message to user [%d]", userId));
+	}
+
+	public void sendMessageToAll(String content) {
+		List<Integer> userIds = new UserDao().getAllIds();
+		for (int userId : userIds) {
+			addMessage(userId, content);
+		}
+		logger.info(String.format("send message to user %s",
+				Arrays.toString(userIds.toArray())));
 	}
 
 	public static void main(String[] args) {
