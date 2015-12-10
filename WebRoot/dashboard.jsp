@@ -33,6 +33,15 @@ a {
 </style>
 </head>
 <body>
+<%
+	Integer userId=null;
+	if(session.getAttribute("userId")!=null){
+		userId=(Integer)session.getAttribute("userId");
+	}
+	else response.sendRedirect("login.jsp");
+%>
+<jsp:useBean id="user" class="model.User"></jsp:useBean>
+	<%if(userId!=null)user.setThisById(userId);%>
 	<div
 		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<header
@@ -73,7 +82,7 @@ a {
 			<header class="demo-drawer-header">
 				<img src="assets/user.jpg" class="demo-avatar">
 				<div class="demo-avatar-dropdown">
-					<span>nettee</span>
+					<span><jsp:getProperty name="user" property="name"/></span>
 					<div class="mdl-layout-spacer"></div>
 					<button id="accbtn"
 						class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
