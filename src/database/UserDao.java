@@ -11,13 +11,54 @@ import org.apache.log4j.Logger;
 public class UserDao extends CommonDao {
 
 	private static final Logger logger = Logger.getLogger(UserDao.class);
+	
+	public User getUserById(int id) {
+		String sql = "SELECT * FROM user WHERE id=?";
+		List<Integer> params = Arrays.asList(id);
+		List<Map<String, Object>> results = query(sql, params);
+		if (results.isEmpty()) {
+			throw new IllegalStateException(String.format(
+					"user id '%d' does not exist", id));
+		} else if (results.size() > 1) {
+			throw new IllegalStateException(String.format(
+					"user id '%d' is not unique", id));
+		}
+		Map<String, Object> line = results.get(0);
+		User user = new User();
+		user.setId((Integer) line.get("id"));
+		user.setName((String) line.get("name"));
+		user.setPassword((String) line.get("password"));
+		user.setBalance((Integer) line.get("balance"));
+		return user;
+	}
+
+	public User getUserByName(String name) {
+		String sql = "SELECT * FROM user WHERE name=?";
+		List<String> params = Arrays.asList(name);
+		List<Map<String, Object>> results = query(sql, params);
+		if (results.isEmpty()) {
+			throw new IllegalStateException(String.format(
+					"username '%s' does not exist", name));
+		} else if (results.size() > 1) {
+			throw new IllegalStateException(String.format(
+					"username '%s' is not unique", name));
+		}
+		Map<String, Object> line = results.get(0);
+		User user = new User();
+		user.setId((Integer) line.get("id"));
+		user.setName((String) line.get("name"));
+		user.setPassword((String) line.get("password"));
+		user.setBalance((Integer) line.get("balance"));
+		return user;
+	}
 
 	public boolean containsUser(String username) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
 		List<Map<String, Object>> results = query(sql, params);
 		boolean contains = !results.isEmpty();
-		logger.info(String.format("containsUser: username=%s, %b", username, contains));
+		logger.info(String.format("containsUser: username=%s, %b", username,
+				contains));
 		return contains;
 	}
 
@@ -44,20 +85,15 @@ public class UserDao extends CommonDao {
 
 		return password.equals(password2);
 	}
-	
-	public User getUserByName(String username) {
-		
-		String sql = "SELECT * FROM user WHERE name=?";
-		List<String> params = Arrays.asList(username);
-		List<Map<String, Object>> results = query(sql, params);
-		
-		return null;
-	}
 
 	public static void main(String[] args) {
 		UserDao userDao = new UserDao();
-		// userDao.addUser("alice", "iloveyou");
-		userDao.validPassword("alice", "123456");
-		// userDao.addUser("bob", "123456789");
+		User user = userDao.getUserByName("dog");
+		System.out.println(user);
+		User user2 = userDao.getUserById(1);
+		System.out.println(user2);
+		User user3 = new User();
+		user3.setThisById(1);
+		System.out.println(user3);
 	}
 }

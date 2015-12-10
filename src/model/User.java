@@ -1,12 +1,14 @@
 package model;
 
+import database.UserDao;
+
 public class User implements Bean {
 
 	private int id;
 	private String name;
 	private String password;
 	private int balance;
-
+	
 	public User() {
 	}
 
@@ -47,7 +49,21 @@ public class User implements Bean {
 	 * @param id the id of user
 	 */
 	public void setThisById(int id) {
-		throw new AssertionError("method not implemented");
+		UserDao dao = new UserDao();
+		User tempUser = dao.getUserById(id);
+		setThisFromUser(tempUser);
+	}
+	
+	private void setThisFromUser(User that) {
+		setId(that.id);
+		setName(that.name);
+		setPassword(that.password);
+		setBalance(that.balance);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("User(id=%d, name=%s, password=%s, balance=%d)", id, name, password, balance);
 	}
 
 }
