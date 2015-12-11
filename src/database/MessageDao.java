@@ -1,8 +1,8 @@
 package database;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class MessageDao extends CommonDao {
 		Message message = new Message();
 		message.setId((Integer) line.get("id"));
 		message.setUserId((Integer) line.get("userId"));
-		message.setPublishTime((Calendar) line.get("publishTime"));
+		message.setPublishTime((Timestamp) line.get("publishTime"));
 		message.setDigest((String) line.get("digest"));
 		message.setContent((String) line.get("content"));
 		message.setOpened((Boolean) line.get("opened"));

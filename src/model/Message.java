@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Calendar;
+import java.sql.Timestamp;
 
 /**
  * Javabean class
@@ -19,7 +19,7 @@ public class Message implements Bean {
 
 	private int id;
 	private int userId;
-	private Calendar publishTime;
+	private Timestamp publishTime;
 	private String digest;
 	private String content;
 	private boolean opened;
@@ -44,11 +44,11 @@ public class Message implements Bean {
 		this.userId = userId;
 	}
 
-	public Calendar getPublishTime() {
+	public Timestamp getPublishTime() {
 		return publishTime;
 	}
 
-	public void setPublishTime(Calendar publishTime) {
+	public void setPublishTime(Timestamp publishTime) {
 		this.publishTime = publishTime;
 	}
 
@@ -74,6 +74,24 @@ public class Message implements Bean {
 
 	public void setOpened(boolean opened) {
 		this.opened = opened;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Message) {
+			Message that = (Message) o;
+			return id == that.id && userId == that.userId
+					&& publishTime.equals(that.publishTime)
+					&& digest.equals(that.digest)
+					&& content.equals(that.content) && opened == that.opened;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Message(id=%d, userId=%d, publishTime=%s, content=%s)", id, userId, publishTime, content);
 	}
 
 }
