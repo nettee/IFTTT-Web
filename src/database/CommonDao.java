@@ -144,16 +144,4 @@ public abstract class CommonDao {
 
 		return ret;
 	}
-
-	public final void close() throws DatabaseException {
-		if (connection == null) {
-			throw new DatabaseException("can not close null connection");
-		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			throw new DatabaseException("Can not close common dao", e);
-		}
-	}
-
 }

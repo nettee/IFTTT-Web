@@ -20,7 +20,6 @@ public class MessageDaoTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		messageDao.close();
 	}
 
 	@Before

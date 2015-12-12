@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		userDao.close();
 	}
 
 	/**

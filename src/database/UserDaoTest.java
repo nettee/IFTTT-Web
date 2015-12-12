@@ -37,7 +37,7 @@ public class UserDaoTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		userDao.close();
+//		userDao.close();
 	}
 
 	@Test

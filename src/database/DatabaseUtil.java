@@ -16,35 +16,31 @@ public class DatabaseUtil {
 	private static final String DB_USER = "checkyh";
 	private static final String DB_PASSWORD = "123456";
 
-	private static boolean driverLoaded = false;
+	private static Connection connection;
 
-	private DatabaseUtil() {
-	}
-
-	private static void loadDriver() {
+	static {
 		try {
 			Class.forName(DRIVER);
-			driverLoaded = true;
 		} catch (ClassNotFoundException e) {
 			logger.error("Cannot load driver " + DRIVER);
 			System.exit(1);
 		}
 	}
 
+	private DatabaseUtil() {
+	}
+
 	public static Connection getConnection() {
-		if (!driverLoaded) {
-			loadDriver();
-		}
-		Connection connection;
-		try {
-			connection = DriverManager.getConnection(DB_URL, DB_USER,
-					DB_PASSWORD);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(DB_URL, DB_USER,
+						DB_PASSWORD);
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
 		}
 		return connection;
 	}
-
 
 	public static void demo() {
 

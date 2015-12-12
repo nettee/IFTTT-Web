@@ -77,7 +77,6 @@ public class MessageDao extends CommonDao {
 	public static void main(String[] args) {
 		MessageDao messageDao = new MessageDao();
 		messageDao.addMessage(4, "hello world");
-		messageDao.close();
 	}
 
 }
