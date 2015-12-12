@@ -11,15 +11,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public abstract class CommonDao {
+public class DaoUtil {
 
-	private final Connection connection;
+	private static final Connection connection = DatabaseUtil.getConnection();
 
-	public CommonDao() {
-		this.connection = DatabaseUtil.getConnection();
+	private DaoUtil() {
+
 	}
 
-	public final void apply(PreparedStatement pstmt, List<?> params)
+	private static final void apply(PreparedStatement pstmt, List<?> params)
 			throws DatabaseException {
 		try {
 			Iterator<?> it = params.iterator();
@@ -41,7 +41,7 @@ public abstract class CommonDao {
 		}
 	}
 
-	public final List<Map<String, Object>> convert(ResultSet rs)
+	private static final List<Map<String, Object>> convert(ResultSet rs)
 			throws DatabaseException {
 
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
@@ -70,14 +70,14 @@ public abstract class CommonDao {
 		return results;
 	}
 
-	public final List<Map<String, Object>> query(String sql, List<?> params)
-			throws DatabaseException {
+	public static final List<Map<String, Object>> query(String sql,
+			List<?> params) throws DatabaseException {
 		List<Map<String, Object>> result = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = connection.prepareStatement(sql);
-			this.apply(pstmt, params);
+			apply(pstmt, params);
 			rs = pstmt.executeQuery();
 			result = convert(rs);
 		} catch (SQLException e) {
@@ -102,7 +102,8 @@ public abstract class CommonDao {
 		return result;
 	}
 
-	public final Map<String, Object> queryOneLine(String sql, List<?> params) {
+	public static final Map<String, Object> queryOneLine(String sql,
+			List<?> params) {
 		List<Map<String, Object>> results = query(sql, params);
 		if (results.isEmpty()) {
 			throw new DatabaseException("data not exist");
@@ -112,7 +113,7 @@ public abstract class CommonDao {
 		return results.get(0);
 	}
 
-	public final Object queryOneObject(String sql, List<?> params)
+	public static final Object queryOneObject(String sql, List<?> params)
 			throws DatabaseException {
 		Map<String, Object> line = queryOneLine(sql, params);
 		if (line.isEmpty()) {
@@ -122,13 +123,13 @@ public abstract class CommonDao {
 		}
 	}
 
-	public final int execute(String sql, List<?> params)
+	public static final int execute(String sql, List<?> params)
 			throws DatabaseException {
 		int ret = 0;
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = connection.prepareStatement(sql);
-			this.apply(pstmt, params);
+			apply(pstmt, params);
 			ret = pstmt.executeUpdate();
 		} catch (SQLException ex) {
 			throw new DatabaseException("", ex);

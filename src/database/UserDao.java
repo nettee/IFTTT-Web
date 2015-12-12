@@ -16,21 +16,21 @@ import org.apache.log4j.Logger;
  * @see User
  *
  */
-public class UserDao extends CommonDao {
+public class UserDao {
 
 	private static final Logger logger = Logger.getLogger(UserDao.class);
 	
 	public User getUserById(int id) {
 		String sql = "SELECT * FROM user WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
-		Map<String, Object> line = queryOneLine(sql, params);
+		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newUserFromLine(line);
 	}
 
 	public User getUserByName(String name) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(name);
-		Map<String, Object> line = queryOneLine(sql, params);
+		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newUserFromLine(line);
 	}
 	
@@ -46,7 +46,7 @@ public class UserDao extends CommonDao {
 	public List<Integer> getAllIds() {
 		String sql = "SELECT id FROM user";
 		List<String> params = Collections.emptyList();
-		List<Map<String, Object>> lines = query(sql, params);
+		List<Map<String, Object>> lines = DaoUtil.query(sql, params);
 		List<Integer> idList = new ArrayList<Integer>();
 		for (Map<String, Object> line : lines) {
 			Integer id = (Integer) line.get("id");
@@ -58,7 +58,7 @@ public class UserDao extends CommonDao {
 	public boolean existsUser(String username) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
-		List<Map<String, Object>> results = query(sql, params);
+		List<Map<String, Object>> results = DaoUtil.query(sql, params);
 		boolean contains = !results.isEmpty();
 		logger.info(String.format("containsUser: username=%s, %b", username,
 				contains));
@@ -68,7 +68,7 @@ public class UserDao extends CommonDao {
 	public void addUser(String username, String password) {
 		String sql = "INSERT INTO user(name, password) VALUES(?, ?)";
 		List<String> params = Arrays.asList(username, password);
-		execute(sql, params);
+		DaoUtil.execute(sql, params);
 		logger.info(String.format("addUser: username=%s, password=%s",
 				username, password));
 	}
@@ -81,7 +81,7 @@ public class UserDao extends CommonDao {
 
 		String sql = "SELECT password FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
-		String password2 = (String) queryOneObject(sql, params);
+		String password2 = (String) DaoUtil.queryOneObject(sql, params);
 		logger.info(String.format(
 				"validPassword: username=%s, password=%s, original=%s",
 				username, password, password2));

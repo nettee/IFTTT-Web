@@ -16,21 +16,21 @@ import org.apache.log4j.Logger;
  * @see Message
  * 
  */
-public class MessageDao extends CommonDao {
+public class MessageDao {
 
 	private static final Logger logger = Logger.getLogger(MessageDao.class);
 
 	public Message getMessageById(int id) {
 		String sql = "SELECT * FROM message WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
-		Map<String, Object> line = queryOneLine(sql, params);
+		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newMessageFromLine(line);
 	}
 
 	public List<Message> getMessagesByUserId(int userId) {
 		String sql = "SELECT * FROM message WHERE userId=?";
 		List<Integer> params = Arrays.asList(userId);
-		List<Map<String, Object>> lines = query(sql, params);
+		List<Map<String, Object>> lines = DaoUtil.query(sql, params);
 		List<Message> messageList = new ArrayList<Message>();
 		for (Map<String, Object> line : lines) {
 			Message message = newMessageFromLine(line);
@@ -55,7 +55,7 @@ public class MessageDao extends CommonDao {
 				40);
 		String sql = "INSERT INTO message(userId, digest, content) VALUES(?, ?, ?)";
 		List<Object> params = Arrays.asList((Object) userId, digest, content);
-		execute(sql, params);
+		DaoUtil.execute(sql, params);
 		logger.info(String.format("addMessage: userId=%d, content=%s", userId,
 				content));
 	}
