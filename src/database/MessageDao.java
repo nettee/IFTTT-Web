@@ -27,13 +27,23 @@ public final class MessageDao {
 		return newMessageFromLine(line);
 	}
 
-	public static long getMessageNumberByUserId(int userId) {
+	public static int getMessageNumberByUserId(int userId) {
 		String sql = "SELECT count(*) FROM message WHERE userId=?";
+		return getSomeMessageNumberByUserId(sql, userId);
+	}
+	
+	public static int getUnopenedMessageNumberByUserId(int userId) {
+		String sql = "SELECT count(*) FROM message WHERE userId=? AND opened=FALSE";
+		return getSomeMessageNumberByUserId(sql, userId);
+	}
+
+	private static int getSomeMessageNumberByUserId(String sql, int userId) {
 		List<Integer> params = Arrays.asList(userId);
 		Object result = DaoUtil.queryOneObject(sql, params);
 		long number = (Long) result;
-		return number;
+		return (int) number;
 	}
+	
 
 	public static List<Message> getMessageListByUserId(int userId) {
 		String sql = "SELECT * FROM message WHERE userId=?";
@@ -85,5 +95,7 @@ public final class MessageDao {
 	public static void main(String[] args) {
 		MessageDao.addMessage(4, "hello world");
 	}
+
+	
 
 }

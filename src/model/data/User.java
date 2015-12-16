@@ -79,6 +79,13 @@ public class User implements Bean {
 		}
 		return MessageDao.getMessageListByUserId(id);
 	}
+	
+	public int getUnopenedMessageNumber() {
+		if (id == null) {
+			throw new IllegalStateException("id not set yet");
+		}
+		return MessageDao.getUnopenedMessageNumberByUserId(id);
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -36,7 +36,13 @@ public class MessageDaoTest {
 	
 	@Test
 	public void testGetMessageNumberByUserId() {
-		long number = MessageDao.getMessageNumberByUserId(4);
+		int number = MessageDao.getMessageNumberByUserId(4);
+		System.out.println(number);
+	}
+	
+	@Test
+	public void testGetUnopenedMessageNumberByUserId() {
+		int number = MessageDao.getUnopenedMessageNumberByUserId(4);
 		System.out.println(number);
 	}
 	
