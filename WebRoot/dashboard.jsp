@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,6 +42,9 @@ a {
 %>
 <jsp:useBean id="user" class="model.data.User"></jsp:useBean>
 	<%if(userId!=null)user.setThisById(userId);%>
+<jsp:useBean id="message" class="model.data.Message"></jsp:useBean>
+	<%if(userId!=null)message.setId(userId); %>
+
 	<div
 		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<header
@@ -104,8 +107,11 @@ a {
 					role="presentation">home</i>Home</a> <a class="mdl-navigation__link"
 					href="?page=Task"><i class="mdl-color-text--blue-grey-400 material-icons"
 					role="presentation">toc</i>Tasks</a> <a class="mdl-navigation__link"
-					href="?page=Inbox"><i class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">inbox</i>Inbox</a> <a class="mdl-navigation__link"
+					href="?page=Inbox">
+					<% if(user.getName().equals("rg4")) {%><span class="mdl-badge" data-badge="n"><i class="mdl-color-text--blue-grey-400 material-icons"
+					role="presentation">inbox</i>Inbox</span><%}else{%><i class="mdl-color-text--blue-grey-400 material-icons"
+					role="presentation">inbox</i>Inbox<%} %>
+					</a> <a class="mdl-navigation__link"
 					href="?page=Setting"><i class="mdl-color-text--blue-grey-400 material-icons"
 					role="presentation">settings</i>Setting</a> <a
 					class="mdl-navigation__link" href="?page=Report"><i
