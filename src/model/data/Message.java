@@ -2,19 +2,6 @@ package model.data;
 
 import java.sql.Timestamp;
 
-/**
- * Javabean class
- * <p>
- * Properties:
- * <ul>
- * <li>id
- * <li>userId
- * <li>publishTime
- * <li>digest
- * <li>content
- * <li>opened
- * </ul>
- */
 public class Message {
 
 	private final int id;
