@@ -12,8 +12,6 @@ import org.junit.Test;
 
 public class MessageDaoTest {
 	
-	private static MessageDao messageDao = new MessageDao();
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -32,13 +30,19 @@ public class MessageDaoTest {
 
 	@Test
 	public void testGetMessageById() {
-		Message message = messageDao.getMessageById(1);
+		Message message = MessageDao.getMessageById(1);
 		System.out.println(message);
 	}
 	
 	@Test
-	public void testGetMessagesByUserId() {
-		List<Message> messages = messageDao.getMessagesByUserId(4);
+	public void testGetMessageNumberByUserId() {
+		long number = MessageDao.getMessageNumberByUserId(4);
+		System.out.println(number);
+	}
+	
+	@Test
+	public void testGetMessageListByUserId() {
+		List<Message> messages = MessageDao.getMessageListByUserId(4);
 		for (Message message : messages) {
 			System.out.println(message);
 		}

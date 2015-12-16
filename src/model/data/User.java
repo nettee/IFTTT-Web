@@ -1,5 +1,8 @@
 package model.data;
 
+import java.util.List;
+
+import database.MessageDao;
 import database.UserDao;
 
 /**
@@ -16,7 +19,7 @@ import database.UserDao;
  */
 public class User implements Bean {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private String password;
 	private int balance;
@@ -24,36 +27,27 @@ public class User implements Bean {
 	public User() {
 	}
 
-	public int getId() {
-		return id;
+	public User(Integer id, String name, String password, int balance) {
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.balance = balance;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public int getBalance() {
 		return balance;
-	}
-
-	public void setBalance(int balance) {
-		this.balance = balance;
 	}
 
 	/**
@@ -73,10 +67,17 @@ public class User implements Bean {
 	}
 
 	private void setThisFromUser(User that) {
-		setId(that.id);
-		setName(that.name);
-		setPassword(that.password);
-		setBalance(that.balance);
+		this.id = that.id;
+		this.name = that.name;
+		this.password = that.password;
+		this.balance = that.balance;
+	}
+
+	public List<Message> getMessageList() {
+		if (id == null) {
+			throw new IllegalStateException("id not set yet");
+		}
+		return MessageDao.getMessageListByUserId(id);
 	}
 
 	@Override

@@ -17,14 +17,10 @@ import org.junit.Test;
 public class UserDaoTest {
 
 	private static UserDao userDao = new UserDao();
-	private static User dog = new User();
+	private static User dog = new User(1, "dog", "1", 5000);
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		dog.setId(1);
-		dog.setName("dog");
-		dog.setPassword("1");
-		dog.setBalance(5000);
 	}
 
 	@Before

@@ -1,5 +1,8 @@
 package model.data;
 
+import model.task.Action;
+import model.task.Trigger;
+
 public class UserTask implements Bean {
 
 	private int id;

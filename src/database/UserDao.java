@@ -35,12 +35,11 @@ public class UserDao {
 	}
 	
 	private User newUserFromLine(Map<String, Object> line) {
-		User user = new User();
-		user.setId((Integer) line.get("id"));
-		user.setName((String) line.get("name"));
-		user.setPassword((String) line.get("password"));
-		user.setBalance((Integer) line.get("balance"));
-		return user;
+		Integer id = (Integer) line.get("id");
+		String name = (String) line.get("name");
+		String password = (String) line.get("password");
+		Integer balance = (Integer) line.get("balance");
+		return new User(id, name, password, balance);
 	}
 	
 	public List<Integer> getAllIds() {

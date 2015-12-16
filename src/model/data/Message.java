@@ -15,65 +15,47 @@ import java.sql.Timestamp;
  * <li>opened
  * </ul>
  */
-public class Message implements Bean {
+public class Message {
 
-	private int id;
-	private int userId;
-	private Timestamp publishTime;
-	private String digest;
-	private String content;
-	private boolean opened;
+	private final int id;
+	private final Integer userId;
+	private final Timestamp publishTime;
+	private final String digest;
+	private final String content;
+	private final boolean opened;
 
-	public Message() {
-
+	public Message(Integer id, Integer userId, Timestamp publishTime,
+			String digest, String content, boolean opened) {
+		this.id = id;
+		this.userId = userId;
+		this.publishTime = publishTime;
+		this.digest = digest;
+		this.content = content;
+		this.opened = opened;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getUserId() {
 		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public Timestamp getPublishTime() {
 		return publishTime;
 	}
 
-	public void setPublishTime(Timestamp publishTime) {
-		this.publishTime = publishTime;
-	}
-
 	public String getDigest() {
 		return digest;
-	}
-
-	public void setDigest(String digest) {
-		this.digest = digest;
 	}
 
 	public String getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public boolean isOpened() {
 		return opened;
-	}
-
-	public void setOpened(boolean opened) {
-		this.opened = opened;
 	}
 
 	@Override
@@ -88,10 +70,12 @@ public class Message implements Bean {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("Message(id=%d, userId=%d, publishTime=%s, content=%s)", id, userId, publishTime, content);
+		return String
+				.format("Message(id=%d, userId=%d, publishTime=%s, content=%s, opened=%b)",
+						id, userId, publishTime, content, opened);
 	}
 
 }

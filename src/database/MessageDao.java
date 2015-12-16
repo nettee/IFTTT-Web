@@ -16,21 +16,30 @@ import org.apache.log4j.Logger;
  * @see Message
  * 
  */
-public class MessageDao {
+public final class MessageDao {
 
 	private static final Logger logger = Logger.getLogger(MessageDao.class);
 
-	public Message getMessageById(int id) {
+	public static Message getMessageById(int id) {
 		String sql = "SELECT * FROM message WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
 		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newMessageFromLine(line);
 	}
 
-	public List<Message> getMessagesByUserId(int userId) {
+	public static long getMessageNumberByUserId(int userId) {
+		String sql = "SELECT count(*) FROM message WHERE userId=?";
+		List<Integer> params = Arrays.asList(userId);
+		Object result = DaoUtil.queryOneObject(sql, params);
+		long number = (Long) result;
+		return number;
+	}
+
+	public static List<Message> getMessageListByUserId(int userId) {
 		String sql = "SELECT * FROM message WHERE userId=?";
 		List<Integer> params = Arrays.asList(userId);
 		List<Map<String, Object>> lines = DaoUtil.query(sql, params);
+
 		List<Message> messageList = new ArrayList<Message>();
 		for (Map<String, Object> line : lines) {
 			Message message = newMessageFromLine(line);
@@ -39,18 +48,17 @@ public class MessageDao {
 		return messageList;
 	}
 
-	private Message newMessageFromLine(Map<String, Object> line) {
-		Message message = new Message();
-		message.setId((Integer) line.get("id"));
-		message.setUserId((Integer) line.get("userId"));
-		message.setPublishTime((Timestamp) line.get("publishTime"));
-		message.setDigest((String) line.get("digest"));
-		message.setContent((String) line.get("content"));
-		message.setOpened((Boolean) line.get("opened"));
-		return message;
+	private static Message newMessageFromLine(Map<String, Object> line) {
+		Integer id = (Integer) line.get("id");
+		Integer userId = (Integer) line.get("userId");
+		Timestamp publishTime = (Timestamp) line.get("publishTime");
+		String digest = (String) line.get("digest");
+		String content = (String) line.get("content");
+		Boolean opened = (Boolean) line.get("opened");
+		return new Message(id, userId, publishTime, digest, content, opened);
 	}
 
-	private void addMessage(Integer userId, String content) {
+	private static void addMessage(Integer userId, String content) {
 		String digest = content.length() <= 60 ? content : content.substring(0,
 				40);
 		String sql = "INSERT INTO message(userId, digest, content) VALUES(?, ?, ?)";
@@ -60,12 +68,12 @@ public class MessageDao {
 				content));
 	}
 
-	public void sendMessageTo(Integer userId, String content) {
+	public static void sendMessageTo(Integer userId, String content) {
 		addMessage(userId, content);
 		logger.info(String.format("send message to user [%d]", userId));
 	}
 
-	public void sendMessageToAll(String content) {
+	public static void sendMessageToAll(String content) {
 		List<Integer> userIds = new UserDao().getAllIds();
 		for (int userId : userIds) {
 			addMessage(userId, content);
@@ -75,8 +83,7 @@ public class MessageDao {
 	}
 
 	public static void main(String[] args) {
-		MessageDao messageDao = new MessageDao();
-		messageDao.addMessage(4, "hello world");
+		MessageDao.addMessage(4, "hello world");
 	}
 
 }
