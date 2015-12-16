@@ -40,7 +40,7 @@ a {
 	}
 	else response.sendRedirect("login.jsp");
 %>
-<jsp:useBean id="user" class="model.User"></jsp:useBean>
+<jsp:useBean id="user" class="model.data.User"></jsp:useBean>
 	<%if(userId!=null)user.setThisById(userId);%>
 	<div
 		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">

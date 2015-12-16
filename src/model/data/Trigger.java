@@ -1,11 +1,12 @@
-package model;
+package model.data;
 
-public class Action implements Bean {
-	
+public class Trigger implements Bean {
+
 	private int id;
 	private String name;
-	
-	public Action() {}
+
+	public Trigger() {
+	}
 
 	public int getId() {
 		return id;

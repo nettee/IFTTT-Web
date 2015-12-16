@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 
-import model.User;
+import model.data.User;
 
 import org.junit.After;
 import org.junit.AfterClass;

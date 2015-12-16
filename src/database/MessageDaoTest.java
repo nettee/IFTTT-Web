@@ -2,7 +2,7 @@ package database;
 
 import java.util.List;
 
-import model.Message;
+import model.data.Message;
 
 import org.junit.After;
 import org.junit.AfterClass;

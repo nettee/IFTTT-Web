@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import model.User;
+import model.data.User;
 
 import org.apache.log4j.Logger;
 
