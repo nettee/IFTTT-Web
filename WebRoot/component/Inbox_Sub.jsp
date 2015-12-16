@@ -1,22 +1,31 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
-  <head>
-    <title>My JSP 'Inbox_Sub.jsp' starting page</title>
+<head>
+<title>Sub page Inbox of User Home</title>
+</head>
+<body>
+	<jsp:useBean id="subuser" class="model.data.User"></jsp:useBean>
+	<main class="mdl-layout__content">
+	<%@page import="model.data.Message"%>
+	<%
+		Integer Id = null;
+		if (session.getAttribute("userId") != null) {
+			Id = (Integer) session.getAttribute("userId");
+		}
+		subuser.setThisById(Id);
+		List<Message> message_list = subuser.getMessageList();
+	%>
+	<%
+		for(Message m:message_list){
+			%>
+			<div class="demo-card--expand mdl-card mdl-shadow--2dp" style>
+			<div class="mdl-card__title"><%=m.getPublishTime() %> </div>
+			<div class="mdl-card__supporting-text"><%=m.getContent() %></div>
+			</div>
+			<% 
+		}
+	 %>
 
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
+	 </main>
+</body>
 </html>
