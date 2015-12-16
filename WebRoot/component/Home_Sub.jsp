@@ -1,16 +1,10 @@
+  <%@ page language="java" pageEncoding="utf-8"%>
   <body>
     <div class="mdl-grid demo-content">
 			<div
-				class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-				Welcome</div>
-			<div
 				class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-				<svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart">
-            </svg>
-				<svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart">
-            </svg>
+              	<span><h4 class="mdl-card_title-text">Welcome user <jsp:getProperty name="user" property="name"/></h4></span>
+              	<span>余额:<jsp:setProperty name="user" property="balance"/></span>
 			</div>
 			<div
 				class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
