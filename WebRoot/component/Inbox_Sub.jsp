@@ -20,17 +20,16 @@
 			for (Message m : message_list) {
 		%>
 		<li class="collection-item avatar"><i
-			class="material-icons circle">folder</i> <span class="title"><%=m.getDigest()%></span>
+			class="material-icons circle">message</i> <span class="title"><%=m.getDigest()%></span>
 			<p><%=m.getPublishTime()%>
 				<br>
 				<%=m.getContent()%>
 			</p> 
-			<%if(m.isOpened()){%> <a href="#!" class="secondary-content" ><i class="material-icons">star</i></a><%}else{
-			 %>  <a href="#!" class="secondary-content mdl-color-teal" style="color:gray;"><i class="material-icons">star</i></a><%} %>
-		</li>
 		<%
 			}
+			//全部设置为已读
 		%>
+		
 	</ul>
 	<script src="./js/materialize.js"></script>
 </body>

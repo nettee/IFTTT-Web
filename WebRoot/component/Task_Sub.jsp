@@ -1,69 +1,57 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<html>
+<head>
+<title>Sub page Task of User Home</title> 
+<link href="css/materialize.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-1.11.3.min.js" > </script>
+<script src="./js/materialize.js"></script>
+
+</head>
 <style>
-.child {
-	height: 100%;
-	width: 100%;
-	
-}
-.task_background{
-	background:url('') center/cover;
+.task_background {
+	background: url('') center/cover;
 }
 </style>
-<div class="demo-card-wide mdl-card mdl-shadow--2dp child task_background">
-	<div class="mdl-card__title">
-		<h2 class="mdl-card__title-text">Task List</h2>
-	</div>
-	<div class="mdl-card__supporting-text">
-		<table class="mdl-data-table mdl-js-data-table">
-			<thead>
-				<tr>
-					<th class="mdl-data-table__cell--non-numeric">Task Name</th>
-					<th>IF</th>
-					<th>Then</th>
-					<th>Delete</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="mdl-data-table__cell--non-numeric">Acrylic
-						(Transparent)</td>
-					<td>25</td>
-					<td>$2.90</td>
-					<td><a><i
-							class="mdl-color-text--blue-grey-400 material-icons"
-							role="presentation">delete</i> </a>
-					</td>
-				</tr>
-				<tr>
-					<td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-					<td>50</td>
-					<td>$1.25</td>
-					<td><a><i
-							class="mdl-color-text--blue-grey-400 material-icons"
-							role="presentation">delete</i> </a>
-					</td>
-				</tr>
-				<tr>
-					<td class="mdl-data-table__cell--non-numeric">Laminate (Gold
-						on Blue)</td>
-					<td>10</td>
-					<td>$2.35</td>
-					<td><a><i
-							class="mdl-color-text--blue-grey-400 material-icons"
-							role="presentation">delete</i> </a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="mdl-card__actions mdl-card--border">
-		<a
-			class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-			Add New Task </a>
-	</div>
-	<div class="mdl-card__menu">
-		<button
-			class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-			<i class="material-icons">share</i>
-		</button>
-	</div>
+<div class="demo-card-wide">
+	<ul class="collection" style="width: 80%">
+	<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
+	<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task2</span></li>
+	</ul>
 </div>
+ <ul class="collapsible" data-collapsible="accordion" style="width: 80%">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">add</i>Add New Task</div>
+      <div class="collapsible-body">
+      <form>
+      <div class="row">
+    	<div class="col s12">
+      		<ul class="tabs">
+        		<li class="tab col s3 disabled"><a href="#test1">If</a></li>
+        		<li class="tab col s3"><a href="#this">This</a></li>
+        		<li class="tab col s3 disabled"><a href="#test1">Then</a></li>
+        		<li class="tab col s3"><a href="#that">That</a></li>
+      		</ul>
+    	</div>
+    	<div id="this" class="col s12">
+    		<div class="row">
+				<div class="col s4">
+					<div class="center promo promo-example"><i class="material-icons">flash_on</i><p class="promo-caption">Speeds up development</p><p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p></div>
+      			</div>
+      			<div class="col s4">
+      			</div>
+      			<div class="col s4">
+      			</div>
+			</div>
+		</div>
+    	<div id="that" class="col s12">Test 3</div>
+		</div>
+		<input	class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" value="Create">
+		</form>
+		</div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">close</i>Close</div>
+      <div class="collapsible-body"></div>
+    </li>
+  </ul>
+</html>

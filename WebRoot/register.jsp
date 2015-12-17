@@ -85,7 +85,7 @@
 			<div class="mdl-card__actions mdl-card--border">
 				<input
 					class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-					type="submit" value="Get Started" form="register"> </input>
+					type="submit" value="Get Started" form="register">
 
 			</div>
 		</div>

@@ -1,22 +1,29 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
-  <head>
-    <title>My JSP 'Setting_Sub.jsp' starting page</title>
-
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
+<head>
+<title>Sub page Task of User Home</title> 
+<link href="css/materialize.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-1.11.3.min.js" > </script>
+<script src="./js/materialize.js"></script>
+</head>
+<style>
+.task_background {
+	background: url('') center/cover;
+}
+</style>
+ <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    </li>
+  </ul>
+    
 </html>

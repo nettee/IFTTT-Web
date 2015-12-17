@@ -111,10 +111,7 @@ a {
 					role="presentation">inbox</i>Inbox<%} %>
 					</a> <a class="mdl-navigation__link"
 					href="?page=Setting"><i class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">settings</i>Setting</a> <a
-					class="mdl-navigation__link" href="?page=Report"><i
-					class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">report</i>Report</a> <a
+					role="presentation">settings</i>Setting</a><a
 					class="mdl-navigation__link" href="?page=Purchase"><i
 					class="mdl-color-text--blue-grey-400 material-icons"
 					role="presentation">shopping_cart</i>Purchases</a>
@@ -131,7 +128,6 @@ a {
 		 if(pageName.equals("Task")){ %><%@include file="component/Task_Sub.jsp" %><% }
 		 else if(pageName.equals("Inbox")){%><%@include file="component/Inbox_Sub.jsp" %><% } 
 		 else if(pageName.equals("Setting")){%><%@include file="component/Setting_Sub.jsp" %><% }
-		 else if(pageName.equals("Report")){%><%@include file="component/Report_Sub.jsp" %><% }
 		 else if(pageName.equals("Purchase")){%><%@include file="component/Purch_Sub.jsp" %><% }
 		 else if(pageName.equals("Help")){%><%@include file="component/Help_Sub.jsp" %><% }
 		 else {%><%@include file="component/Home_Sub.jsp" %><% }
