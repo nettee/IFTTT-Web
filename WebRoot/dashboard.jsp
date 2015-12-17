@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard</title>
+<title>Dash board</title>
 <link href="css/font.css" rel="stylesheet">
 <link href="css/icon.css" rel="stylesheet">
 <link rel="stylesheet" href="css/material.css">
@@ -57,8 +57,7 @@ a {
 					<i class="material-icons">more_vert</i>
 				</button>
 				<ul
-					class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right"
-					for="hdrbtn">
+					class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right">
 
 					<li class="mdl-menu__item"><a href="/about">About</a>
 					</li>
@@ -78,12 +77,11 @@ a {
 					<div class="mdl-layout-spacer"></div>
 					<button id="accbtn"
 						class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-						<i class="material-icons" role="presentation">arrow_drop_down</i>
+						<i class="material-icons" >arrow_drop_down</i>
 						<span class="visuallyhidden">Accounts</span>
 					</button>
 					<ul
-						class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-						for="accbtn">
+						class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
 						<li class="mdl-menu__item"><a href="login.jsp"><i
 								class="material-icons">add</i>Add another account...</a>
 						</li>
@@ -91,25 +89,31 @@ a {
 				</div>
 			</header>
 			<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-				<a class="mdl-navigation__link" href="?page=Home"><i
-					class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">home</i>Home</a> <a class="mdl-navigation__link"
-					href="?page=Task"><i class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">toc</i>Tasks</a> <a class="mdl-navigation__link"
-					href="?page=Inbox">
-					<% if(Unread>0) {%><span class="mdl-badge" data-badge="<%=Unread%>"><i class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">inbox</i>Inbox</span><%}else{%><i class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">inbox</i>Inbox<%} %>
-					</a> <a class="mdl-navigation__link"
-					href="?page=Setting"><i class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">settings</i>Setting</a><a
-					class="mdl-navigation__link" href="?page=Purchase"><i
-					class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">shopping_cart</i>Purchases</a>
+				<a class="mdl-navigation__link" href="?page=Home">
+					<i class="mdl-color-text--blue-grey-400 material-icons">home</i>
+					Home
+				</a> 
+				<a class="mdl-navigation__link" href="?page=Task">
+					<i class="mdl-color-text--blue-grey-400 material-icons">toc</i>
+					Tasks
+				</a> 
+				<a class="mdl-navigation__link" href="?page=Inbox">
+					<% if(Unread>0) {%>
+					<span class="mdl-badge" data-badge="<%=Unread%>">
+					<i class="mdl-color-text--blue-grey-400 material-icons">inbox</i>Inbox</span><%}
+					else{%>
+					<i class="mdl-color-text--blue-grey-400 material-icons">inbox</i>Inbox<%} %>
+				</a>
+				<a class="mdl-navigation__link" href="?page=Setting">
+					<i class="mdl-color-text--blue-grey-400 material-icons">settings</i>
+					Setting
+				</a>
+				<a class="mdl-navigation__link" href="?page=Purchase">
+					<i class="mdl-color-text--blue-grey-400 material-icons">shopping_cart</i>
+					Purchases
+				</a>
 				<div class="mdl-layout-spacer"></div>
-				<a class="mdl-navigation__link" href="?page=Help"><i
-					class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">help_outline</i><span class="visuallyhidden">Help</span>
+					<a class="mdl-navigation__link" href="?page=Help"><i class="mdl-color-text--blue-grey-400 material-icons">help_outline</i><span class="visuallyhidden">Help</span>
 				</a>
 			</nav>
 		</div>
