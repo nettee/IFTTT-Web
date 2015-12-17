@@ -5,7 +5,7 @@
 <link href="css/materialize.css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery-1.11.3.min.js" > </script>
 <script src="./js/materialize.js"></script>
-
+<%@include file="Data_Sub.jsp" %>
 </head>
 <style>
 .task_background {
@@ -24,7 +24,7 @@
       <div class="collapsible-body">
       <form>
       <div class="row">
-    	<div class="col s12">
+      	<div class="col s12">
       		<ul class="tabs">
         		<li class="tab col s3 disabled"><a href="#test1">If</a></li>
         		<li class="tab col s3"><a href="#this">This</a></li>
@@ -32,19 +32,22 @@
         		<li class="tab col s3"><a href="#that">That</a></li>
       		</ul>
     	</div>
+    	<br>
     	<div id="this" class="col s12">
     		<div class="row">
 				<div class="col s4">
 					<div class="center promo promo-example"><i class="material-icons">flash_on</i><p class="promo-caption">Speeds up development</p><p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p></div>
-      			</div>
-      			<div class="col s4">
-      			</div>
-      			<div class="col s4">
-      			</div>
-			</div>
+     				</div>
+      				<div class="col s4">
+      					<div class="center promo promo-example"><i class="material-icons">flash_on</i><p class="promo-caption">Speeds up development</p><p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p></div>
+      				</div>
+      				<div class="col s4">
+      					<div class="center promo promo-example"><i class="material-icons">flash_on</i><p class="promo-caption">Speeds up development</p><p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p></div>
+      				</div>
+				</div>
 		</div>
     	<div id="that" class="col s12">Test 3</div>
-		</div>
+    	</div>
 		<input	class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" value="Create">
 		</form>
 		</div>

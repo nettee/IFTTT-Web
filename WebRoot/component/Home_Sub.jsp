@@ -3,14 +3,13 @@
 <head>
 <title>Sub page Home of User Home</title>
 </head>
-</head>
+<%@include file="Data_Sub.jsp" %>
   <body>
-  
     <div class="mdl-grid demo-content">
 			<div
 				class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-              	<span><h4 class="mdl-card_title-text">Welcome user <jsp:getProperty name="user" property="name"/></h4></span>
-              	<span>余额:<jsp:getProperty name="user" property="balance"/></span>
+              	<span class="mdl-card_title-text">Welcome user <jsp:getProperty name="subuser" property="name"/></span>
+              	<span>余额:<jsp:getProperty name="subuser" property="balance"/></span>
 			</div>
 			<div
 				class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">

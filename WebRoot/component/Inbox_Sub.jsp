@@ -3,19 +3,14 @@
 <head>
 <title>Sub page Inbox of User Home</title>
 <link href="css/materialize.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-1.11.3.min.js" > </script>
+<script src="./js/materialize.js"></script>
 </head>
+<%@page import="model.data.Message"%>
+<%@include file="Data_Sub.jsp" %>
+<%List<Message> message_list = subuser.getMessageList();%>
 <body>
-	<jsp:useBean id="subuser" class="model.data.User"></jsp:useBean>
 	<ul class="collection" style="width: 80%">
-		<%@page import="model.data.Message"%>
-		<%
-			Integer Id = null;
-			if (session.getAttribute("userId") != null) {
-				Id = (Integer) session.getAttribute("userId");
-			}
-			subuser.setThisById(Id);
-			List<Message> message_list = subuser.getMessageList();
-		%>
 		<%
 			for (Message m : message_list) {
 		%>
@@ -31,6 +26,5 @@
 		%>
 		
 	</ul>
-	<script src="./js/materialize.js"></script>
 </body>
 </html>

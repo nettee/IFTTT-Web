@@ -40,9 +40,10 @@ a {
 	else response.sendRedirect("login.jsp");
 %>
 <jsp:useBean id="user" class="model.data.User" ></jsp:useBean>
-	<%if(userId!=null)user.setThisById(userId);
+<%
+	if(userId!=null)user.setThisById(userId);
 	int Unread=user.getUnopenedMessageNumber();
-	%>
+%>
 	<div
 		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<header
@@ -50,16 +51,6 @@ a {
 			<div class="mdl-layout__header-row">
 				<span class="mdl-layout-title"><%String pageName=request.getParameter("page");if(pageName!=null){%><%=pageName %><%}else{%>Home<%} %></span>
 				<div class="mdl-layout-spacer"></div>
-				<div
-					class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-					<label class="mdl-button mdl-js-button mdl-button--icon"
-						for="search"> <i class="material-icons">search</i> </label>
-					<div class="mdl-textfield__expandable-holder">
-						<input class="mdl-textfield__input" type="text" id="search">
-						<label class="mdl-textfield__label" for="search">Enter
-							your query...</label>
-					</div>
-				</div>
 				<button
 					class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
 					id="hdrbtn">
@@ -125,13 +116,13 @@ a {
 		<main class="mdl-layout__content mdl-color--grey-100 parent">
 		
 		<%if(pageName!=null){
-		 if(pageName.equals("Task")){ %><%@include file="component/Task_Sub.jsp" %><% }
-		 else if(pageName.equals("Inbox")){%><%@include file="component/Inbox_Sub.jsp" %><% } 
-		 else if(pageName.equals("Setting")){%><%@include file="component/Setting_Sub.jsp" %><% }
-		 else if(pageName.equals("Purchase")){%><%@include file="component/Purch_Sub.jsp" %><% }
-		 else if(pageName.equals("Help")){%><%@include file="component/Help_Sub.jsp" %><% }
-		 else {%><%@include file="component/Home_Sub.jsp" %><% }
-		}else{ %><%@include file="component/Home_Sub.jsp" %><%}%>
+		 if(pageName.equals("Task")){ %><jsp:include page="component/Task_Sub.jsp"></jsp:include><% }
+		 else if(pageName.equals("Inbox")){%><jsp:include page="component/Inbox_Sub.jsp"></jsp:include><% } 
+		 else if(pageName.equals("Setting")){%><jsp:include page="component/Setting_Sub.jsp"></jsp:include><% }
+		 else if(pageName.equals("Purchase")){%><jsp:include page="component/Purch_Sub.jsp"></jsp:include><% }
+		 else if(pageName.equals("Help")){%><jsp:include page="component/Help_Sub.jsp"></jsp:include><% }
+		 else {%><jsp:include page="component/Home_Sub.jsp"></jsp:include><% }
+		}else{ %><jsp:include page="component/Home_Sub.jsp"></jsp:include><%}%>
 		</main>
 	</div>
 	<script src="./js/material.js"></script>
