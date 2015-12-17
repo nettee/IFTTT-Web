@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-public class DatabaseUtil {
+class DatabaseUtil {
 
 	private static final Logger logger = Logger.getLogger(DatabaseUtil.class);
 

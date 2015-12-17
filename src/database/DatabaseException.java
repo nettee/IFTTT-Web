@@ -1,7 +1,7 @@
 package database;
 
 @SuppressWarnings("serial")
-public class DatabaseException extends RuntimeException {
+class DatabaseException extends RuntimeException {
 	
 	public DatabaseException() {
 		super();
