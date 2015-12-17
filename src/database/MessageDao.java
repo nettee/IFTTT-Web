@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import model.data.Message;
-import model.data.User;
 
 import org.apache.log4j.Logger;
 
@@ -46,7 +45,7 @@ public final class MessageDao {
 	}
 
 	public static List<Message> getMessageListByUserId(int userId) {
-		String sql = "SELECT * FROM message WHERE userId=?";
+		String sql = "SELECT * FROM message WHERE userId=? ORDER BY publishTime DESC";
 		List<Integer> params = Arrays.asList(userId);
 		List<Map<String, Object>> lines = DaoUtil.query(sql, params);
 
@@ -67,13 +66,13 @@ public final class MessageDao {
 		Boolean opened = (Boolean) line.get("opened");
 		return new Message(id, userId, publishTime, subject, content, opened);
 	}
-	
+
 	public static void setMessageOpenedByUserId(int userId) {
 		// TODO
 	}
-	
 
-	public static void sendMessageTo(Integer userId, String subject, String content) {
+	public static void sendMessageTo(Integer userId, String subject,
+			String content) {
 		addMessage(userId, subject, content);
 		logger.info(String.format("send message to user [%d]", userId));
 	}
@@ -87,16 +86,18 @@ public final class MessageDao {
 				Arrays.toString(userIds.toArray())));
 	}
 
-	private static void addMessage(Integer userId, String subject, String content) {
+	private static void addMessage(Integer userId, String subject,
+			String content) {
 		String sql = "INSERT INTO message(userId, subject, content) VALUES(?, ?, ?)";
 		List<Object> params = Arrays.asList((Object) userId, subject, content);
 		DaoUtil.execute(sql, params);
 		logger.info(String.format("addMessage: userId=%d, content=%s", userId,
 				content));
 	}
-	
+
 	public static void main(String[] args) {
-		sendMessageToAll("Welcome new user!", "You are using the world's most excellent IFTTT system!");
+		sendMessageToAll("Welcome new user!",
+				"You are using the world's most excellent IFTTT system!");
 	}
 
 }
