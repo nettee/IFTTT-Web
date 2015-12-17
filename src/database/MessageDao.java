@@ -20,18 +20,11 @@ public final class MessageDao {
 
 	private static final Logger logger = Logger.getLogger(MessageDao.class);
 
-	public static Message getMessageById(int id) {
-		String sql = "SELECT * FROM message WHERE id=?";
-		List<Integer> params = Arrays.asList(id);
-		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
-		return newMessageFromLine(line);
-	}
-
 	public static int getMessageNumberByUserId(int userId) {
 		String sql = "SELECT count(*) FROM message WHERE userId=?";
 		return getSomeMessageNumberByUserId(sql, userId);
 	}
-	
+
 	public static int getUnopenedMessageNumberByUserId(int userId) {
 		String sql = "SELECT count(*) FROM message WHERE userId=? AND opened=FALSE";
 		return getSomeMessageNumberByUserId(sql, userId);
@@ -43,7 +36,13 @@ public final class MessageDao {
 		long number = (Long) result;
 		return (int) number;
 	}
-	
+
+	public static Message getMessageById(int id) {
+		String sql = "SELECT * FROM message WHERE id=?";
+		List<Integer> params = Arrays.asList(id);
+		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
+		return newMessageFromLine(line);
+	}
 
 	public static List<Message> getMessageListByUserId(int userId) {
 		String sql = "SELECT * FROM message WHERE userId=?";
@@ -67,16 +66,11 @@ public final class MessageDao {
 		Boolean opened = (Boolean) line.get("opened");
 		return new Message(id, userId, publishTime, digest, content, opened);
 	}
-
-	private static void addMessage(Integer userId, String content) {
-		String digest = content.length() <= 60 ? content : content.substring(0,
-				40);
-		String sql = "INSERT INTO message(userId, digest, content) VALUES(?, ?, ?)";
-		List<Object> params = Arrays.asList((Object) userId, digest, content);
-		DaoUtil.execute(sql, params);
-		logger.info(String.format("addMessage: userId=%d, content=%s", userId,
-				content));
+	
+	public static void setMessageOpenedByUserId(int userId) {
+		// TODO
 	}
+	
 
 	public static void sendMessageTo(Integer userId, String content) {
 		addMessage(userId, content);
@@ -92,10 +86,14 @@ public final class MessageDao {
 				Arrays.toString(userIds.toArray())));
 	}
 
-	public static void main(String[] args) {
-		MessageDao.addMessage(4, "hello world");
+	private static void addMessage(Integer userId, String content) {
+		String digest = content.length() <= 60 ? content : content.substring(0,
+				40);
+		String sql = "INSERT INTO message(userId, digest, content) VALUES(?, ?, ?)";
+		List<Object> params = Arrays.asList((Object) userId, digest, content);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("addMessage: userId=%d, content=%s", userId,
+				content));
 	}
-
-	
 
 }
