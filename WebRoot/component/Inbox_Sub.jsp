@@ -15,7 +15,7 @@
 			for (Message m : message_list) {
 		%>
 		<li class="collection-item avatar"><i
-			class="material-icons circle">message</i> <span class="title"><%=m.getDigest()%></span>
+			class="material-icons circle">message</i> <span class="title"><%=m.getSubject()%></span>
 			<p><%=m.getPublishTime()%>
 				<br>
 				<%=m.getContent()%>
