@@ -1,12 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!doctype html>
-<%@page import="model.data.Message"%>
+<%@page import="model.data.Message" %>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description"
-	content="A front-end template that helps you build fast, modern mobile web apps.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard</title>
 <link href="css/font.css" rel="stylesheet">
@@ -23,48 +21,34 @@
 	margin-bottom: 40px;
 	z-index: 900;
 }
-
 .parent {
-	overflow: hidden;
-	position: relative;
-	width: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
 }
-
 a {
 	text-decoration: none;
 }
 </style>
 </head>
 <body>
-	<%
-		Integer userId = null;
-		if (session.getAttribute("userId") != null) {
-			userId = (Integer) session.getAttribute("userId");
-		} else
-			response.sendRedirect("login.jsp");
-	%>
-	<jsp:useBean id="user" class="model.data.User"></jsp:useBean>
-	<%
-		if (userId != null)
-			user.setThisById(userId);
-		int Unread = user.getUnopenedMessageNumber();
+<%
+	Integer userId=null;
+	if(session.getAttribute("userId")!=null){
+		userId=(Integer)session.getAttribute("userId");
+	}
+	else response.sendRedirect("login.jsp");
+%>
+<jsp:useBean id="user" class="model.data.User" ></jsp:useBean>
+	<%if(userId!=null)user.setThisById(userId);
+	int Unread=user.getUnopenedMessageNumber();
 	%>
 	<div
 		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<header
 			class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
 			<div class="mdl-layout__header-row">
-				<span class="mdl-layout-title">
-					<%
-						String pageName = request.getParameter("page");
-						if (pageName != null) {
-					%><%=pageName%>
-					<%
-						} else {
-					%>Home<%
-						}
-					%>
-				</span>
+				<span class="mdl-layout-title"><%String pageName=request.getParameter("page");if(pageName!=null){%><%=pageName %><%}else{%>Home<%} %></span>
 				<div class="mdl-layout-spacer"></div>
 				<div
 					class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
@@ -85,9 +69,11 @@ a {
 					class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right"
 					for="hdrbtn">
 
-					<li class="mdl-menu__item"><a href="/about">About</a></li>
+					<li class="mdl-menu__item"><a href="/about">About</a>
+					</li>
 
-					<li class="mdl-menu__item"><a href="/login.jsp">Log Out</a></li>
+					<li class="mdl-menu__item"><a href="/login.jsp">Log Out</a>
+					</li>
 
 				</ul>
 			</div>
@@ -97,7 +83,7 @@ a {
 			<header class="demo-drawer-header">
 				<img src="assets/user.jpg" class="demo-avatar">
 				<div class="demo-avatar-dropdown">
-					<span><jsp:getProperty name="user" property="name" /></span>
+					<span><jsp:getProperty name="user" property="name"/></span>
 					<div class="mdl-layout-spacer"></div>
 					<button id="accbtn"
 						class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
@@ -108,7 +94,8 @@ a {
 						class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
 						for="accbtn">
 						<li class="mdl-menu__item"><a href="login.jsp"><i
-								class="material-icons">add</i>Add another account...</a></li>
+								class="material-icons">add</i>Add another account...</a>
+						</li>
 					</ul>
 				</div>
 			</header>
@@ -116,23 +103,14 @@ a {
 				<a class="mdl-navigation__link" href="?page=Home"><i
 					class="mdl-color-text--blue-grey-400 material-icons"
 					role="presentation">home</i>Home</a> <a class="mdl-navigation__link"
-					href="?page=Task"><i
-					class="mdl-color-text--blue-grey-400 material-icons"
+					href="?page=Task"><i class="mdl-color-text--blue-grey-400 material-icons"
 					role="presentation">toc</i>Tasks</a> <a class="mdl-navigation__link"
-					href="?page=Inbox"> <%
- 	if (Unread > 0) {
- %><span class="mdl-badge"
-					data-badge="<%=Unread%>"><i
-						class="mdl-color-text--blue-grey-400 material-icons"
-						role="presentation">inbox</i>Inbox</span>
-					<%
-						} else {
-					%><i class="mdl-color-text--blue-grey-400 material-icons"
-					role="presentation">inbox</i>Inbox<%
-						}
-					%> </a> <a
-					class="mdl-navigation__link" href="?page=Setting"><i
-					class="mdl-color-text--blue-grey-400 material-icons"
+					href="?page=Inbox">
+					<% if(Unread>0) {%><span class="mdl-badge" data-badge="<%=Unread%>"><i class="mdl-color-text--blue-grey-400 material-icons"
+					role="presentation">inbox</i>Inbox</span><%}else{%><i class="mdl-color-text--blue-grey-400 material-icons"
+					role="presentation">inbox</i>Inbox<%} %>
+					</a> <a class="mdl-navigation__link"
+					href="?page=Setting"><i class="mdl-color-text--blue-grey-400 material-icons"
 					role="presentation">settings</i>Setting</a> <a
 					class="mdl-navigation__link" href="?page=Report"><i
 					class="mdl-color-text--blue-grey-400 material-icons"
@@ -147,41 +125,18 @@ a {
 				</a>
 			</nav>
 		</div>
-		<main class="mdl-layout__content mdl-color--grey-100 parent"> <%
- 	if (pageName != null) {
- 		if (pageName.equals("Task")) {
- %><%@include
-			file="component/Task_Sub.jsp"%>
-		<%
-			} else if (pageName.equals("Inbox")) {
-		%><%@include
-			file="component/Inbox_Sub.jsp"%>
-		<%
-			} else if (pageName.equals("Setting")) {
-		%><%@include
-			file="component/Setting_Sub.jsp"%>
-		<%
-			} else if (pageName.equals("Report")) {
-		%><%@include
-			file="component/Report_Sub.jsp"%>
-		<%
-			} else if (pageName.equals("Purchase")) {
-		%><%@include
-			file="component/Purch_Sub.jsp"%>
-		<%
-			} else if (pageName.equals("Help")) {
-		%><%@include
-			file="component/Help_Sub.jsp"%>
-		<%
-			} else {
-		%><%@include file="component/Home_Sub.jsp"%>
-		<%
-			}
-			} else {
-		%><%@include file="component/Home_Sub.jsp"%>
-		<%
-			}
-		%> </main>
+		<main class="mdl-layout__content mdl-color--grey-100 parent">
+		
+		<%if(pageName!=null){
+		 if(pageName.equals("Task")){ %><%@include file="component/Task_Sub.jsp" %><% }
+		 else if(pageName.equals("Inbox")){%><%@include file="component/Inbox_Sub.jsp" %><% } 
+		 else if(pageName.equals("Setting")){%><%@include file="component/Setting_Sub.jsp" %><% }
+		 else if(pageName.equals("Report")){%><%@include file="component/Report_Sub.jsp" %><% }
+		 else if(pageName.equals("Purchase")){%><%@include file="component/Purch_Sub.jsp" %><% }
+		 else if(pageName.equals("Help")){%><%@include file="component/Help_Sub.jsp" %><% }
+		 else {%><%@include file="component/Home_Sub.jsp" %><% }
+		}else{ %><%@include file="component/Home_Sub.jsp" %><%}%>
+		</main>
 	</div>
 	<script src="./js/material.js"></script>
 </body>
