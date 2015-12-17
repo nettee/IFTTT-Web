@@ -57,7 +57,7 @@ a {
 					<i class="material-icons">more_vert</i>
 				</button>
 				<ul
-					class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right">
+					class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
 
 					<li class="mdl-menu__item"><a href="/about">About</a>
 					</li>
@@ -81,7 +81,7 @@ a {
 						<span class="visuallyhidden">Accounts</span>
 					</button>
 					<ul
-						class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+						class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
 						<li class="mdl-menu__item"><a href="login.jsp"><i
 								class="material-icons">add</i>Add another account...</a>
 						</li>
