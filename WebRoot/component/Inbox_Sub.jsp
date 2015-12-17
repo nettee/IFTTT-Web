@@ -23,6 +23,7 @@
 		<%
 			}
 			//全部设置为已读
+			subuser.setAllMessageOpened();
 		%>
 		
 	</ul>
