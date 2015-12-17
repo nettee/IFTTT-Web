@@ -15,6 +15,7 @@
 			}
 			subuser.setThisById(Id);
 			List<Message> message_list = subuser.getMessageList();
+			subuser.setAllMessageOpened();
 		%>
 		<%
 			for (Message m : message_list) {

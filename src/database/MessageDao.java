@@ -67,8 +67,10 @@ public final class MessageDao {
 		return new Message(id, userId, publishTime, subject, content, opened);
 	}
 
-	public static void setMessageOpenedByUserId(int userId) {
-		// TODO
+	public static void setAllMessageOpenedByUserId(int userId) {
+		String sql = "UPDATE message SET opened=TRUE WHERE userId=?";
+		List<Integer> params = Arrays.asList(userId);
+		DaoUtil.execute(sql, params);
 	}
 
 	public static void sendMessageTo(Integer userId, String subject,
