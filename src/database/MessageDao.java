@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.data.Message;
+import model.data.User;
 
 import org.apache.log4j.Logger;
 
@@ -61,10 +62,10 @@ public final class MessageDao {
 		Integer id = (Integer) line.get("id");
 		Integer userId = (Integer) line.get("userId");
 		Timestamp publishTime = (Timestamp) line.get("publishTime");
-		String digest = (String) line.get("digest");
+		String subject = (String) line.get("subject");
 		String content = (String) line.get("content");
 		Boolean opened = (Boolean) line.get("opened");
-		return new Message(id, userId, publishTime, digest, content, opened);
+		return new Message(id, userId, publishTime, subject, content, opened);
 	}
 	
 	public static void setMessageOpenedByUserId(int userId) {
@@ -72,28 +73,30 @@ public final class MessageDao {
 	}
 	
 
-	public static void sendMessageTo(Integer userId, String content) {
-		addMessage(userId, content);
+	public static void sendMessageTo(Integer userId, String subject, String content) {
+		addMessage(userId, subject, content);
 		logger.info(String.format("send message to user [%d]", userId));
 	}
 
-	public static void sendMessageToAll(String content) {
+	public static void sendMessageToAll(String subject, String content) {
 		List<Integer> userIds = new UserDao().getAllIds();
 		for (int userId : userIds) {
-			addMessage(userId, content);
+			addMessage(userId, subject, content);
 		}
 		logger.info(String.format("send message to user %s",
 				Arrays.toString(userIds.toArray())));
 	}
 
-	private static void addMessage(Integer userId, String content) {
-		String digest = content.length() <= 60 ? content : content.substring(0,
-				40);
-		String sql = "INSERT INTO message(userId, digest, content) VALUES(?, ?, ?)";
-		List<Object> params = Arrays.asList((Object) userId, digest, content);
+	private static void addMessage(Integer userId, String subject, String content) {
+		String sql = "INSERT INTO message(userId, subject, content) VALUES(?, ?, ?)";
+		List<Object> params = Arrays.asList((Object) userId, subject, content);
 		DaoUtil.execute(sql, params);
 		logger.info(String.format("addMessage: userId=%d, content=%s", userId,
 				content));
+	}
+	
+	public static void main(String[] args) {
+		sendMessageToAll("Welcome new user!", "You are using the world's most excellent IFTTT system!");
 	}
 
 }

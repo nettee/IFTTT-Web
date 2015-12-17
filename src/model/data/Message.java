@@ -7,16 +7,16 @@ public class Message {
 	private final int id;
 	private final Integer userId;
 	private final Timestamp publishTime;
-	private final String digest;
+	private final String subject;
 	private final String content;
 	private final boolean opened;
 
 	public Message(Integer id, Integer userId, Timestamp publishTime,
-			String digest, String content, boolean opened) {
+			String subject, String content, boolean opened) {
 		this.id = id;
 		this.userId = userId;
 		this.publishTime = publishTime;
-		this.digest = digest;
+		this.subject = subject;
 		this.content = content;
 		this.opened = opened;
 	}
@@ -33,8 +33,8 @@ public class Message {
 		return publishTime;
 	}
 
-	public String getDigest() {
-		return digest;
+	public String getSubject() {
+		return subject;
 	}
 
 	public String getContent() {
@@ -51,7 +51,7 @@ public class Message {
 			Message that = (Message) o;
 			return id == that.id && userId == that.userId
 					&& publishTime.equals(that.publishTime)
-					&& digest.equals(that.digest)
+					&& subject.equals(that.subject)
 					&& content.equals(that.content) && opened == that.opened;
 		} else {
 			return false;
