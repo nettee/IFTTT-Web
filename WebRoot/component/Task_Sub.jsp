@@ -11,6 +11,7 @@
 .task_background {
 	background: url('') center/cover;
 }
+
 </style>
 <div class="demo-card-wide">
 	<ul class="collection" style="width: 80%">
@@ -32,23 +33,30 @@
         		<li class="tab col s3"><a href="#that">That</a></li>
       		</ul>
     	</div>
-    	<br>
     	<div id="this" class="col s12">
-    		<div class="row">
-				<div class="col s4">
-					<div class="center promo promo-example"><i class="material-icons">flash_on</i><p class="promo-caption">Speeds up development</p><p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p></div>
+					<div class="col s4" style="padding-top: 20px">
+						<div class="center">
+							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
+							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
+							<p class="light center">当指定用户发布包含指定内容的微博时</p>
+						</div>
      				</div>
-      				<div class="col s4">
-      					<div class="center promo promo-example"><i class="material-icons">flash_on</i><p class="promo-caption">Speeds up development</p><p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p></div>
-      				</div>
-      				<div class="col s4">
-      					<div class="center promo promo-example"><i class="material-icons">flash_on</i><p class="promo-caption">Speeds up development</p><p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p></div>
-      				</div>
-				</div>
-		</div>
-    	<div id="that" class="col s12">Test 3</div>
-    	</div>
-		<input	class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" value="Create">
+      				<div class="col s4" style="padding-top: 20px">
+						<div class="center">
+							<img alt="if2" src="assets/mail.png" style="width:50px;height: 40px;">
+							<p class="center " style="font-weight: bold;font-size:large;">邮件</p>
+							<p class="light center">当指定邮箱收到邮件时</p></div>
+     				</div>
+     				<div class="col s4" style="padding-top: 20px">
+						<div class="center">
+							<img alt="if3" src="assets/clock.png" style="width:50px;height: 40px;">
+							<p class="center " style="font-weight: bold;font-size:large;">时钟</p>
+							<p class="light center">当处于指定时间时</p></div>
+     				</div>
+			</div>
+    		<div id="that" class="col s12">Test 3</div>
+    		</div>
+			<input	class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" value="Create">
 		</form>
 		</div>
     </li>
