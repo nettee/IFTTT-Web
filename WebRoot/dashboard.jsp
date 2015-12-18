@@ -31,19 +31,9 @@ a {
 }
 </style>
 </head>
+<%@include file="component/Data_Sub.jsp"%>
+<%if(subId!=null) {Integer Unread=subuser.getUnopenedMessageNumber();%>
 <body>
-<%
-	Integer userId=null;
-	if(session.getAttribute("userId")!=null){
-		userId=(Integer)session.getAttribute("userId");
-	}
-	else response.sendRedirect("login.jsp");
-%>
-<jsp:useBean id="user" class="model.data.User" ></jsp:useBean>
-<%
-	if(userId!=null)user.setThisById(userId);
-	int Unread=user.getUnopenedMessageNumber();
-%>
 	<div
 		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<header
@@ -62,7 +52,7 @@ a {
 					<li class="mdl-menu__item"><a href="/about">About</a>
 					</li>
 
-					<li class="mdl-menu__item"><a href="/login.jsp">Log Out</a>
+					<li class="mdl-menu__item"><a href="/logout.do">Log Out</a>
 					</li>
 
 				</ul>
@@ -73,7 +63,7 @@ a {
 			<header class="demo-drawer-header">
 				<img src="assets/user.jpg" class="demo-avatar">
 				<div class="demo-avatar-dropdown">
-					<span><jsp:getProperty name="user" property="name"/></span>
+					<span><jsp:getProperty name="subuser" property="name"/></span>
 					<div class="mdl-layout-spacer"></div>
 					<button id="accbtn"
 						class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
@@ -131,4 +121,5 @@ a {
 	</div>
 	<script src="./js/material.js"></script>
 </body>
+<%} %>
 </html>
