@@ -12,19 +12,24 @@
 	background: url('') center/cover;
 }
 </style>
- <ul class="collapsible" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-    </li>
-  </ul>
-    
+<script type="text/javascript">
+ $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+     
+</script>
+ <!-- Modal Trigger -->
+  <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+    </div>
+  </div>
 </html>
