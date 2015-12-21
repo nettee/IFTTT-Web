@@ -45,16 +45,9 @@ $(document).ready(function(){
 							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
 							<p class="light center">当指定用户发布包含指定内容的微博时</p>
-							<p class="center"><a class="modal-trigger" href="#modal1"><input name="group1" type="radio" id="o1" /><label for="o1"></label></a></p>
-							<div id="modal1" class="modal">
-  								<div class="modal-content">
-      								<h4>Modal Header</h4>
-      								<p>A bunch of text</p>
-    							</div>
-    							<div class="modal-footer">
-      								<a href="#!" class=" modal-action modal-close  btn-flat">Agree</a>
-    							</div>
-  							</div>
+							<p class="center"><input name="group1" type="radio" id="o1" /><label for="o1"></label></p>
+							<%if(session.getAttribute("userId")==null){ %><a class="btn"  target="_blank" href="/weibo">授权</a><%}
+							else {%><a class="btn disabled">已授权</a><%} %>
 						</div>
      				</div>
       				<div class="col s4" style="padding-top: 20px">

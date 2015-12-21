@@ -35,6 +35,13 @@
     <servlet-name>Logout</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Weibo</servlet-name>
+    <servlet-class>servlet.WeiboServlet</servlet-class>
+  </servlet>
+
 
 
 	<servlet-mapping>
@@ -54,6 +61,10 @@
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
     <url-pattern>/logout.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Weibo</servlet-name>
+    <url-pattern>/weibo</url-pattern>
   </servlet-mapping>
 
 	<context-param>
