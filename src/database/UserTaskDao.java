@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.data.UserTask;
-import model.task.Action;
 import model.task.Task;
-import model.task.Trigger;
 
 import org.apache.log4j.Logger;
 
@@ -49,22 +47,22 @@ public class UserTaskDao {
 	private static UserTask newUserTaskFromLine(Map<String, Object> line) {
 		Integer id = (Integer) line.get("id");
 		Integer userId = (Integer) line.get("userId");
-		Trigger trigger = (Trigger) line.get("trigger_");
-		Action action = (Action) line.get("action_");
+		Task task = (Task) line.get("task");
 
-		logger.debug(String.format("id=%d, userId=%d, trigger=%s, action=%s",
-				id, userId, trigger, action));
-		return new UserTask(id, userId, trigger, action);
+		logger.debug(String.format("id=%d, userId=%d, task=%s", id, userId,
+				task.toString()));
+		return new UserTask(id, userId, task);
 	}
 
 	public static void addUserTask(Integer userId, Task task) {
-		Trigger trigger = task.getTrigger();
-		Action action = task.getAction();
-		String sql = "INSERT INTO usertask(userId, trigger_, action_) VALUES(?, ?, ?)";
-		List<Object> params = Arrays.asList((Object) userId, trigger, action);
+		if (task == null) {
+			throw new NullPointerException("task == null");
+		}
+		String sql = "INSERT INTO usertask(userId, task) VALUES(?, ?)";
+		List<Object> params = Arrays.asList((Object) userId, (Object) task);
 		DaoUtil.execute(sql, params);
-		logger.info(String.format("new usertask: userId=%d, %s, %s", userId,
-				trigger.toString(), action.toString()));
+		logger.info(String.format("add usertask: userId=%d, %s", userId,
+				task.toString()));
 	}
 
 }

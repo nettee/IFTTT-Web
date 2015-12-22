@@ -1,12 +1,25 @@
 package model.task;
 
-public class Task {
+import java.io.Serializable;
 
+public class Task implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private String name;
 	private Trigger trigger;
 	private Action action;
 
 	public Task() {
+		this("Default Task");
+	}
 
+	public Task(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public Trigger getTrigger() {
@@ -23,6 +36,12 @@ public class Task {
 
 	public void setAction(Action action) {
 		this.action = action;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Task{%s, %s}", trigger.toString(),
+				action.toString());
 	}
 
 }

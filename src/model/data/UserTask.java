@@ -1,20 +1,17 @@
 package model.data;
 
-import model.task.Action;
-import model.task.Trigger;
+import model.task.Task;
 
 public class UserTask {
 
 	private final Integer id;
 	private final Integer userId;
-	private final Trigger trigger;
-	private final Action action;
+	private final Task task;
 
-	public UserTask(Integer id, Integer userId, Trigger trigger, Action action) {
+	public UserTask(Integer id, Integer userId, Task task) {
 		this.id = id;
 		this.userId = userId;
-		this.trigger = trigger;
-		this.action = action;
+		this.task = task;
 	}
 
 	public int getId() {
@@ -25,12 +22,8 @@ public class UserTask {
 		return userId;
 	}
 
-	public Trigger getTrigger() {
-		return trigger;
-	}
-
-	public Action getAction() {
-		return action;
+	public Task getTask() {
+		return task;
 	}
 
 }
