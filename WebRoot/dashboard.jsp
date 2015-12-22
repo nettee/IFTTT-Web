@@ -33,7 +33,7 @@ a {
 </head>
 <%@include file="component/Data_Sub.jsp"%>
 <%if(subId!=null) {Integer Unread=subuser.getUnopenedMessageNumber();%>
-<body style="overflow: auto;">
+<body>
 	<div
 		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<header
@@ -107,7 +107,7 @@ a {
 				</a>
 			</nav>
 		</div>
-		<main class="mdl-layout__content mdl-color--grey-100">
+		<main class="mdl-layout__content">
 		
 		<%if(pageName!=null){
 		 if(pageName.equals("Task")){ %><jsp:include page="component/Task_Sub.jsp"></jsp:include><% }

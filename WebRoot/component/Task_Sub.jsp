@@ -19,11 +19,6 @@
 		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task2</span></li>
 		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
 		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
 		</ul>
 	</div>
 <div style="width: 80%;" draggable="auto">
@@ -44,7 +39,7 @@
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
 							<p class="center"><input name="group1" type="radio" id="o1" value="o1"/><label for="o1"></label></p>
 							<p class="light center">当指定用户发布包含指定内容的微博时</p>
-							<a class="btn" href="/weibo">授权</a>
+							<a class="btn" target="_parent" href="/weibo">授权</a>
 							<%if(session.getAttribute("code")!=null) {%><p class="center">已授权</p><%} %>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
@@ -76,7 +71,7 @@
 							<p class="light center">当前时间为指定时间时</p></div>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield__input" id="t"	type="time" name="time"> <label class="mdl-textfield__label"></label>
+								<input class="mdl-textfield__input center" id="t"	type="time" name="time"> <label class="mdl-textfield__label"></label>
 							</div>
 							</div>
      				</div>				
@@ -121,7 +116,9 @@
      				
     		</div>
 		</div>
-		<input	class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" value="Create">
+		<div class="center">
+			<input	class="center btn" type="submit" value="Create">
+		</div>
 		</form>
 		</div>
   </body>
