@@ -19,11 +19,8 @@ public class LoginServlet extends HttpServlet {
 
 	private static final Logger logger = Logger.getLogger(LoginServlet.class);
 
-	private UserDao userDao;
-
 	@Override
 	public void init() throws ServletException {
-		userDao = new UserDao();
 	}
 
 	@Override
@@ -47,24 +44,26 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		if (userDao.validPassword(username, password)) {
+		if (UserDao.validPassword(username, password)) {
 			logger.info(String.format("logged in, username=%s, password=%s",
 					username, password));
 
 			HttpSession session = request.getSession();
-			User user = userDao.getUserByName(username);
+			User user = UserDao.getUserByName(username);
 			session.setAttribute("userId", user.getId());
-			
-			String userHomePage = getServletContext().getInitParameter("user home page");
+
+			String userHomePage = getServletContext().getInitParameter(
+					"user home page");
 			response.sendRedirect(userHomePage);
 		} else {
 			logger.info("cannot log in, invalid username or password");
-			String loginPage = getServletContext().getInitParameter("login page");
-			String loginPage_Invalid = loginPage+"?valid=no";
+			String loginPage = getServletContext().getInitParameter(
+					"login page");
+			String loginPage_Invalid = loginPage + "?valid=no";
 			response.sendRedirect(loginPage_Invalid);
 		}
 

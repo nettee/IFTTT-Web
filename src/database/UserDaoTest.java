@@ -16,7 +16,6 @@ import org.junit.Test;
 
 public class UserDaoTest {
 
-	private static UserDao userDao = new UserDao();
 	private static User dog = new User(1, "dog", "1", 5000);
 
 	@BeforeClass
@@ -37,30 +36,30 @@ public class UserDaoTest {
 
 	@Test
 	public void testGetUserById() {
-		User user = userDao.getUserById(dog.getId());
+		User user = UserDao.getUserById(dog.getId());
 		assertEquals(user, dog);
 	}
 
 	@Test
 	public void testGetUserByName() {
-		User user = userDao.getUserByName(dog.getName());
+		User user = UserDao.getUserByName(dog.getName());
 		assertEquals(user, dog);
 	}
 
 	@Test
 	public void testGetAllIds() {
-		List<Integer> allIds = userDao.getAllIds();
+		List<Integer> allIds = UserDao.getAllIds();
 		System.out.println(Arrays.toString(allIds.toArray()));
 	}
 
 	@Test
 	public void testExistsUser() {
-		assertTrue(userDao.existsUser(dog.getName()));
+		assertTrue(UserDao.existsUser(dog.getName()));
 	}
 
 	@Test
 	public void testValidPassword() {
-		assertTrue(userDao.validPassword(dog.getName(), dog.getPassword()));
+		assertTrue(UserDao.validPassword(dog.getName(), dog.getPassword()));
 	}
 
 }

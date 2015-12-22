@@ -18,11 +18,8 @@ public class RegisterServlet extends HttpServlet {
 	private static final Logger logger = Logger
 			.getLogger(RegisterServlet.class);
 
-	private UserDao userDao;
-
 	@Override
 	public void init() throws ServletException {
-		userDao = new UserDao();
 	}
 
 	@Override
@@ -48,9 +45,10 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		logger.info("doPost");
-		
+
 		ServletContext servletContext = getServletContext();
-		logger.info("register page = " + servletContext.getAttribute("login page"));
+		logger.info("register page = "
+				+ servletContext.getAttribute("login page"));
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -58,16 +56,18 @@ public class RegisterServlet extends HttpServlet {
 		logger.info(String.format("register: username=%s, password=%s",
 				username, password));
 
-		if (userDao.existsUser(username)) {
+		if (UserDao.existsUser(username)) {
 			logger.info("username already exists!");
-			String registerPage = getServletContext().getInitParameter("register page");
-			String registerPage_exist=registerPage+"?exist=yes";
+			String registerPage = getServletContext().getInitParameter(
+					"register page");
+			String registerPage_exist = registerPage + "?exist=yes";
 			response.sendRedirect(registerPage_exist);
 		} else {
-			userDao.addUser(username, password);
+			UserDao.addUser(username, password);
 			logger.info(String.format("register succeeded, username=%s",
 					username));
-			String loginPage = getServletContext().getInitParameter("login page");
+			String loginPage = getServletContext().getInitParameter(
+					"login page");
 			response.sendRedirect(loginPage);
 		}
 	}

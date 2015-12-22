@@ -20,6 +20,10 @@ public final class MessageDao {
 
 	private static final Logger logger = Logger.getLogger(MessageDao.class);
 
+	private MessageDao() {
+
+	}
+
 	public static int getMessageNumberByUserId(int userId) {
 		String sql = "SELECT count(*) FROM message WHERE userId=?";
 		return getSomeMessageNumberByUserId(sql, userId);
@@ -80,7 +84,7 @@ public final class MessageDao {
 	}
 
 	public static void sendMessageToAll(String subject, String content) {
-		List<Integer> userIds = new UserDao().getAllIds();
+		List<Integer> userIds = UserDao.getAllIds();
 		for (int userId : userIds) {
 			addMessage(userId, subject, content);
 		}

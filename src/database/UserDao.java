@@ -14,35 +14,39 @@ import org.apache.log4j.Logger;
  * User Data Access and Operation
  * 
  * @see User
- *
+ * 
  */
-public class UserDao {
+public final class UserDao {
 
 	private static final Logger logger = Logger.getLogger(UserDao.class);
 	
-	public User getUserById(int id) {
+	private UserDao() {
+		
+	}
+
+	public static User getUserById(int id) {
 		String sql = "SELECT * FROM user WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
 		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newUserFromLine(line);
 	}
 
-	public User getUserByName(String name) {
+	public static User getUserByName(String name) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(name);
 		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newUserFromLine(line);
 	}
-	
-	private User newUserFromLine(Map<String, Object> line) {
+
+	private static User newUserFromLine(Map<String, Object> line) {
 		Integer id = (Integer) line.get("id");
 		String name = (String) line.get("name");
 		String password = (String) line.get("password");
 		Integer balance = (Integer) line.get("balance");
 		return new User(id, name, password, balance);
 	}
-	
-	public List<Integer> getAllIds() {
+
+	public static List<Integer> getAllIds() {
 		String sql = "SELECT id FROM user";
 		List<String> params = Collections.emptyList();
 		List<Map<String, Object>> lines = DaoUtil.query(sql, params);
@@ -54,7 +58,7 @@ public class UserDao {
 		return idList;
 	}
 
-	public boolean existsUser(String username) {
+	public static boolean existsUser(String username) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
 		List<Map<String, Object>> results = DaoUtil.query(sql, params);
@@ -64,7 +68,7 @@ public class UserDao {
 		return contains;
 	}
 
-	public void addUser(String username, String password) {
+	public static void addUser(String username, String password) {
 		String sql = "INSERT INTO user(name, password) VALUES(?, ?)";
 		List<String> params = Arrays.asList(username, password);
 		DaoUtil.execute(sql, params);
@@ -72,7 +76,7 @@ public class UserDao {
 				username, password));
 	}
 
-	public boolean validPassword(String username, String password) {
+	public static boolean validPassword(String username, String password) {
 
 		if (!existsUser(username)) {
 			return false;

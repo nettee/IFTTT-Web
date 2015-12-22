@@ -43,7 +43,7 @@ public class User implements Bean {
 	public String getName() {
 		return name;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}
@@ -63,8 +63,7 @@ public class User implements Bean {
 	 *            the id of user
 	 */
 	public void setThisById(int id) {
-		UserDao dao = new UserDao();
-		User tempUser = dao.getUserById(id);
+		User tempUser = UserDao.getUserById(id);
 		setThisFromUser(tempUser);
 	}
 
