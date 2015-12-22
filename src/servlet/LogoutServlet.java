@@ -45,6 +45,7 @@ public class LogoutServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", null);
+		session.invalidate();
 		String loginPage = getServletContext().getInitParameter("login page");
 		response.sendRedirect(loginPage);
 	}
