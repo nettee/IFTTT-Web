@@ -1,4 +1,4 @@
-package task;
+package task.weibo;
 
 @SuppressWarnings("serial")
 public class WeiboException extends RuntimeException {

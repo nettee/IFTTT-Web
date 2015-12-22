@@ -5,9 +5,14 @@ import java.util.Map;
 
 import model.task.Trigger;
 
-public class InstantTrigger implements Trigger {
+public final class InstantTrigger implements Trigger {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Override
+	public int getType() {
+		return INSTANT;
+	}
 
 	@Override
 	public boolean test() {

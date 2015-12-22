@@ -18,6 +18,11 @@ public class TimeTrigger implements Trigger {
 	}
 
 	@Override
+	public int getType() {
+		return TIME;
+	}
+
+	@Override
 	public boolean test() {
 		GregorianCalendar currentTime = new GregorianCalendar();
 		return currentTime.after(settedTime);

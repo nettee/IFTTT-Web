@@ -18,6 +18,11 @@ public class MailReceivedTrigger implements Trigger {
 	}
 
 	@Override
+	public int getType() {
+		return MAIL_RECEIVED;
+	}
+
+	@Override
 	public boolean test() {
 		// TODO
 		return false;
@@ -33,7 +38,8 @@ public class MailReceivedTrigger implements Trigger {
 
 	@Override
 	public String toString() {
-		return String.format("MailReceivedTrigger(address: %s, password: %s)", address, password);
+		return String.format("MailReceivedTrigger(address: %s, password: %s)",
+				address, password);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package task;
+package task.mail;
 
 @SuppressWarnings("serial")
 public class MailException extends RuntimeException {

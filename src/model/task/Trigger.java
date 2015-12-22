@@ -1,12 +1,30 @@
 package model.task;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface Trigger extends Serializable {
 	
-	boolean test();
+	int INSTANT = 0;
+	int TIME = 1;
+	int MAIL_RECEIVED = 2;
+	int WEIBO_PUSHED = 3;
 	
+	Map<Integer, String> names = new HashMap<Integer, String>() {
+		private static final long serialVersionUID = 1L;
+		{
+			put(INSTANT, "Instant Trigger");
+			put(TIME, "Time Trigger");
+			put(MAIL_RECEIVED, "Mail Received Trigger");
+			put(WEIBO_PUSHED, "Weibo Pushed Trigger");
+		}
+	};
+	
+	int getType();
+	
+	boolean test();
+
 	Map<String, Object> getProperties();
 
 }
