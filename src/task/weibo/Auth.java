@@ -2,27 +2,22 @@ package task.weibo;
 
 import weibo4j.Oauth;
 import weibo4j.http.AccessToken;
-import weibo4j.model.WeiboException;
 
 public class Auth {
-	public static String getCodeUrL() {
+	public static String getCodeUrL() throws WeiboException {
 		Oauth oauth = new Oauth();
 		try {
 			return oauth.authorize("code");
-		} catch (WeiboException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (weibo4j.model.WeiboException e) {
+			throw new WeiboException(e.getMessage(), e.getCause());
 		}
-		return null;
 	}
-	
-	public static AccessToken getAccessToken(String code){
+
+	public static AccessToken getAccessToken(String code) throws WeiboException {
 		try {
 			return Oauth.getAccessTokenByCode(code);
-		} catch (WeiboException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (weibo4j.model.WeiboException e) {
+			throw new WeiboException(e.getMessage(), e.getCause());
 		}
-		return null;
 	}
 }
