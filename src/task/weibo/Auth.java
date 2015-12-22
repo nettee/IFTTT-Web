@@ -1,4 +1,4 @@
-package weibo_pack;
+package task.weibo;
 
 import weibo4j.Oauth;
 import weibo4j.http.AccessToken;

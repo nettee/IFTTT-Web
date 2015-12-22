@@ -1,4 +1,4 @@
-package weibo_pack;
+package task.weibo;
 
 import weibo4j.Timeline;
 import weibo4j.examples.oauth2.Log;
