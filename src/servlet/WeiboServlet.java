@@ -9,9 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import weibo_pack.Auth;
+import task.weibo.Auth;
 
 public class WeiboServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2307835113833198475L;
 
 	/**
 	 * Constructor of the object.
@@ -51,6 +56,7 @@ public class WeiboServlet extends HttpServlet {
 			out.close();
 		} else {
 			String code = request.getParameter("code");
+			log("get weibo code:"+code);
 			response.setContentType("text/html");
 			HttpSession session = request.getSession();
 			session.setAttribute("code", code);
@@ -62,7 +68,6 @@ public class WeiboServlet extends HttpServlet {
 			out.println(code);
 			out.println("  </BODY>");
 			out.println("</HTML>");
-			out.flush();
 			out.close();
 		}
 	}

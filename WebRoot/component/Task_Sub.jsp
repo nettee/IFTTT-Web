@@ -33,10 +33,10 @@ $(document).ready(function(){
       <div class="row">
       	<div class="col s12">
       		<ul class="tabs">
-        		<li class="tab col s3 disabled"><a href="#test1">If</a></li>
+        		<li class="tab col s3 disabled"><a href="#test1" style="color:black !important;">If</a></li>
         		<li class="tab col s3"><a href="#this">This</a></li>
-        		<li class="tab col s3 disabled"><a href="#test1">Then</a></li>
-        		<li class="tab col s3"><a href="#that">That</a></li>
+        		<li class="tab col s3 disabled"><a href="#test1" style="color:black !important;">Then</a></li>
+        		<li class="tab col s3" ><a href="#that">That</a></li>
       		</ul>
     	</div>
     	<div id="this" class="col s12">
@@ -46,8 +46,8 @@ $(document).ready(function(){
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
 							<p class="light center">当指定用户发布包含指定内容的微博时</p>
 							<p class="center"><input name="group1" type="radio" id="o1" /><label for="o1"></label></p>
-							<%if(session.getAttribute("userId")==null){ %><a class="btn"  target="_blank" href="/weibo">授权</a><%}
-							else {%><a class="btn disabled">已授权</a><%} %>
+							<a class="btn"  target="_blank" href="/weibo">授权</a>
+							<label>${sessionScope.code}</label>
 						</div>
      				</div>
       				<div class="col s4" style="padding-top: 20px">
@@ -69,6 +69,7 @@ $(document).ready(function(){
     		<div id="that" class="col s12">Test 3</div>
     		</div>
 			<input	class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" value="Create">
+			<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >Next</a>
 		</form>
 		</div>
     </li>
