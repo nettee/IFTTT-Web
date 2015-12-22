@@ -41,4 +41,11 @@ public class MailSendingAction implements Action {
 		};
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"MailSendingAction{address=%s, subject=%s, content=%s}",
+				address, subject, content);
+	}
+
 }

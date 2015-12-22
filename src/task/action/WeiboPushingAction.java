@@ -9,11 +9,11 @@ public class WeiboPushingAction implements Action {
 
 	private static final long serialVersionUID = 1L;
 
-	private final String username;
+	private final String user;
 	private final String content;
 
-	public WeiboPushingAction(String username, String content) {
-		this.username = username;
+	public WeiboPushingAction(String user, String content) {
+		this.user = user;
 		this.content = content;
 	}
 
@@ -32,10 +32,16 @@ public class WeiboPushingAction implements Action {
 		return new HashMap<String, Object>() {
 			private static final long serialVersionUID = 1L;
 			{
-				put("username", username);
+				put("user", user);
 				put("content", content);
 			}
 		};
+	}
+
+	@Override
+	public String toString() {
+		return String.format("WeiboPushingAction{user=%s, content=%s",
+				user, content);
 	}
 
 }

@@ -33,18 +33,6 @@ public class TimeTrigger implements Trigger {
 	}
 
 	@Override
-	public String toString() {
-		int year = settedTime.get(Calendar.YEAR);
-		int month = settedTime.get(Calendar.MONTH);
-		int day = settedTime.get(Calendar.DAY_OF_MONTH);
-		int hour = settedTime.get(Calendar.HOUR_OF_DAY);
-		int minute = settedTime.get(Calendar.MINUTE);
-		int second = settedTime.get(Calendar.SECOND);
-		return String.format("TimeTrigger(%4d-%2d-%2d %2d:%2d:%2d)", year,
-				month, day, hour, minute, second);
-	}
-
-	@Override
 	public Map<String, Object> getProperties() {
 		return new HashMap<String, Object>() {
 			private static final long serialVersionUID = 1L;
@@ -52,6 +40,18 @@ public class TimeTrigger implements Trigger {
 				put("setted time", settedTime);
 			}
 		};
+	}
+
+	@Override
+	public String toString() {
+		int year = settedTime.get(Calendar.YEAR);
+		int month = settedTime.get(Calendar.MONTH);
+		int day = settedTime.get(Calendar.DAY_OF_MONTH);
+		int hour = settedTime.get(Calendar.HOUR_OF_DAY);
+		int minute = settedTime.get(Calendar.MINUTE);
+		int second = settedTime.get(Calendar.SECOND);
+		return String.format("TimeTrigger{%4d-%2d-%2d %2d:%2d:%2d}", year,
+				month, day, hour, minute, second);
 	}
 
 }

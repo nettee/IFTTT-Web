@@ -37,12 +37,6 @@ public class MailReceivedTrigger implements Trigger {
 	}
 
 	@Override
-	public String toString() {
-		return String.format("MailReceivedTrigger(address: %s, password: %s)",
-				address, password);
-	}
-
-	@Override
 	public Map<String, Object> getProperties() {
 		// password should not be shown
 		return new HashMap<String, Object>() {
@@ -53,4 +47,9 @@ public class MailReceivedTrigger implements Trigger {
 		};
 	}
 
+	@Override
+	public String toString() {
+		return String.format("MailReceivedTrigger{address=%s, password=%s}",
+				address, password);
+	}
 }

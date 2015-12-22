@@ -9,11 +9,11 @@ public class WeiboPushedTrigger implements Trigger {
 
 	private static final long serialVersionUID = 1L;
 
-	private final String username;
+	private final String user;
 	private final String pattern;
 
-	public WeiboPushedTrigger(String username, String pattern) {
-		this.username = username;
+	public WeiboPushedTrigger(String user, String pattern) {
+		this.user = user;
 		this.pattern = pattern;
 	}
 
@@ -33,10 +33,16 @@ public class WeiboPushedTrigger implements Trigger {
 		return new HashMap<String, Object>() {
 			private static final long serialVersionUID = 1L;
 			{
-				put("username", username);
+				put("user", user);
 				put("pattern", pattern);
 			}
 		};
+	}
+
+	@Override
+	public String toString() {
+		return String.format("WeiboPushedTrigger{user=%s, pattern=%s}", user,
+				pattern);
 	}
 
 }
