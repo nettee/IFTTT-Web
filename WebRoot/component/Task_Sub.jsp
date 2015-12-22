@@ -98,18 +98,20 @@
 							<p class="center " style="font-weight: bold;font-size:large;">邮件</p>
 							<p class="center"><input name="group2" type="radio" value="o5" id="o5" /><label for="o5"></label></p>
 							<p class="light center">用指定邮箱向另一个邮箱发送邮件</p></div>
-							<div class="center">
+							<div class="row center">
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input" id="mn2"	name="mail2_name"> <label class="mdl-textfield__label">发送邮箱</label>
 							</div>
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input" id="mp2" type="password" name="mail2_password"> <label class="mdl-textfield__label">密码</label>
 							</div>
+							</div>
+							<div class="row center">
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input" id="mn3"	name="mail3_name"> <label class="mdl-textfield__label">发送至邮箱</label>
 							</div>
 							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield__input" id="mc2"	name="mail2_content"> <label class="mdl-textfield__label">指定内容</label>
+								<input class=" mdl-textfield__input" id="mc2"	name="mail2_content"> <label class="mdl-textfield__label">指定内容</label>
 							</div>
 							</div>
      				</div>
