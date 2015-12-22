@@ -95,6 +95,10 @@ public class User implements Bean {
 	public void addTask(Task task) {
 		UserTaskDao.addUserTask(id, task);
 	}
+	
+	public List<UserTask> getTaskList() {
+		return UserTaskDao.getUserTaskListByUserId(id);
+	}
 
 	@Override
 	public boolean equals(Object o) {
