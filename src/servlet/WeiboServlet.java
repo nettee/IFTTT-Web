@@ -51,24 +51,15 @@ public class WeiboServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		if (request.getParameter("code") == null) {
-			Auth.getCode();
+			response.sendRedirect(Auth.getCodeUrL());	
 			out.println("<body onload=\"javascript:window.close()\">");
 			out.close();
 		} else {
 			String code = request.getParameter("code");
 			log("get weibo code:"+code);
-			response.setContentType("text/html");
 			HttpSession session = request.getSession();
 			session.setAttribute("code", code);
-			out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-			out.println("<HTML>");
-			out.println("  <HEAD><TITLE>WeiboServlet</TITLE></HEAD>");
-			out.println("  <BODY>");
-			out.print("    The Code is ");
-			out.println(code);
-			out.println("  </BODY>");
-			out.println("</HTML>");
-			out.close();
+			response.sendRedirect("dashboard.jsp?page=Task");
 		}
 	}
 
