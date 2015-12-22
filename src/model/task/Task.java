@@ -38,6 +38,14 @@ public class Task implements Serializable {
 		this.action = action;
 	}
 
+	public boolean THIS() {
+		return trigger.test();
+	}
+
+	public void THAT() {
+		action.perform();
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Task{%s, %s}", trigger.toString(),
