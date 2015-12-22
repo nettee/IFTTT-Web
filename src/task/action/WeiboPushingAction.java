@@ -1,31 +1,30 @@
-package task.trigger;
+package task.action;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import model.task.Trigger;
+import model.task.Action;
 
-public class WeiboPushedTrigger implements Trigger {
+public class WeiboPushingAction implements Action {
 
 	private static final long serialVersionUID = 1L;
 
 	private final String username;
-	private final String pattern;
+	private final String content;
 
-	public WeiboPushedTrigger(String username, String pattern) {
+	public WeiboPushingAction(String username, String content) {
 		this.username = username;
-		this.pattern = pattern;
+		this.content = content;
 	}
 
 	@Override
 	public int getType() {
-		return WEIBO_PUSHED;
+		return WEIBO_PUSHING;
 	}
 
 	@Override
-	public boolean test() {
+	public void perform() {
 		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class WeiboPushedTrigger implements Trigger {
 			private static final long serialVersionUID = 1L;
 			{
 				put("username", username);
-				put("pattern", pattern);
+				put("content", content);
 			}
 		};
 	}
