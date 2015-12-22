@@ -3,46 +3,34 @@ package model.data;
 import model.task.Action;
 import model.task.Trigger;
 
-public class UserTask implements Bean {
+public class UserTask {
 
-	private int id;
-	private int userId;
-	private Trigger trigger;
-	private Action action;
+	private final Integer id;
+	private final Integer userId;
+	private final Trigger trigger;
+	private final Action action;
 
-	public UserTask() {
+	public UserTask(Integer id, Integer userId, Trigger trigger, Action action) {
+		this.id = id;
+		this.userId = userId;
+		this.trigger = trigger;
+		this.action = action;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getUserId() {
 		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public Trigger getTrigger() {
 		return trigger;
 	}
 
-	public void setTrigger(Trigger trigger) {
-		this.trigger = trigger;
-	}
-
 	public Action getAction() {
 		return action;
-	}
-
-	public void setAction(Action action) {
-		this.action = action;
 	}
 
 }

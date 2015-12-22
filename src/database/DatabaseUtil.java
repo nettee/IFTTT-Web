@@ -12,7 +12,7 @@ class DatabaseUtil {
 	private static final Logger logger = Logger.getLogger(DatabaseUtil.class);
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://www.db4free.net:3306/ifttt";
+	private static final String DB_URL = "jdbc:mysql://www.db4free.net:3306/ifttt?autoDeserialize=true";
 	private static final String DB_USER = "checkyh";
 	private static final String DB_PASSWORD = "123456";
 

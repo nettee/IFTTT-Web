@@ -8,7 +8,7 @@ import model.task.Trigger;
 public final class InstantTrigger implements Trigger {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	public int getType() {
 		return INSTANT;
@@ -24,6 +24,11 @@ public final class InstantTrigger implements Trigger {
 	public Map<String, Object> getProperties() {
 		// returns empty map
 		return new HashMap<String, Object>();
+	}
+
+	@Override
+	public String toString() {
+		return "InstantTrigger{}";
 	}
 
 }

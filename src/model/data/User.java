@@ -2,8 +2,10 @@ package model.data;
 
 import java.util.List;
 
+import model.task.Task;
 import database.MessageDao;
 import database.UserDao;
+import database.UserTaskDao;
 
 /**
  * Javabean class
@@ -89,6 +91,10 @@ public class User implements Bean {
 	
 	public void setAllMessageOpened() {
 		MessageDao.setAllMessageOpenedByUserId(id);
+	}
+	
+	public void addTask(Task task) {
+		UserTaskDao.addUserTask(id, task);
 	}
 
 	@Override

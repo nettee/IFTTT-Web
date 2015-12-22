@@ -25,4 +25,9 @@ public class HelloAction implements Action {
 		return new HashMap<String, Object>();
 	}
 
+	@Override
+	public String toString() {
+		return "HelloAction{}";
+	}
+
 }
