@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import task.weibo.Auth;
+import weibo4j.http.AccessToken;
 
 public class WeiboServlet extends HttpServlet {
 
@@ -55,10 +56,10 @@ public class WeiboServlet extends HttpServlet {
 			out.println("<body onload=\"javascript:window.close()\">");
 			out.close();
 		} else {
-			String code = request.getParameter("code");
-			log("get weibo code:"+code);
+			AccessToken accessToken = Auth.getAccessToken(request.getParameter("code"));
+			log("get accessToken:"+accessToken);
 			HttpSession session = request.getSession();
-			session.setAttribute("code", code);
+			session.setAttribute("accessToken", accessToken);
 			response.sendRedirect("dashboard.jsp?page=Task");
 		}
 	}
