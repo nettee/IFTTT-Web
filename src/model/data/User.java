@@ -19,7 +19,7 @@ import database.UserTaskDao;
  * </ul>
  * 
  */
-public class User implements Bean {
+public class User {
 
 	private Integer id;
 	private String name;
