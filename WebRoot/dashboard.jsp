@@ -83,6 +83,12 @@ a {
 					<i class="mdl-color-text--blue-grey-400 material-icons">home</i>
 					Home
 				</a> 
+				<%if(subId==1) {%>
+				<a class="mdl-navigation__link" href="?page=UserList">
+					<i class="mdl-color-text--blue-grey-400 material-icons">supervisor_account</i>
+					UserList
+				</a>
+				<%} %>
 				<a class="mdl-navigation__link" href="?page=Task">
 					<i class="mdl-color-text--blue-grey-400 material-icons">toc</i>
 					Tasks
@@ -108,13 +114,13 @@ a {
 			</nav>
 		</div>
 		<main class="mdl-layout__content">
-		
 		<%if(pageName!=null){
 		 if(pageName.equals("Task")){ %><jsp:include page="component/Task_Sub.jsp"></jsp:include><% }
 		 else if(pageName.equals("Inbox")){%><jsp:include page="component/Inbox_Sub.jsp"></jsp:include><% } 
 		 else if(pageName.equals("Setting")){%><jsp:include page="component/Setting_Sub.jsp"></jsp:include><% }
 		 else if(pageName.equals("Purchase")){%><jsp:include page="component/Purch_Sub.jsp"></jsp:include><% }
 		 else if(pageName.equals("Help")){%><jsp:include page="component/Help_Sub.jsp"></jsp:include><% }
+		 else if(pageName.equals("UserList")){%><jsp:include page="component/UserList_Sub.jsp"></jsp:include><% }
 		 else {%><jsp:include page="component/Home_Sub.jsp"></jsp:include><% }
 		}else{ %><jsp:include page="component/Home_Sub.jsp"></jsp:include><%}%>
 		</main>
