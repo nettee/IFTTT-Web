@@ -59,7 +59,7 @@ public class Mail {
 	}
 
 	private Folder fetchInbox(Properties props, Authenticator authenticator,
-			String protocol) throws MailException{
+			String protocol) throws MailException {
 		Session session = Session.getDefaultInstance(props, authenticator);
 		Store store = null;
 		Folder folder = null;
@@ -72,12 +72,12 @@ public class Mail {
 		} catch (NoSuchProviderException e) {
 			throw new MailException("No such Provider");
 		} catch (MessagingException e) {
-			throw new MailException(e.getMessage(),e.getCause());
+			throw new MailException(e.getMessage(), e.getCause());
 		}
 		return folder;
 	}
 
-	public boolean hasNewMessage() throws MailException{
+	public boolean hasNewMessage() throws MailException {
 		int newAllMessage = 0;
 		Folder folder = fetchInbox(props,
 				Mail_AuthenticatorGenerator
@@ -98,7 +98,7 @@ public class Mail {
 
 	}
 
-	public void sendMessage(String address, String body) throws MailException{
+	public void sendMessage(String address, String body) throws MailException {
 		Session session = Session.getDefaultInstance(props,
 				Mail_AuthenticatorGenerator
 						.getAuthenticator(userName, password));
@@ -128,7 +128,7 @@ public class Mail {
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 		} catch (MessagingException e) {
-			throw new MailException(e.getMessage(),e.getCause());
+			throw new MailException(e.getMessage(), e.getCause());
 		}
 	}
 }
