@@ -30,6 +30,16 @@ public class UserTaskDao {
 		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newUserTaskFromLine(line);
 	}
+	
+	// TODO test
+	public static int getUserIdById(int id) {
+		String sql = "SELECT userId FROM usertask WHERE id=?";
+		List<Integer> params = Arrays.asList(id);
+		Object result = DaoUtil.queryOneObject(sql, params);
+		int userId = (Integer) result;
+		logger.info(String.format("getUserIdById: id=%d, returns %d", id, userId));
+		return userId;
+	}
 
 	public static List<UserTask> getUserTaskListByUserId(int userId) {
 		String sql = "SELECT * FROM usertask WHERE userId=?";

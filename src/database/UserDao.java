@@ -91,4 +91,15 @@ public final class UserDao {
 
 		return password.equals(password2);
 	}
+	
+	// TODO test
+	public static void payExpense(int userId, int amount) {
+		if (amount <= 0) {
+			throw new IllegalArgumentException();
+		}
+		String sql = "UPDATE user SET balance=balance-? WHERE id=?";
+		List<Integer> params = Arrays.asList(amount, userId);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("payExpense: userId=%d, amount=%d", userId, amount));
+	}
 }
