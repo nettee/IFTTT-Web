@@ -45,7 +45,20 @@ public class TaskRunner extends Thread {
 
 	@Override
 	public void run() {
+
+		long time0 = System.currentTimeMillis();
+		work();
+		long time1 = System.currentTimeMillis();
+		
+		int second = (int) (time1 - time0 + 999) / 1000;
+
+		logger.info(String.format("task used %d seconds", second));
+	}
+
+	private void work() {
+
 		while (true) {
+
 			if (task.THIS()) {
 				logger.info(String.format("trigger effort: %s", task
 						.getTrigger().toString()));
