@@ -23,7 +23,7 @@ public class Mail {
 		return connect;
 	}
 
-	public Mail(String arg_name, String arg_password) throws MailException {
+	public Mail(String arg_name, String arg_password) {
 		String mail_end = arg_name.split("@")[1];
 		userName = arg_name;
 		password = arg_password;
@@ -38,7 +38,7 @@ public class Mail {
 			mail_Host = Mail_Host.NETEASE2;
 			props = mail_Host.getProperties();
 		} else {
-			System.out.println("Unsupported Mail Type");
+			throw new MailException("UnSupported Mail Type");
 		}
 		Folder folder = fetchInbox(props,
 				Mail_AuthenticatorGenerator
@@ -50,11 +50,14 @@ public class Mail {
 			} else
 				connect = false;
 		} catch (MessagingException e) {
-			throw new MailException(e.getMessage(), e.getCause());
+			e.printStackTrace();
+		} catch (MailException e) {
+			e.printStackTrace();
 		}
 	}
 
-	private Folder fetchInbox(Properties props, Authenticator authenticator) {
+	private Folder fetchInbox(Properties props, Authenticator authenticator)
+			throws MailException {
 		return fetchInbox(props, authenticator, null);
 	}
 
@@ -79,13 +82,15 @@ public class Mail {
 
 	public boolean hasNewMessage() throws MailException {
 		int newAllMessage = 0;
-		Folder folder = fetchInbox(props,
-				Mail_AuthenticatorGenerator
-						.getAuthenticator(userName, password));
 		try {
+			Folder folder = fetchInbox(props,
+					Mail_AuthenticatorGenerator.getAuthenticator(userName,
+							password));
 			newAllMessage = folder.getNewMessageCount();
 		} catch (MessagingException e) {
-			throw new MailException(e.getMessage(), e.getCause());
+			e.printStackTrace();
+		} catch (MailException e) {
+			e.printStackTrace();
 		}
 
 		if (newAllMessage > mail_count) {
@@ -98,7 +103,7 @@ public class Mail {
 
 	}
 
-	public void sendMessage(String address, String body) throws MailException {
+	public boolean sendMessage(String address, String body) {
 		Session session = Session.getDefaultInstance(props,
 				Mail_AuthenticatorGenerator
 						.getAuthenticator(userName, password));
@@ -127,8 +132,10 @@ public class Mail {
 			}
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
+			return true;
 		} catch (MessagingException e) {
-			throw new MailException(e.getMessage(), e.getCause());
+			e.printStackTrace();
 		}
+		return false;
 	}
 }
