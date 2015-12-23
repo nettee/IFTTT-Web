@@ -12,6 +12,13 @@
 <link rel="stylesheet" href="css/material.css">
 <link rel="stylesheet" href="css/dashboard.css">
 <style>
+<script type="text/javascript">
+ $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+</script>
 #view-source {
 	position: fixed;
 	display: block;
