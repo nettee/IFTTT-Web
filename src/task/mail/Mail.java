@@ -117,19 +117,7 @@ public class Mail {
 			message.setText(body);
 			message.setRecipient(RecipientType.TO, to);
 			Transport transport = session.getTransport("smtps");
-			switch (mail_Host) {
-			case NETEASE:
-				transport.connect("smtp.163.com", 465, userName, password);
-				break;
-			case NETEASE2:
-				transport.connect("smtp.yeah.net", 465, userName, password);
-				break;
-			case TENCENT:
-				transport.connect("smtp.qq.com", 465, userName, password);
-				break;
-			default:
-				break;
-			}
+			transport.connect(props.getProperty("smtp.mail.host"), 465, userName, password);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 			return true;

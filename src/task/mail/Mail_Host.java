@@ -10,6 +10,7 @@ public enum Mail_Host {
 			defaults.put("mail.pop3.host", "pop.yeah.net");
 			defaults.put("mail.imap.host", "imap.yeah.net");
 			defaults.put("mail.store.protocol", "pop3");
+			defaults.put("mail.smtp.host","smtp.yeah.net");
 			return defaults;
 		}
 
@@ -21,6 +22,7 @@ public enum Mail_Host {
 			defaults.put("mail.pop3.host", "pop.163.com");
 			defaults.put("mail.imap.host", "imap.163.com");
 			defaults.put("mail.store.protocol", "pop3");
+			defaults.put("mail.stmp.host","smtp.163.com");
 			return defaults;
 		}
 
@@ -37,6 +39,7 @@ public enum Mail_Host {
 			defaults.put("mail.imap.auth.plain.disable", "true");
 			defaults.put("mail.imap.socketFactory", "javax.net.ssl.SSLSocketFactory");
 			defaults.put("mail.imap.socketFactory.fallback", "false");
+			defaults.put("mail.stmp.host","smtp.qq.com");
 			return defaults;
 		}
 	};
