@@ -1,3 +1,5 @@
+<%@page import="model.data.UserTask"%>
+<%@page import="model.task.Task"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
 <head>
@@ -15,10 +17,17 @@
 <body>
 	<div class="demo-card-wide">
 		<ul class="collection" style="width: 80%">
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task2</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
-		<li class="collection-item avatar"><i class="material-icons circle">view_headline</i><span class="title">Task1</span></li>
+		<%@page import="model.*" %>
+		<%for(UserTask t:subuser.getTaskList()) { Task tb=t.getTask();%>
+		<li class="collection-item avatar">
+			<i class="material-icons circle">view_headline</i>
+			<span class="title"><%=tb.getName()%></span>
+			<p>
+			
+				<br>
+			</p>
+		</li>
+		<%} %>
 		</ul>
 	</div>
 <div style="width: 80%;" draggable="auto">
@@ -40,7 +49,7 @@
 							<p class="center"><input name="group1" type="radio" id="o1" value="o1"/><label for="o1"></label></p>
 							<p class="light center">当指定用户发布包含指定内容的微博时</p>
 							<a class="btn" target="_parent" href="/weibo">授权</a>
-							<%if(session.getAttribute("code")!=null) {%><p class="center">已授权</p><%} %>
+							<%if(session.getAttribute("accessToken")!=null) {%><p class="center">已授权</p><%} %>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input" id="wc"	name="weibo_content"> <label class="mdl-textfield__label">指定内容</label>
@@ -84,7 +93,7 @@
 							<p class="center"><input name="group2" type="radio" value="o4" id="o4" /><label for="o4"></label></p>
 							<p class="light center">发送微博</p>
 							<a class="btn" href="/weibo">授权</a>
-							<%if(session.getAttribute("code")!=null) {%><p class="center">已授权</p><%} %>
+							<%if(session.getAttribute("accessToken")!=null) {%><p class="center">已授权</p><%} %>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input" id="pwc" 	name="post_sweibo_content"> <label class="mdl-textfield__label">指定内容</label>
