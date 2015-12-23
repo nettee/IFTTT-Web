@@ -19,15 +19,30 @@ import org.apache.log4j.Logger;
 public final class UserDao {
 
 	private static final Logger logger = Logger.getLogger(UserDao.class);
-	
+
 	private UserDao() {
+
+	}
+
+	// TODO test
+	public static List<User> getUserList() {
+		String sql = "SELECT * FROM user";
+		List<Map<String, Object>> lines = DaoUtil.query(sql, Collections.EMPTY_LIST);
 		
+		List<User> userList = new ArrayList<User>();
+		for (Map<String, Object> line : lines) {
+			User user = newUserFromLine(line);
+			userList.add(user);
+		}
+		logger.info("get user list");
+		return userList;
 	}
 
 	public static User getUserById(int id) {
 		String sql = "SELECT * FROM user WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
 		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
+		logger.info(String.format("get user by id=%d", id));
 		return newUserFromLine(line);
 	}
 
@@ -35,6 +50,7 @@ public final class UserDao {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(name);
 		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
+		logger.info(String.format("get user by name=%s", name));
 		return newUserFromLine(line);
 	}
 
@@ -91,7 +107,7 @@ public final class UserDao {
 
 		return password.equals(password2);
 	}
-	
+
 	// TODO test
 	public static void payExpense(int userId, int amount) {
 		if (amount <= 0) {
@@ -100,6 +116,8 @@ public final class UserDao {
 		String sql = "UPDATE user SET balance=balance-? WHERE id=?";
 		List<Integer> params = Arrays.asList(amount, userId);
 		DaoUtil.execute(sql, params);
-		logger.info(String.format("payExpense: userId=%d, amount=%d", userId, amount));
+		logger.info(String.format("payExpense: userId=%d, amount=%d", userId,
+				amount));
 	}
+
 }

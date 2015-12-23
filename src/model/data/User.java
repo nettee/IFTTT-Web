@@ -99,7 +99,19 @@ public class User implements Bean {
 	public List<UserTask> getTaskList() {
 		return UserTaskDao.getUserTaskListByUserId(id);
 	}
+	
+	public List<User> getUserList() {
+		verifyAdmin(this.id);
+		return UserDao.getUserList();
+	}
 
+	private static void verifyAdmin(int id) {
+		final int adminId = 1;
+		if (id != adminId) {
+			throw new IllegalArgumentException(String.format("Illegal id %d", id));
+		}
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof User) {

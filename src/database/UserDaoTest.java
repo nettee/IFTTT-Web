@@ -33,6 +33,14 @@ public class UserDaoTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
+	
+	@Test
+	public void testGetUserList() {
+		List<User> userList = UserDao.getUserList();
+		for (User user : userList) {
+			System.out.println(user);
+		}
+	}
 
 	@Test
 	public void testGetUserById() {
