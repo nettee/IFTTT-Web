@@ -1,7 +1,6 @@
-/*package task.mail;
+package task.mail;
 
 import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.Folder;
 import javax.mail.MessagingException;
@@ -14,147 +13,102 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
 public class Mail {
-	int current_Count;
 	Properties props;
 	String userName, password;
 	Mail_Host mail_Host;
+	int mail_count;
+	public boolean connect = false;
 
 	public boolean isConnect() {
 		return connect;
 	}
 
-	public boolean connect = false;
-
-	public Mail(String arg_name, String arg_password) {
+	public Mail(String arg_name, String arg_password) throws MailException {
 		String mail_end = arg_name.split("@")[1];
-
-		switch (mail_end) {
-		case "qq.com":
-			mail_Host = Mail_Host.TENCENT;
-			props = mail_Host.getProperties();
-			break;
-		case "163.com":
-			mail_Host = Mail_Host.NETEASE;
-			props = mail_Host.getProperties();
-			break;
-		case "yeah.net":
-			mail_Host = Mail_Host.NETEASE2;
-			props = mail_Host.getProperties();
-			break;
-		default:
-
-		}
-		current_Count = 0;
 		userName = arg_name;
 		password = arg_password;
-		int newAllMessage = 0;
-		Folder folder = fetchInbox(props, Mail_AuthenticatorGenerator.getAuthenticator(userName, password));
-		try {
-			if (folder.exists())
-				connect = true;
-			else
-				connect = false;
-			newAllMessage = folder.getMessageCount();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		current_Count = newAllMessage;
-	}
-
-	public Mail(String arg_name, String arg_password, Log_Field arg_field) {
-		String[] address = arg_name.split("@");
-		String mail_end = " ";
-		if (address.length == 2)
-			mail_end = arg_name.split("@")[1];
-		log_Field = arg_field;
-		switch (mail_end) {
-		case "qq.com":
-			log_Field.add(arg_name + " 邮箱类型为：qq邮箱");
+		mail_count = 0;
+		if (mail_end.equals("qq.com")) {
 			mail_Host = Mail_Host.TENCENT;
 			props = mail_Host.getProperties();
-			break;
-		case "163.com":
-			log_Field.add(arg_name + " 邮箱类型为：网易163邮箱");
+		} else if (mail_end.equals("163.com")) {
 			mail_Host = Mail_Host.NETEASE;
 			props = mail_Host.getProperties();
-			break;
-		case "yeah.net":
-			log_Field.add(arg_name + " 邮箱类型为：网易yeah.net邮箱");
+		} else if (mail_end.equals("yeah.net")) {
 			mail_Host = Mail_Host.NETEASE2;
 			props = mail_Host.getProperties();
-			break;
-		default:
-			log_Field.add("不支持的邮箱类型");
-			return;
+		} else {
+			System.out.println("Unsupported Mail Type");
 		}
-		current_Count = 0;
-		userName = arg_name;
-		password = arg_password;
-		int newAllMessage = 0;
-		Folder folder = fetchInbox(props, Mail_AuthenticatorGenerator.getAuthenticator(userName, password));
+		Folder folder = fetchInbox(props,
+				Mail_AuthenticatorGenerator
+						.getAuthenticator(userName, password));
 		try {
-			if (folder.exists())
+			if (folder.exists()) {
 				connect = true;
-			else
+				mail_count = folder.getMessageCount();
+			} else
 				connect = false;
-			newAllMessage = folder.getMessageCount();
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MailException(e.getMessage(), e.getCause());
 		}
-		current_Count = newAllMessage;
 	}
 
-	public Folder fetchInbox(Properties props, Authenticator authenticator) {
+	private Folder fetchInbox(Properties props, Authenticator authenticator) {
 		return fetchInbox(props, authenticator, null);
 	}
 
-	public Folder fetchInbox(Properties props, Authenticator authenticator, String protocol) {
+	private Folder fetchInbox(Properties props, Authenticator authenticator,
+			String protocol) throws MailException{
 		Session session = Session.getDefaultInstance(props, authenticator);
 		Store store = null;
 		Folder folder = null;
 		try {
-			store = protocol == null || protocol.trim().length() == 0 ? session.getStore() : session.getStore(protocol);
+			store = protocol == null || protocol.trim().length() == 0 ? session
+					.getStore() : session.getStore(protocol);
 			store.connect();
-			folder = store.getFolder("INBOX");// 获取收件箱
-			folder.open(Folder.READ_ONLY); // 以只读方式打开
+			folder = store.getFolder("INBOX");
+			folder.open(Folder.READ_ONLY);
 		} catch (NoSuchProviderException e) {
-			e.printStackTrace();
+			throw new MailException("No such Provider");
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MailException(e.getMessage(),e.getCause());
 		}
 		return folder;
 	}
 
-	public boolean newMessage() {
+	public boolean hasNewMessage() throws MailException{
 		int newAllMessage = 0;
-		Folder folder = fetchInbox(props, Mail_AuthenticatorGenerator.getAuthenticator(userName, password));
+		Folder folder = fetchInbox(props,
+				Mail_AuthenticatorGenerator
+						.getAuthenticator(userName, password));
 		try {
-			newAllMessage = folder.getMessageCount();
+			newAllMessage = folder.getNewMessageCount();
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MailException(e.getMessage(), e.getCause());
 		}
-		System.out.println("before: " + current_Count + ";current: " + newAllMessage);
-		if (newAllMessage > current_Count){
-			current_Count=newAllMessage;
+
+		if (newAllMessage > mail_count) {
+			mail_count = newAllMessage;
 			return true;
-		}
-		
-		else{
-			current_Count=newAllMessage;
+		} else {
+			mail_count = newAllMessage;
 			return false;
 		}
+
 	}
 
-	public void sendMessage(String address, String body) {
+	public void sendMessage(String address, String body) throws MailException{
 		Session session = Session.getDefaultInstance(props,
-				Mail_AuthenticatorGenerator.getAuthenticator(userName, password));
+				Mail_AuthenticatorGenerator
+						.getAuthenticator(userName, password));
 		MimeMessage message = new MimeMessage(session);
 		try {
 			InternetAddress from;
 			from = new InternetAddress(userName);
 			message.setFrom(from);
 			InternetAddress to = new InternetAddress(address);
-			message.setSubject("[IFTTT]Time_Message");
+			message.setSubject("[IFTTT]Message");
 			message.setText(body);
 			message.setRecipient(RecipientType.TO, to);
 			Transport transport = session.getTransport("smtps");
@@ -174,8 +128,7 @@ public class Mail {
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MailException(e.getMessage(),e.getCause());
 		}
-
 	}
-}*/
+}
