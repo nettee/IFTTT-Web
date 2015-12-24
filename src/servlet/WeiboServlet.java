@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,11 +49,8 @@ public class WeiboServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		if (request.getParameter("code") == null) {
 			response.sendRedirect(Auth.getCodeUrL());	
-			out.println("<body onload=\"javascript:window.close()\">");
-			out.close();
 		} else {
 			AccessToken accessToken = Auth.getAccessToken(request.getParameter("code"));
 			log("get accessToken:"+accessToken);

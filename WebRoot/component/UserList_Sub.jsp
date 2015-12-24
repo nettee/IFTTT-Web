@@ -12,6 +12,18 @@
 <%if(subId!=1) response.sendRedirect("dashboard.jsp"); %>
 <body>
 	<ul class="collapsible" data-collapsible="accordion" style="width: 80%">
+	<li class="collection-item avatar">
+		<div class="collapsible-header ">
+		<i class="material-icons circle">account_circle</i>全站公告
+		</div>
+		<div class="collapsible-body center">
+		<div class="mdl-textfield mdl-js-textfield">
+            	<input class="mdl-textfield__input"type="text">
+              	<label class="mdl-textfield__label">公告</label>
+        </div>
+        <a class="btn">Send</a>
+        </div>
+	</li>
 		<%
 			for (User u : subuser.getUserList()) {
 		%>
