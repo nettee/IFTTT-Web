@@ -1,15 +1,9 @@
 package model.data;
 
-import model.task.Task;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-
-import task.action.HelloAction;
-import task.trigger.InstantTrigger;
 
 public class UserTaskTest {
 
@@ -27,15 +21,6 @@ public class UserTaskTest {
 
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testLaunch() {
-		Task task = new Task();
-		task.setTrigger(new InstantTrigger());
-		task.setAction(new HelloAction());
-		UserTask userTask = new UserTask(3, 1, task);
-		userTask.launch();
 	}
 
 }

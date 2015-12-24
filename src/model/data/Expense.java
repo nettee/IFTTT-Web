@@ -1,33 +1,37 @@
 package model.data;
 
-import java.sql.Timestamp;
-
 import org.apache.log4j.Logger;
 
+import task.run.TaskRunner;
 import database.ExpenseDao;
 import database.UserDao;
 import database.UserTaskDao;
-
-import task.run.TaskRunner;
 
 public class Expense {
 
 	private static final Logger logger = Logger.getLogger(Expense.class);
 
-	public static final int AMOUNT_FACTOR = 1;
+	private static final int AMOUNT_FACTOR = 1;
 
 	private final Integer id;
 	private final Integer userTaskId;
-	private final Timestamp startTime;
-	private final Timestamp endTime;
+	private final int mode;
 	private final int amount;
 
-	public Expense(Integer id, Integer userTaskId, TaskRunner.Duration duration) {
+	private Expense(Integer id, Integer userTaskId, int mode, int amount) {
 		this.id = id;
 		this.userTaskId = userTaskId;
-		this.startTime = duration.getStartTime();
-		this.endTime = duration.getEndTime();
-		this.amount = duration.getSeconds() * AMOUNT_FACTOR;
+		this.mode = mode;
+		this.amount = amount;
+	}
+
+	public static Expense getSimpleExpense(Integer userTaskId) {
+		return new Expense(null, userTaskId, TaskRunner.ONCE, 5);
+	}
+	
+	public static Expense getDurationExpense(Integer userTaskId, int seconds) {
+		return new Expense(null, userTaskId, TaskRunner.REPEATED, seconds
+				* AMOUNT_FACTOR);
 	}
 
 	public Integer getId() {
@@ -38,12 +42,8 @@ public class Expense {
 		return userTaskId;
 	}
 
-	public Timestamp getStartTime() {
-		return startTime;
-	}
-
-	public Timestamp getEndTime() {
-		return endTime;
+	public int getMode() {
+		return mode;
 	}
 
 	public int getAmount() {
@@ -51,7 +51,7 @@ public class Expense {
 	}
 
 	public void effect() {
-		ExpenseDao.addExpense(userTaskId, startTime, endTime, amount);
+		ExpenseDao.addExpense(userTaskId, mode, amount);
 		int userId = UserTaskDao.getUserIdById(userTaskId);
 		UserDao.payExpense(userId, amount);
 		logger.info("expense effected");

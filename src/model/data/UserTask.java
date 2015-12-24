@@ -5,7 +5,6 @@ import model.task.Task;
 import org.apache.log4j.Logger;
 
 import task.run.TaskRunner;
-import task.run.TaskRunner.Duration;
 
 public class UserTask {
 
@@ -33,23 +32,17 @@ public class UserTask {
 		return task;
 	}
 
-	public void launch() {
-		logger.info(String.format("launch usertask, id=%d, userId=%d", id,
-				userId));
+	public void startOnce() {
+		logger.info(String.format("start[once] usertask, id=%d", id));
 
-		TaskRunner runner = TaskRunner.getOnceRunner(task);
-		runner.start();
-		try {
-			runner.join();
-			Duration duration = runner.getDuration();
-			logger.info(String.format("start time: %s, end time: %s",
-					duration.getStartTime(), duration.getEndTime()));
-			Expense expense = new Expense(null, id, duration);
-			expense.effect();
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
+		Expense.getSimpleExpense(id).effect();
+		TaskRunner.getOnceRunner(task).start();
+	}
+	
+	public void startRepeated(int seconds) {
+		logger.info(String.format("start[repeated] usertask, id=%d", id));
+		Expense.getDurationExpense(id, seconds).effect();
+		TaskRunner.getRepeatedRunner(task, seconds).start();
+		
 	}
 }

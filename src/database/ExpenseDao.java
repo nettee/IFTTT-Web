@@ -1,6 +1,5 @@
 package database;
 
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,17 +15,15 @@ public final class ExpenseDao {
 
 	}
 
-	public static void addExpense(Integer userTaskId, 
-		 Timestamp startTime, Timestamp endTime, int amount) {
+	public static void addExpense(Integer userTaskId, int mode, int amount) {
 
-		String sql = "INSERT INTO expense(userTaskId, startTime, endTime, amount) VALUES(?, ?, ?, ?)";
-		List<Object> params = Arrays.asList((Object) userTaskId, startTime,
-				endTime, amount);
+		String sql = "INSERT INTO expense(userTaskId, mode, amount) VALUES(?, ?, ?)";
+		List<Object> params = Arrays.asList((Object) userTaskId, mode, amount);
 		DaoUtil.execute(sql, params);
 
 		logger.info(String
-				.format("addExpense: userTaskId=%d, startTime=%s, endTime=%s, amount=%d",
-						userTaskId, startTime, endTime, amount));
+				.format("addExpense: userTaskId=%d, mode=%d, amount=%d",
+						userTaskId, mode, amount));
 	}
 
 }
