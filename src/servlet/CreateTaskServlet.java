@@ -135,7 +135,7 @@ public class CreateTaskServlet extends HttpServlet {
 			}
 		} else {
 			Judge = false;
-			tempInfo.append("<div>Choose no Option for This</div>");
+			tempInfo.append("<div>No Option For Trigger</div>");
 		}
 		if (option_that != null) {
 			if (option_that.equals("o5")) {

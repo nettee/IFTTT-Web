@@ -21,11 +21,23 @@
 		<%for(UserTask t:subuser.getTaskList()) { Task tb=t.getTask();%>
 		<li class="collection-item avatar">
 			<i class="material-icons circle">view_headline</i>
+			
 			<span class="title"><%=tb.getName()%></span>
 			<p>
+			 <div style="position: relative;float: right" class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large grey">
+      <i class="material-icons">mode_edit</i>
+    </a>
+    <ul>
+    
+      <li><a class="btn-floating red" data-op="1" data-id=<%=t.getId()%> ><i class="material-icons">play_arrow</i></a></li>
+      <li><a class="btn-floating yellow darken-1" data-op="2" data-id=<%=t.getId()%> ><i class="material-icons">pause</i></a></li>
+      <li><a class="btn-floating green" data-op="3" data-id=<%=t.getId()%> ><i class="material-icons">stop</i></a></li>
+      <li><a class="btn-floating blue" data-op="4" data-id=<%=t.getId()%> ><i class="material-icons">delete</i></a></li>
+   			 </ul>
+ 			 </div>
 			<%=tb.toString() %>
 				<br>
-			</p>
 		</li>
 		<%} %>
 		</ul>
@@ -43,7 +55,6 @@
         		<li class="tab col s3 disabled"><a href="#test1" style="color:black !important;">Then</a></li>
         		<li class="tab col s3" ><a href="#that">That</a></li>
       		</ul>
-    	</div>
     	<div id="this" class="col s12">
 					<div class="col s3" style="padding-top: 20px">
 						<div class="center">
@@ -153,10 +164,19 @@
 		<div class="center">
 			<input	class="center btn" type="submit" value="Create">
 		</div>
+		
+		</div>
+		</div>
 		</form>
 		</div>
 		</li>
 		<li class="collection-item" style="width: 80%;"><div class="collapsible-header">close</div><div class="collapsible-body"><p></p></div></li>
 		</ul>
   </body>
+  <script type="text/javascript">
+$(".btn-floating").on("click",function(){
+    alert("Operation: " +$(this).data("op")+"   id:"+$(this).data("id"));
+    
+});
+</script>
 </html>
