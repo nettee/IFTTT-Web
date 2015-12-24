@@ -23,15 +23,18 @@
 			<i class="material-icons circle">view_headline</i>
 			<span class="title"><%=tb.getName()%></span>
 			<p>
-			
+			<%=tb.toString() %>
 				<br>
 			</p>
 		</li>
 		<%} %>
 		</ul>
 	</div>
-<div style="width: 80%;" draggable="auto">
-      <form action="/create" method="post" >
+<ul class="collapsible" data-collapsible="accordion" style="width: 80%">
+<li class="collection-item" style="width: 80%;">
+<div class="collapsible-header">Create Task</div>
+<div class="collapsible-body">
+      <form action="/Create" method="post" >
       <div class="row">
       	<div class="col s12">
       		<ul class="tabs">
@@ -61,7 +64,7 @@
 						<div class="center">
 							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
-							<p class="center"><input name="group1" type="radio" id="o2" value="o2"/><label for="o1"></label></p>
+							<p class="center"><input name="group1" type="radio" id="o2" value="o2"/><label for="o2"></label></p>
 							<p class="light center">当用户在指定时间段内未发布微博时</p>
 							<a class="btn" target="_parent" href="/weibo">授权</a>
 							<%if(session.getAttribute("accessToken")!=null) {%><p class="center">已授权</p><%} %>
@@ -76,7 +79,7 @@
 						<div class="center">
 							<img alt="if2" src="assets/mail.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">邮件</p>
-							<p class="center"><input name="group1" type="radio" id="o3" value="o3"/><label for="o2"></label></p>
+							<p class="center"><input name="group1" type="radio" id="o3" value="o3"/><label for="o3"></label></p>
 							<p class="light center">当指定邮箱收到邮件时</p></div>
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input" type="text" id="mn"	 name="mail1_name"> <label class="mdl-textfield__label">邮箱</label>
@@ -91,7 +94,7 @@
 						<div class="center">
 							<img alt="if3" src="assets/clock.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">时钟</p>
-							<p class="center"><input name="group1" type="radio" id="o4" value="o4"/><label for="o3"></label></p>
+							<p class="center"><input name="group1" type="radio" id="o4" value="o4"/><label for="o4"></label></p>
 							<p class="light center">当前时间为指定时间时</p></div>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
@@ -105,7 +108,7 @@
 						<div class="center">
 							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
-							<p class="center"><input name="group2" type="radio" value="o5" id="o5" /><label for="o4"></label></p>
+							<p class="center"><input name="group2" type="radio" value="o5" id="o5" /><label for="o5"></label></p>
 							<p class="light center">发送微博</p>
 							<a class="btn" href="/weibo">授权</a>
 							<%if(session.getAttribute("accessToken")!=null) {%><p class="center">已授权</p><%} %>
@@ -120,7 +123,7 @@
 						<div class="center">
 							<img alt="if2" src="assets/mail.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">邮件</p>
-							<p class="center"><input name="group2" type="radio" value="o6" id="o6" /><label for="o5"></label></p>
+							<p class="center"><input name="group2" type="radio" value="o6" id="o6" /><label for="o6"></label></p>
 							<p class="light center">用指定邮箱向另一个邮箱发送邮件</p></div>
 							<div class="row center">
 							<div class="mdl-textfield mdl-js-textfield">
@@ -140,12 +143,15 @@
 							</div>
      				</div>
      				
-    		</div>
+		</div>
 		</div>
 		<div class="center">
 			<input	class="center btn" type="submit" value="Create">
 		</div>
 		</form>
 		</div>
+		</li>
+		<li class="collection-item" style="width: 80%;"><div class="collapsible-header">close</div><div class="collapsible-body"><p></p></div></li>
+		</ul>
   </body>
 </html>

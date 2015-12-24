@@ -41,6 +41,13 @@
     <servlet-name>Weibo</servlet-name>
     <servlet-class>servlet.WeiboServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>Temp Creating page</description>
+    <display-name>Create</display-name>
+    <servlet-name>Create</servlet-name>
+    <servlet-class>servlet.CreateTaskServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -65,6 +72,10 @@
   <servlet-mapping>
     <servlet-name>Weibo</servlet-name>
     <url-pattern>/weibo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Create</servlet-name>
+    <url-pattern>/Create</url-pattern>
   </servlet-mapping>
 
 	<context-param>
