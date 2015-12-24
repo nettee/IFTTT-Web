@@ -15,15 +15,14 @@ public final class ExpenseDao {
 
 	}
 
-	public static void addExpense(Integer userTaskId, int mode, int amount) {
+	public static void addExpense(Integer userTaskId, int amount) {
 
-		String sql = "INSERT INTO expense(userTaskId, mode, amount) VALUES(?, ?, ?)";
-		List<Object> params = Arrays.asList((Object) userTaskId, mode, amount);
+		String sql = "INSERT INTO expense(userTaskId, amount) VALUES(?, ?)";
+		List<Object> params = Arrays.asList((Object) userTaskId, amount);
 		DaoUtil.execute(sql, params);
 
-		logger.info(String
-				.format("addExpense: userTaskId=%d, mode=%d, amount=%d",
-						userTaskId, mode, amount));
+		logger.info(String.format("addExpense: userTaskId=%d, amount=%d",
+				userTaskId, amount));
 	}
 
 }
