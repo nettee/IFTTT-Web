@@ -55,7 +55,7 @@ public class WeiboServlet extends HttpServlet {
 			AccessToken accessToken = Auth.getAccessToken(request.getParameter("code"));
 			log("get accessToken:"+accessToken);
 			HttpSession session = request.getSession();
-			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("accessToken", accessToken.getAccessToken());
 			response.sendRedirect("dashboard.jsp?page=Task");
 		}
 	}
