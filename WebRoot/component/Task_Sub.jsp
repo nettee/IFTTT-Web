@@ -67,7 +67,7 @@
 							<%if(session.getAttribute("accessToken")!=null) {%><p class="center">已授权</p><%} %>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield__input center" id="wt"	type="time" name="weibo_time"> <label class="mdl-textfield__label" style="float:right;"></label>
+								<input class="mdl-textfield__input center" id="wt"	type="time" name="weibo_time"> 
 							</div>
 							</div>
 						</div>
