@@ -30,12 +30,11 @@ public class TaskRunnerTest {
 	}
 
 	@Test
-	public void test() {
+	public void testOnceRunner() {
 		Task task = new Task();
 		task.setTrigger(new InstantTrigger());
 		task.setAction(new HelloAction());
-		TaskRunner runner = TaskRunner.getOnceRunner(task);
-		runner.start();
+		TaskRunner.getOnceRunner(task).start();
 	}
 
 }

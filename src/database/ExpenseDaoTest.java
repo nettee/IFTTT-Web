@@ -1,6 +1,4 @@
-package model.data;
-
-import model.task.Task;
+package database;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -8,19 +6,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import task.action.HelloAction;
-import task.trigger.InstantTrigger;
-
-public class UserTaskTest {
-	
-	private static UserTask userTask;
+public class ExpenseDaoTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		Task task = new Task();
-		task.setTrigger(new InstantTrigger());
-		task.setAction(new HelloAction());
-		userTask = new UserTask(3, 1, task);
 	}
 
 	@AfterClass
@@ -34,10 +23,10 @@ public class UserTaskTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	@Test
-	public void testStartOnce() {
-		userTask.startOnce();
+	public void testAddExpense() {
+		ExpenseDao.addExpense(3, 5);
 	}
 
 }
