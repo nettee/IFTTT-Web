@@ -42,7 +42,7 @@
       		</ul>
     	</div>
     	<div id="this" class="col s12">
-					<div class="col s4" style="padding-top: 20px">
+					<div class="col s3" style="padding-top: 20px">
 						<div class="center">
 							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
@@ -57,14 +57,29 @@
 							</div>
 						</div>
      				</div>
-      				<div class="col s4" style="padding-top: 20px">
+     				<div class="col s3" style="padding-top: 20px">
+						<div class="center">
+							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
+							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
+							<p class="center"><input name="group1" type="radio" id="o2" value="o2"/><label for="o1"></label></p>
+							<p class="light center">当用户在指定时间段内未发布微博时</p>
+							<a class="btn" target="_parent" href="/weibo">授权</a>
+							<%if(session.getAttribute("accessToken")!=null) {%><p class="center">已授权</p><%} %>
+							<div class="center">
+							<div class="mdl-textfield mdl-js-textfield">
+								<input class="mdl-textfield__input center" id="wt"	type="time" name="weibo_time"> <label class="mdl-textfield__label" style="float:right;"></label>
+							</div>
+							</div>
+						</div>
+     				</div>
+      				<div class="col s3" style="padding-top: 20px">
 						<div class="center">
 							<img alt="if2" src="assets/mail.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">邮件</p>
-							<p class="center"><input name="group1" type="radio" id="o2" value="o2"/><label for="o2"></label></p>
+							<p class="center"><input name="group1" type="radio" id="o3" value="o3"/><label for="o2"></label></p>
 							<p class="light center">当指定邮箱收到邮件时</p></div>
 							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield__input" id="mn"	 name="mail1_name"> <label class="mdl-textfield__label">邮箱</label>
+								<input class="mdl-textfield__input" type="text" id="mn"	 name="mail1_name"> <label class="mdl-textfield__label">邮箱</label>
 							</div>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
@@ -72,11 +87,11 @@
 							</div>
 							</div>
      				</div>
-     				<div class="col s4" style="padding-top: 20px">
+     				<div class="col s3" style="padding-top: 20px">
 						<div class="center">
 							<img alt="if3" src="assets/clock.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">时钟</p>
-							<p class="center"><input name="group1" type="radio" id="o3" value="o3"/><label for="o3"></label></p>
+							<p class="center"><input name="group1" type="radio" id="o4" value="o4"/><label for="o3"></label></p>
 							<p class="light center">当前时间为指定时间时</p></div>
 							<div class="center">
 							<div class="mdl-textfield mdl-js-textfield">
@@ -90,7 +105,7 @@
 						<div class="center">
 							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
-							<p class="center"><input name="group2" type="radio" value="o4" id="o4" /><label for="o4"></label></p>
+							<p class="center"><input name="group2" type="radio" value="o5" id="o5" /><label for="o4"></label></p>
 							<p class="light center">发送微博</p>
 							<a class="btn" href="/weibo">授权</a>
 							<%if(session.getAttribute("accessToken")!=null) {%><p class="center">已授权</p><%} %>
@@ -105,7 +120,7 @@
 						<div class="center">
 							<img alt="if2" src="assets/mail.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">邮件</p>
-							<p class="center"><input name="group2" type="radio" value="o5" id="o5" /><label for="o5"></label></p>
+							<p class="center"><input name="group2" type="radio" value="o6" id="o6" /><label for="o5"></label></p>
 							<p class="light center">用指定邮箱向另一个邮箱发送邮件</p></div>
 							<div class="row center">
 							<div class="mdl-textfield mdl-js-textfield">

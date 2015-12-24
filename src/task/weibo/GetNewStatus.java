@@ -7,6 +7,7 @@ import weibo4j.Timeline;
 import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 
+//getUserTimelineByName() 接口升级后：uid与screen_name只能为当前授权用户；
 public class GetNewStatus {
 	public static String getNewStatus(String access_token) {
 		Timeline tm = new Timeline(access_token);

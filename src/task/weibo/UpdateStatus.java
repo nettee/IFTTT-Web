@@ -3,8 +3,8 @@ package task.weibo;
 import weibo4j.Timeline;
 
 public class UpdateStatus {
-	public static boolean postStatus(String access_token, String arg_status){
-		String statuses = arg_status;
+	public static boolean postStatus(String access_token, String status){
+		String statuses = status;
 		Timeline tm = new Timeline(access_token);
 		try {
 			tm.updateStatus(statuses);
