@@ -12,10 +12,11 @@ import org.junit.Test;
 
 import task.action.HelloAction;
 import task.trigger.InstantTrigger;
+import task.trigger.TimeTrigger;
 
 public class UserTest {
 
-	private static User user = new User();
+	private static User user;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,6 +28,7 @@ public class UserTest {
 
 	@Before
 	public void setUp() throws Exception {
+		user = new User();
 	}
 
 	@After
@@ -43,6 +45,20 @@ public class UserTest {
 			task.setAction(new HelloAction());
 			user.addTask(task);
 		}
+	}
+	
+	@Test
+	public void testTaskRunningChain() {
+		user.setThisById(1);
+		
+		UserTask userTask = user.getTaskList().get(1);
+		Task task = userTask.getTask();
+		task.setName("ÎÒ²»ÊÇºùÂ«ÍÞ");
+		userTask.editTask(task);
+		
+		UserTask ut = UserTask.getUserTask(12);
+		ut.startOnce();
+		
 	}
 
 	@Test

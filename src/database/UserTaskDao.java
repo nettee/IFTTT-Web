@@ -52,6 +52,7 @@ public class UserTaskDao {
 			UserTask userTask = newUserTaskFromLine(line);
 			userTaskList.add(userTask);
 		}
+		logger.info(String.format("getUserTaskListByUserId: userId=%d", userId));
 		return userTaskList;
 	}
 
@@ -81,7 +82,7 @@ public class UserTaskDao {
 			throw new NullPointerException("task == null");
 		}
 		String sql = "UPDATE usertask SET task=? WHERE id=?";
-		List<Object> params = Arrays.asList((Object) id, (Object) task);
+		List<Object> params = Arrays.asList((Object) task, (Object) id);
 		DaoUtil.execute(sql, params);
 		logger.info(String.format("edit usertask's task: id=%d, task=%s", id,
 				task.toString()));

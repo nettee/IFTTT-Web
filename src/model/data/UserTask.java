@@ -21,6 +21,10 @@ public class UserTask {
 		this.userId = userId;
 		this.task = task;
 	}
+	
+	public static UserTask getUserTask(int id) {
+		return UserTaskDao.getUserTaskById(id);
+	}
 
 	public int getId() {
 		return id;
@@ -94,7 +98,7 @@ public class UserTask {
 
 		UserTaskDao.editUserTaskTaskById(id, task);
 		
-		logger.info(String.format("usertask[%d] edit to %s", id,
+		logger.info(String.format("usertask[%d] edited to %s", id,
 				task.toString()));
 
 	}

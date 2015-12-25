@@ -22,6 +22,10 @@ public class Task implements Serializable {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Trigger getTrigger() {
 		return trigger;
 	}
