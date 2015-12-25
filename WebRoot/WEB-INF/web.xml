@@ -47,6 +47,11 @@
     <servlet-name>Create</servlet-name>
     <servlet-class>servlet.CreateTaskServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>TaskOperateServlet</servlet-name>
+    <servlet-class>servlet.TaskOperateServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -76,6 +81,10 @@
   <servlet-mapping>
     <servlet-name>Create</servlet-name>
     <url-pattern>/Create</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TaskOperateServlet</servlet-name>
+    <url-pattern>/TaskOperate</url-pattern>
   </servlet-mapping>
 
 	<context-param>

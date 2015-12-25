@@ -15,7 +15,7 @@
 }
 </style>
 <body>
-	<div class="demo-card-wide">
+	<div class="demo-card-wide" id="tasklist">
 		<ul class="collection" style="width: 80%">
 		<%@page import="model.*" %>
 		<%for(UserTask t:subuser.getTaskList()) { Task tb=t.getTask();%>
@@ -175,8 +175,12 @@
   </body>
   <script type="text/javascript">
 $(".btn-floating").on("click",function(){
-    alert("Operation: " +$(this).data("op")+"   id:"+$(this).data("id"));
-    
+    var op=$(this).data("op");
+    var id=$(this).data("id");
+	$.post("TaskOperate",{op:op,id:id},function(data,status){
+		$("#tasklist").load(location.href + " #tasklist");
+	});
+	
 });
 </script>
 </html>
