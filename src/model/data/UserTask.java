@@ -52,7 +52,7 @@ public class UserTask {
 	public void startOnce() {
 		Expense.getSimpleExpense(id).effect();
 
-		UserTaskRunner runner = UserTaskRunner.getOnceRunner(task);
+		UserTaskRunner runner = UserTaskRunner.getOnceRunner(this);
 		RunnerBoard.getInstance().putRunner(this, runner);
 		runner.start_();
 	}
@@ -60,7 +60,7 @@ public class UserTask {
 	public void startRepeated(int seconds) {
 		Expense.getDurationExpense(id, seconds).effect();
 
-		UserTaskRunner runner = UserTaskRunner.getRepeatedRunner(task, seconds);
+		UserTaskRunner runner = UserTaskRunner.getRepeatedRunner(this, seconds);
 		RunnerBoard.getInstance().putRunner(this, runner);
 		runner.start_();
 	}

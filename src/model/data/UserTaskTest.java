@@ -8,14 +8,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import task.action.HelloAction;
+import task.trigger.InstantTrigger;
 import database.UserTaskDao;
 
-import task.action.HelloAction;
-import task.run.UserTaskRunner;
-import task.trigger.InstantTrigger;
-
 public class UserTaskTest {
-	
+
 	private static UserTask userTask;
 
 	@BeforeClass
@@ -37,23 +35,7 @@ public class UserTaskTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
-	@Test
-	public void testStartOnce() {
-		userTask.startOnce();
-	}
-	
-	@Test
-	public void testStartRepeated() {
-		UserTaskRunner runner = UserTaskRunner.getRepeatedRunner(userTask.getTask(), 20);
-		runner.start();
-		try {
-			runner.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 	@Test
 	public void testEditTask() {
 		Task task = new Task();
@@ -61,7 +43,7 @@ public class UserTaskTest {
 		task.setAction(new HelloAction());
 		userTask.editTask(task);
 	}
-	
+
 	@Test
 	public void testDelete() {
 		UserTask userTask2 = UserTaskDao.getUserTaskById(2);
