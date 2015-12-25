@@ -84,7 +84,7 @@ public final class MessageDao {
 	}
 
 	public static void sendMessageToAll(String subject, String content) {
-		List<Integer> userIds = UserDao.getAllIds();
+		List<Integer> userIds = UserDao.getUserIdList();
 		for (int userId : userIds) {
 			addMessage(userId, subject, content);
 		}

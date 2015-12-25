@@ -12,11 +12,12 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class UserDaoTest {
 
-	private static User dog = new User(1, "dog", "1", 5000);
+	private static User dog = new User();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -24,6 +25,8 @@ public class UserDaoTest {
 
 	@Before
 	public void setUp() throws Exception {
+		dog.setThisById(1);
+		System.out.println("-------------------------");
 	}
 
 	@After
@@ -33,13 +36,19 @@ public class UserDaoTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-	
+
 	@Test
 	public void testGetUserList() {
 		List<User> userList = UserDao.getUserList();
 		for (User user : userList) {
 			System.out.println(user);
 		}
+	}
+
+	@Test
+	public void testGetUserIdList() {
+		List<Integer> idList = UserDao.getUserIdList();
+		System.out.println(Arrays.toString(idList.toArray()));
 	}
 
 	@Test
@@ -55,19 +64,42 @@ public class UserDaoTest {
 	}
 
 	@Test
-	public void testGetAllIds() {
-		List<Integer> allIds = UserDao.getAllIds();
-		System.out.println(Arrays.toString(allIds.toArray()));
-	}
-
-	@Test
 	public void testExistsUser() {
 		assertTrue(UserDao.existsUser(dog.getName()));
 	}
 
 	@Test
-	public void testValidPassword() {
-		assertTrue(UserDao.validPassword(dog.getName(), dog.getPassword()));
+	public void testConfirmPassword() {
+		assertTrue(UserDao.confirmPassword(dog.getName(), dog.getPassword()));
+	}
+
+	@Ignore
+	@Test
+	public void testAddUser() {
+		for (int i = 0; i < 10; i++) {
+			String username = "ÄÄß¸" + i + "ºÅ";
+			UserDao.addUser(username, "duluth");
+		}
+	}
+
+	@Ignore
+	@Test
+	public void testPayExpense() {
+		for (int i = 0; i < 10; i++) {
+			String username = "ÄÄß¸" + i + "ºÅ";
+			User user = UserDao.getUserByName(username);
+			UserDao.payExpense(user.getId(), (i + 1) * 100);
+		}
+	}
+
+	@Ignore
+	@Test
+	public void testAddScore() {
+		for (int i = 0; i < 10; i++) {
+			String username = "ÄÄß¸" + i + "ºÅ";
+			User user = UserDao.getUserByName(username);
+			UserDao.addScore(user.getId(), (i + 1) * 100);
+		}
 	}
 
 }

@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		if (UserDao.validPassword(username, password)) {
+		if (UserDao.confirmPassword(username, password)) {
 			logger.info(String.format("logged in, username=%s, password=%s",
 					username, password));
 

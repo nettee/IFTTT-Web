@@ -23,8 +23,9 @@ public final class UserDao {
 	private UserDao() {
 
 	}
+	
+	// ============== read daos ================
 
-	// TODO test
 	public static List<User> getUserList() {
 		String sql = "SELECT * FROM user";
 		List<Map<String, Object>> lines = DaoUtil.query(sql,
@@ -35,35 +36,12 @@ public final class UserDao {
 			User user = newUserFromLine(line);
 			userList.add(user);
 		}
-		logger.info("get user list");
+		logger.info(String.format("get user list - %d users in total",
+				userList.size()));
 		return userList;
 	}
 
-	public static User getUserById(int id) {
-		String sql = "SELECT * FROM user WHERE id=?";
-		List<Integer> params = Arrays.asList(id);
-		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
-		logger.info(String.format("get user by id=%d", id));
-		return newUserFromLine(line);
-	}
-
-	public static User getUserByName(String name) {
-		String sql = "SELECT * FROM user WHERE name=?";
-		List<String> params = Arrays.asList(name);
-		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
-		logger.info(String.format("get user by name=%s", name));
-		return newUserFromLine(line);
-	}
-
-	private static User newUserFromLine(Map<String, Object> line) {
-		Integer id = (Integer) line.get("id");
-		String name = (String) line.get("name");
-		String password = (String) line.get("password");
-		Integer balance = (Integer) line.get("balance");
-		return new User(id, name, password, balance);
-	}
-
-	public static List<Integer> getAllIds() {
+	public static List<Integer> getUserIdList() {
 		String sql = "SELECT id FROM user";
 		List<String> params = Collections.emptyList();
 		List<Map<String, Object>> lines = DaoUtil.query(sql, params);
@@ -72,28 +50,60 @@ public final class UserDao {
 			Integer id = (Integer) line.get("id");
 			idList.add(id);
 		}
+		logger.info(String.format("get user id list - %d user ids in total",
+				idList.size()));
 		return idList;
 	}
 
+	public static User getUserById(int id) {
+		String sql = "SELECT * FROM user WHERE id=?";
+		List<Integer> params = Arrays.asList(id);
+		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
+		User user = newUserFromLine(line);
+		logger.info(String.format("get user by id=%d - %s", id, user.toString()));
+		return user;
+	}
+
+	public static User getUserByName(String name) {
+		String sql = "SELECT * FROM user WHERE name=?";
+		List<String> params = Arrays.asList(name);
+		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
+		User user = newUserFromLine(line);
+		logger.info(String.format("get user by name=%s - %s", name,
+				user.toString()));
+		return user;
+	}
+
+	private static User newUserFromLine(Map<String, Object> line) {
+		Integer id = (Integer) line.get("id");
+		String name = (String) line.get("name");
+		String password = (String) line.get("password");
+		int balance = (Integer) line.get("balance");
+		int score = (Integer) line.get("score");
+		return new User(id, name, password, balance, score);
+	}
+
+	/**
+	 * Tests whether there exists user of specified name
+	 * 
+	 * @return <tt>true</tt> if there exists user of specified name
+	 */
 	public static boolean existsUser(String username) {
 		String sql = "SELECT * FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
 		List<Map<String, Object>> results = DaoUtil.query(sql, params);
-		boolean contains = !results.isEmpty();
-		logger.info(String.format("containsUser: username=%s, %b", username,
-				contains));
-		return contains;
+		boolean exists = !results.isEmpty();
+		logger.info(String.format("exists user: username=%s - %s", username,
+				(exists ? "Yes" : "No")));
+		return exists;
 	}
 
-	public static void addUser(String username, String password) {
-		String sql = "INSERT INTO user(name, password) VALUES(?, ?)";
-		List<String> params = Arrays.asList(username, password);
-		DaoUtil.execute(sql, params);
-		logger.info(String.format("addUser: username=%s, password=%s",
-				username, password));
-	}
-
-	public static boolean validPassword(String username, String password) {
+	/**
+	 * Tests whether password confirms to username
+	 * 
+	 * @return <tt>true</tt> if password confirms to username
+	 */
+	public static boolean confirmPassword(String username, String password) {
 
 		if (!existsUser(username)) {
 			return false;
@@ -102,11 +112,22 @@ public final class UserDao {
 		String sql = "SELECT password FROM user WHERE name=?";
 		List<String> params = Arrays.asList(username);
 		String password2 = (String) DaoUtil.queryOneObject(sql, params);
-		logger.info(String.format(
-				"validPassword: username=%s, password=%s, original=%s",
-				username, password, password2));
+		boolean confirms = password.equals(password2);
 
-		return password.equals(password2);
+		logger.info(String.format(
+				"confirm password of user %s - '%s' with '%s' - %s", username,
+				password, password2, (confirms ? "Yes" : "No")));
+		return confirms;
+	}
+	
+	// ============== write daos ================
+
+	public static void addUser(String username, String password) {
+		String sql = "INSERT INTO user(name, password) VALUES(?, ?)";
+		List<String> params = Arrays.asList(username, password);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("add user: username=%s, password=%s",
+				username, password));
 	}
 
 	// TODO test

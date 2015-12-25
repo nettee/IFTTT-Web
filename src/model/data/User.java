@@ -16,6 +16,7 @@ import database.UserTaskDao;
  * <li>name
  * <li>password
  * <li>balance
+ * <li>score
  * </ul>
  * 
  */
@@ -25,15 +26,17 @@ public class User {
 	private String name;
 	private String password;
 	private int balance;
+	private int score;
 
 	public User() {
 	}
 
-	public User(Integer id, String name, String password, int balance) {
+	public User(Integer id, String name, String password, int balance, int score) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.balance = balance;
+		this.score = score;
 	}
 
 	public int getId() {
@@ -43,13 +46,17 @@ public class User {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
 
 	public int getBalance() {
 		return balance;
+	}
+
+	public int getScore() {
+		return score;
 	}
 
 	/**
@@ -72,6 +79,7 @@ public class User {
 		this.name = that.name;
 		this.password = that.password;
 		this.balance = that.balance;
+		this.score = that.score;
 	}
 
 	public List<Message> getMessageList() {
@@ -87,19 +95,19 @@ public class User {
 		}
 		return MessageDao.getUnopenedMessageNumberByUserId(id);
 	}
-	
+
 	public void setAllMessageOpened() {
 		MessageDao.setAllMessageOpenedByUserId(id);
 	}
-	
+
 	public void addTask(Task task) {
 		UserTaskDao.addUserTask(id, task);
 	}
-	
+
 	public List<UserTask> getTaskList() {
 		return UserTaskDao.getUserTaskListByUserId(id);
 	}
-	
+
 	public List<User> getUserList() {
 		verifyAdmin(this.id);
 		return UserDao.getUserList();
@@ -108,10 +116,11 @@ public class User {
 	private static void verifyAdmin(int id) {
 		final int adminId = 1;
 		if (id != adminId) {
-			throw new IllegalArgumentException(String.format("Illegal id %d", id));
+			throw new IllegalArgumentException(String.format("Illegal id %d",
+					id));
 		}
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof User) {
@@ -126,8 +135,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return String.format("User(id=%d, name=%s, password=%s, balance=%d)",
-				id, name, password, balance);
+		return String.format(
+				"User(id=%d, name=%s, password=%s, balance=%d, score=%d)", id,
+				name, password, balance, score);
 	}
 
 }
