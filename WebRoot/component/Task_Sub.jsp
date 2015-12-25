@@ -196,7 +196,7 @@ $(document).on("click",".op",function(){
 		});
 	}
 	else{
-		var duration = prompt("请输入运行时间(分钟)", "");
+		var duration = prompt("请输入运行时间(秒)", "");
 		$.post("TaskOperate",{op:op,id:id,duration:duration},function(data,status){
 			$("#tasklist").load(location.href + " #tasklist");
 		});
