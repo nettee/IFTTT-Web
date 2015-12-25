@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import task.action.HelloAction;
-import task.trigger.MailReceivedTrigger;
-import task.trigger.TimeTrigger;
-
 import model.data.User;
 import model.data.UserTask;
-import model.task.Task;
 
 public class TaskOperateServlet extends HttpServlet {
-	
-	private static final Logger logger = Logger.getLogger(TaskOperateServlet.class);
+
+	private static final Logger logger = Logger
+			.getLogger(TaskOperateServlet.class);
 	/**
 	 * 
 	 */
@@ -43,54 +38,72 @@ public class TaskOperateServlet extends HttpServlet {
 
 	/**
 	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * This method is called when a form has its tag value method equals to
+	 * post.
+	 * 
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		UserTask task=null;
-		String op=request.getParameter("op");
-		User user=new User();
-		user.setThisById((Integer)request.getSession().getAttribute("userId"));
-		int id=0;
-		if(request.getParameter("id")!=null) 
-		{
-			id=Integer.valueOf(request.getParameter("id"));
-			task=UserTask.getUserTask(id);
+		UserTask task = null;
+		String op = request.getParameter("op");
+		User user = new User();
+		user.setThisById((Integer) request.getSession().getAttribute("userId"));
+		int id = 0;
+		if (request.getParameter("id") != null) {
+			id = Integer.valueOf(request.getParameter("id"));
+			task = UserTask.getUserTask(id);
 		}
-		if(op!=null){
-		if(op.equals("run"))//Run
-		{
-			String duration_string=request.getParameter("duration");
-			int duration=Integer.valueOf(duration_string);
-			if(task!=null) {task.startRepeated(duration); logger.info(task.getTask().getName()+" Start for "+duration);}
-		}else if(op.equals("run_once"))//Run Once
-		{
-			if(task!=null) {task.startOnce(); logger.info(task.getTask().getName()+" Start for once");}
-		}else if(op.equals("pause"))//Pause
-		{
-			
-		}else if(op.equals("stop"))//Stop
-		{
-			
-		}else if(op.equals("edit"))//Edit
-		{
-			
-		}else if(op.equals("delete"))//Delete
-		{
-		
-		}}
+		if (op != null) {
+			if (op.equals("run"))// Run
+			{
+				String duration_string = request.getParameter("duration");
+				int duration = Integer.valueOf(duration_string);
+				if (task != null) {
+					task.startRepeated(duration);
+					logger.info(task.getTask().getName() + " Start for "
+							+ duration);
+				}
+			} else if (op.equals("run_once"))// Run Once
+			{
+				if (task != null) {
+					task.startOnce();
+					logger.info(task.getTask().getName() + " Start for once");
+				}
+			} else if (op.equals("pause"))// Pause
+			{
+
+			} else if (op.equals("stop"))// Stop
+			{
+
+			} else if (op.equals("edit"))// Edit
+			{
+				if(task!=null){
+					request.getSession().setAttribute("Edit", id);
+				}
+			} else if (op.equals("delete"))// Delete
+			{
+				if(task!=null){
+					task.delete();
+					logger.info(task.getTask().getName() + " Deleted");
+				}
+			}
+		}
 	}
 
 	/**
 	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
+	 * 
+	 * @throws ServletException
+	 *             if an error occurs
 	 */
 	public void init() throws ServletException {
 		// Put your code here
