@@ -10,9 +10,13 @@ import model.task.Task;
 
 import org.apache.log4j.Logger;
 
-public class UserTaskDao {
+public final class UserTaskDao {
 
 	private static final Logger logger = Logger.getLogger(UserTaskDao.class);
+	
+	private UserTaskDao() {
+		
+	}
 
 	// TODO test
 	public static int getUserTaskNumberByUserId(int userId) {

@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import task.action.HelloAction;
 import task.trigger.InstantTrigger;
+import task.trigger.TimeTrigger;
 
 public class UserTest {
 
@@ -52,7 +53,7 @@ public class UserTest {
 		
 		UserTask userTask = user.getTaskList().get(1);
 		Task task = userTask.getTask();
-		task.setName("ÎÒ²»ÊÇºùÂ«ÍŞ");
+		task.setTrigger(new TimeTrigger(15, 23));
 		userTask.editTask(task);
 		
 		UserTask ut = UserTask.getUserTask(12);

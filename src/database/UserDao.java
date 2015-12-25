@@ -27,8 +27,9 @@ public final class UserDao {
 	// TODO test
 	public static List<User> getUserList() {
 		String sql = "SELECT * FROM user";
-		List<Map<String, Object>> lines = DaoUtil.query(sql, Collections.EMPTY_LIST);
-		
+		List<Map<String, Object>> lines = DaoUtil.query(sql,
+				Collections.EMPTY_LIST);
+
 		List<User> userList = new ArrayList<User>();
 		for (Map<String, Object> line : lines) {
 			User user = newUserFromLine(line);
@@ -111,13 +112,24 @@ public final class UserDao {
 	// TODO test
 	public static void payExpense(int userId, int amount) {
 		if (amount <= 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("amount <= 0");
 		}
 		String sql = "UPDATE user SET balance=balance-? WHERE id=?";
 		List<Integer> params = Arrays.asList(amount, userId);
 		DaoUtil.execute(sql, params);
 		logger.info(String.format("payExpense: userId=%d, amount=%d", userId,
 				amount));
+	}
+
+	public static void addScore(int userId, int points) {
+		if (points <= 0) {
+			throw new IllegalArgumentException("points <= 0");
+		}
+		String sql = "UPDATE user SET score=score+? WHERE id=?";
+		List<Integer> params = Arrays.asList(points, userId);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("addScore: userId=%d, points=%d", userId,
+				points));
 	}
 
 }
