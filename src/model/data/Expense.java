@@ -17,7 +17,7 @@ public class Expense {
 	private final Integer userTaskId;
 	private final int amount;
 
-	private Expense(Integer id, Integer userTaskId, int amount) {
+	public Expense(Integer id, Integer userTaskId, int amount) {
 		this.id = id;
 		this.userTaskId = userTaskId;
 		this.amount = amount;
@@ -51,6 +51,11 @@ public class Expense {
 		UserDao.payExpense(userId, amount);
 		UserDao.addScore(userId, amount * SCORE_AMOUNT_FACTOR);
 		logger.info("expense effected");
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Expense[%d]{userTaskId=%d, amount=%d}", id, userTaskId, amount);
 	}
 
 }
