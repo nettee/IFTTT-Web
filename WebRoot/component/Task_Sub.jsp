@@ -185,7 +185,7 @@
 		<li class="collection-item" style="width: 80%;"><div class="collapsible-header">close</div><div class="collapsible-body"><p></p></div></li>
 		</ul>
   </body>
-    <script type="text/javascript">
+<script type="text/javascript">
 $(document).on("click",".op",function(){
 	var op=$(this).data("op");
     var id=$(this).data("id");

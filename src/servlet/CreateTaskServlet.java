@@ -2,15 +2,13 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 
 import task.trigger.*;
 import task.action.*;
@@ -22,6 +20,8 @@ import model.task.Trigger;
 
 public class CreateTaskServlet extends HttpServlet {
 
+	private static final Logger logger = Logger
+			.getLogger(CreateTaskServlet.class);
 	/**
 	 * 
 	 */
@@ -85,6 +85,7 @@ public class CreateTaskServlet extends HttpServlet {
 					trigger = new WeiboPushedTrigger(accessToken, content);
 				else {
 					tempInfo.append("<div>No Authority for weibo</div>");
+					logger.info("No Authority For Weibo");
 					Judge = false;
 				}
 			} else if (option_this.equals("o2")) {
@@ -93,11 +94,13 @@ public class CreateTaskServlet extends HttpServlet {
 						&& !weibo_time.equals("")) {
 				} else {
 					Judge = false;
-					if (accessToken != null)
+					if (accessToken != null) {
 						tempInfo.append("<div>No Time set for weibo Trigger</div>");
-					else
+						logger.info("No Time Set For Weibo Trigger");
+					} else {
 						tempInfo.append("<div>No Authority for weibo</div>");
-
+						logger.info("No Authority For Weibo");
+					}
 				}
 			} else if (option_this.equals("o3")) {
 				String address = request.getParameter("mail1_name");
@@ -108,34 +111,28 @@ public class CreateTaskServlet extends HttpServlet {
 				else {
 					Judge = false;
 					tempInfo.append("<div>Wrong Mail Info For Trigger</div>");
+					logger.info("Wrong Mail Info For Trigger");
 				}
 			} else if (option_this.equals("o4")) {
 				String time = request.getParameter("time");
 				if (time != null && !time.equals("")) {
-					SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-					Date date = new Date();
-					try {
-						date = sdf.parse(time);
-					} catch (ParseException e) {
-						Judge = false;
-						tempInfo.append("<div>Error Time Set For Trigger</div>");
-						e.printStackTrace();
-					}
-					Calendar cal = Calendar.getInstance();
-					cal.setTime(date);
-					// System.out.println(cal.get(Calendar.HOUR_OF_DAY)+" "+cal.get(Calendar.MINUTE));
-					trigger = new TimeTrigger(cal);
+					int hour = Integer.valueOf(time.split(":")[0]);
+					int minute = Integer.valueOf(time.split(":")[1]);
+					trigger = new TimeTrigger(hour, minute);
 				} else {
 					Judge = false;
 					tempInfo.append("<div>No Time Set For Trigger</div>");
+					logger.info("No Time Set For Trigger");
 				}
 			} else {
 				Judge = false;
 				tempInfo.append("<div>No Option For Trigger</div>");
+				logger.info("No Option For Trigger");
 			}
 		} else {
 			Judge = false;
 			tempInfo.append("<div>No Option For Trigger</div>");
+			logger.info("No Option For Trigger");
 		}
 		if (option_that != null) {
 			if (option_that.equals("o5")) {
@@ -147,10 +144,13 @@ public class CreateTaskServlet extends HttpServlet {
 							post_weibo_content);
 				else {
 					Judge = false;
-					if (accessToken == null)
+					if (accessToken == null) {
 						tempInfo.append("<div>No Authority for weibo</div>");
-					else
+						logger.info("No Authority for Weibo");
+					} else {
 						tempInfo.append("<div>No Content for Weibo sending</div>");
+						logger.info("No Content for Weibo sending");
+					}
 				}
 			} else if (option_that.equals("o6")) {
 				String address = request.getParameter("post_to_address");
@@ -161,22 +161,24 @@ public class CreateTaskServlet extends HttpServlet {
 				else {
 					Judge = false;
 					tempInfo.append("<div>No Addresss For Post</div>");
+					logger.info("No Option for That");
 				}
-			} else if(option_that.equals("o7")){
-				action=new HelloAction();
+			} else if (option_that.equals("o7")) {
+				action = new HelloAction();
 			}
 		} else {
 			Judge = false;
-			tempInfo.append("<div>Choose no Option for That</div>");
+			tempInfo.append("<div>Choose no Option for Action</div>");
+			logger.info("No Option for Action");
 		}
 		tempInfo.append("<a href=\"dashboard.jsp?page=Task\" >Back</a>");
 		tempInfo.append("</BODY></HTML>");
 		if (Judge) {
-			log("Format True");
+			logger.info("Format True");
 			task.setAction(action);
 			task.setTrigger(trigger);
 			user.addTask(task);
-			log(task.toString());
+			logger.info(task.toString());
 			response.sendRedirect("dashboard.jsp?page=Task");
 		} else {
 			response.setContentType("text/html");

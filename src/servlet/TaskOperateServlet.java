@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import task.action.HelloAction;
 import task.trigger.MailReceivedTrigger;
 import task.trigger.TimeTrigger;
@@ -17,7 +19,8 @@ import model.data.UserTask;
 import model.task.Task;
 
 public class TaskOperateServlet extends HttpServlet {
-
+	
+	private static final Logger logger = Logger.getLogger(TaskOperateServlet.class);
 	/**
 	 * 
 	 */
@@ -65,10 +68,10 @@ public class TaskOperateServlet extends HttpServlet {
 		{
 			String duration_string=request.getParameter("duration");
 			int duration=Integer.valueOf(duration_string);
-			if(task!=null) {task.startRepeated(duration); log(task.getTask().getName()+" Start for "+duration);}
+			if(task!=null) {task.startRepeated(duration); logger.info(task.getTask().getName()+" Start for "+duration);}
 		}else if(op.equals("run_once"))//Run Once
 		{
-			if(task!=null) {task.startOnce(); log(task.getTask().getName()+" Start for once");}
+			if(task!=null) {task.startOnce(); logger.info(task.getTask().getName()+" Start for once");}
 		}else if(op.equals("pause"))//Pause
 		{
 			
