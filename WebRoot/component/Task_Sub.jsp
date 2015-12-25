@@ -46,11 +46,12 @@
 		<%} %>
 		</ul>
 	</div>
-<ul class="collapsible" data-collapsible="accordion" style="width: 80%">
-<li class="collection-item" style="width: 80%;">
+<ul class="collapsible" data-collapsible="expandable" style="width: 80%">
+<li class="collection-item createform" style="width: 80%;">
 <div class="collapsible-header">Create Task</div>
 <div class="collapsible-body">
-      <form action="/Create" method="post" >
+      <form action="/Create" method="post" name="">
+      <input type="hidden" value="create" name="submit_type">
       <div class="row">
       	<div class="col s12">
       		<ul class="tabs">
@@ -174,7 +175,7 @@
 		</div>
 		
 		<div class="center">
-			<input	class="center btn" type="submit" value="Create">
+			<input	class="center btn sub" type="submit" value="Create">
 		</div>
 		
 		</div>
@@ -182,7 +183,7 @@
 		</form>
 		</div>
 		</li>
-		<li class="collection-item" style="width: 80%;"><div class="collapsible-header">close</div><div class="collapsible-body"><p></p></div></li>
+		<li class="collection-item close" style="width: 80%;"><div class="collapsible-header">close</div><div class="collapsible-body"><p></p></div></li>
 		</ul>
   </body>
 <script type="text/javascript">
@@ -190,12 +191,28 @@ $(document).on("click",".op",function(){
 	var op=$(this).data("op");
     var id=$(this).data("id");
     if(op!="run")
-    {
+    {    	
+    var $li=$(this).parent().parent().parent().parent();
+    $li.css("backgroundColor", "#00BCD4");
 		$.post("TaskOperate",{op:op,id:id},function(data,status){
+				if(op=="delete"){
+              $li.slideToggle(300, function() {
+                $li.remove();
+            });
+               
+            }
+            if(op=="edit"){
+               var list=$(".close");
+               list.load("component/DynEdit.jsp",function(){
+               $('.collapsible').collapsible();
+               $('.collapsible').collapsible();
+               });
+            }
 			$("#tasklist").load(location.href + " #tasklist");
+				
 		});
 	}
-	else{
+	else {
 		var duration = prompt("请输入运行时间(秒)", "");
 		$.post("TaskOperate",{op:op,id:id,duration:duration},function(data,status){
 			$("#tasklist").load(location.href + " #tasklist");

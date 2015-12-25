@@ -14,6 +14,7 @@ import task.trigger.*;
 import task.action.*;
 
 import model.data.User;
+import model.data.UserTask;
 import model.task.Action;
 import model.task.Task;
 import model.task.Trigger;
@@ -70,6 +71,7 @@ public class CreateTaskServlet extends HttpServlet {
 		Trigger trigger = null;
 		String option_this = request.getParameter("group1");
 		String option_that = request.getParameter("group2");
+		String submit_type = request.getParameter("submit_type");
 		// Set Task Name as "User TaskNo"
 		Task task = new Task(user.getName() + " Task"
 				+ user.getTaskList().size());
@@ -177,9 +179,20 @@ public class CreateTaskServlet extends HttpServlet {
 			logger.info("Format True");
 			task.setAction(action);
 			task.setTrigger(trigger);
-			user.addTask(task);
-			logger.info(task.toString());
-			response.sendRedirect("dashboard.jsp?page=Task");
+			if (submit_type.equals("create")
+					&& request.getSession().getAttribute("Edit") == null) {
+
+				user.addTask(task);
+				logger.info("Add Task:" + task.toString());
+				response.sendRedirect("dashboard.jsp?page=Task");
+			} else if (submit_type.equals("edit")){
+				Integer edit_id = (Integer) request.getSession().getAttribute(
+						"Edit");
+				UserTask edit_task = UserTask.getUserTask(edit_id);
+				edit_task.editTask(task);
+				request.getSession().removeAttribute("Edit");
+				logger.info("Edit Task to:"+task.toString());
+			}
 		} else {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
