@@ -21,23 +21,23 @@ public class RunnerBoard {
 	}
 
 	// stores map from usertask id to task-runner
-	private Map<Integer, TaskRunner> map = new HashMap<Integer, TaskRunner>();
+	private Map<Integer, UserTaskRunner> map = new HashMap<Integer, UserTaskRunner>();
 
-	public TaskRunner getRunner(UserTask userTask) {
+	public UserTaskRunner getRunner(UserTask userTask) {
 		int userTaskId = userTask.getId();
 		return getRunner(userTaskId);
 	}
 
-	TaskRunner getRunner(Integer userTaskId) {
+	UserTaskRunner getRunner(Integer userTaskId) {
 		return map.get(userTaskId);
 	}
 
-	public void putRunner(UserTask userTask, TaskRunner runner) {
+	public void putRunner(UserTask userTask, UserTaskRunner runner) {
 		int userTaskId = userTask.getId();
 		putRunner(userTaskId, runner);
 	}
 
-	void putRunner(Integer userTaskId, TaskRunner runner) {
+	void putRunner(Integer userTaskId, UserTaskRunner runner) {
 		map.put(userTaskId, runner);
 	}
 

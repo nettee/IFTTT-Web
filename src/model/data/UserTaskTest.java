@@ -11,7 +11,7 @@ import org.junit.Test;
 import database.UserTaskDao;
 
 import task.action.HelloAction;
-import task.run.TaskRunner;
+import task.run.UserTaskRunner;
 import task.trigger.InstantTrigger;
 
 public class UserTaskTest {
@@ -45,7 +45,7 @@ public class UserTaskTest {
 	
 	@Test
 	public void testStartRepeated() {
-		TaskRunner runner = TaskRunner.getRepeatedRunner(userTask.getTask(), 20);
+		UserTaskRunner runner = UserTaskRunner.getRepeatedRunner(userTask.getTask(), 20);
 		runner.start();
 		try {
 			runner.join();

@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import task.action.HelloAction;
-import task.run.TaskRunner;
+import task.run.UserTaskRunner;
 
 public class TimeTriggerTest {
 
@@ -82,7 +82,7 @@ public class TimeTriggerTest {
 		Task task = new Task("test");
 		task.setTrigger(new TimeTrigger(14, 3));
 		task.setAction(new HelloAction());
-		TaskRunner runner = TaskRunner.getOnceRunner(task);
+		UserTaskRunner runner = UserTaskRunner.getOnceRunner(task);
 		runner.start();
 		try {
 			runner.join();
