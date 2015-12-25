@@ -45,4 +45,20 @@ public class UserTask {
 		TaskRunner.getRepeatedRunner(task, seconds).start();
 		
 	}
+	
+	public void pause() {
+		// TODO
+	}
+	
+	public void stop() {
+		// TODO
+	}
+	
+	public void editTask(Task task) {
+		// TODO
+	}
+	
+	public void delete() {
+		// TODO
+	}
 }
