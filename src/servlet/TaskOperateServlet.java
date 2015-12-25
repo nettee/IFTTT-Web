@@ -13,6 +13,7 @@ import task.trigger.MailReceivedTrigger;
 import task.trigger.TimeTrigger;
 
 import model.data.User;
+import model.data.UserTask;
 import model.task.Task;
 
 public class TaskOperateServlet extends HttpServlet {
@@ -49,19 +50,25 @@ public class TaskOperateServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		UserTask task=null;
 		String op=request.getParameter("op");
-		int id=0;
-		if(request.getParameter("id")!=null) id=Integer.parseInt(request.getParameter("id"));
 		User user=new User();
 		user.setThisById((Integer)request.getSession().getAttribute("userId"));
+		int id=0;
+		if(request.getParameter("id")!=null) 
+		{
+			id=Integer.valueOf(request.getParameter("id"));
+			task=UserTask.getUserTask(id);
+		}
 		if(op!=null){
 		if(op.equals("run"))//Run
 		{
-			String duration=request.getParameter("duration");
+			String duration_string=request.getParameter("duration");
+			int duration=Integer.valueOf(duration_string);
+			if(task!=null) {task.startRepeated(duration); log(task.getTask().getName()+" Start for "+duration);}
 		}else if(op.equals("run_once"))//Run Once
 		{
-			
+			if(task!=null) {task.startOnce(); log(task.getTask().getName()+" Start for once");}
 		}else if(op.equals("pause"))//Pause
 		{
 			
