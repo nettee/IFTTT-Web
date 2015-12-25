@@ -32,10 +32,12 @@
     </a>
     <ul>
     
-      <li><a class="btn-floating red" data-op="1" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">play_arrow</i></a></li>
-      <li><a class="btn-floating yellow darken-1" data-op="2" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">replay</i></a></li>
-      <li><a class="btn-floating green" data-op="3" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">stop</i></a></li>
-      <li><a class="btn-floating blue" data-op="4" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">delete</i></a></li>
+      <li><a class="op btn-floating green lighten-2 tooltipped" data-tooltip="Run task repeatly" data-op="run" data-id=<%=t.getId()%> ><i class="material-icons">repeat</i></a></li>
+      <li><a class="op btn-floating green darken-2 tooltipped" data-tooltip="Run task once" data-op="run_once" data-id=<%=t.getId()%> ><i class="material-icons">play_arrow</i></a></li>
+      <li><a class="op btn-floating yellow darken-1 tooltipped" data-tooltip="Pause task" data-op="pause" data-id=<%=t.getId()%> ><i class="material-icons">pause</i></a></li>
+      <li><a class="op btn-floating red tooltipped" data-tooltip="Stop task" data-op="stop" data-id=<%=t.getId()%> ><i class="material-icons">stop</i></a></li>
+      <li><a class="op btn-floating purple tooltipped" data-tooltip="Edit task" data-op="edit" data-id=<%=t.getId()%> ><i class="material-icons">mode_edit</i></a></li>
+      <li><a class="op btn-floating blue tooltipped" data-tooltip="Delete task" data-op="delete" data-id=<%=t.getId()%> ><i class="material-icons">delete</i></a></li>
    			 </ul>
  			 </div>
 			<%=tb.toString() %>
@@ -117,7 +119,7 @@
      				</div>				
 			</div>
     		<div id="that" class="col s12">
-    			<div class="col s6" style="padding-top: 20px">
+    			<div class="col s4" style="padding-top: 20px">
 						<div class="center">
 							<img alt="if1" src="assets/weibo.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">新浪微博</p>
@@ -132,7 +134,7 @@
 							</div>
 						</div>
      				</div>
-      				<div class="col s6" style="padding-top: 20px">
+     				<div class="col s4" style="padding-top: 20px">
 						<div class="center">
 							<img alt="if2" src="assets/mail.png" style="width:50px;height: 40px;">
 							<p class="center " style="font-weight: bold;font-size:large;">邮件</p>
@@ -162,7 +164,15 @@
      				</div>
      				
 		</div>
+		<div class="col s4" style="padding-top: 20px">
+						<div class="center">
+							<img alt="if1" src="assets/user.jpg" style="width:50px;height: 40px;">
+							<p class="center " style="font-weight: bold;font-size:large;">HelloWorld</p>
+							<p class="center"><input name="group2" type="radio" value="o7" id="o7" /><label for="o7"></label></p>
+						</div>
+				</div>
 		</div>
+		
 		<div class="center">
 			<input	class="center btn" type="submit" value="Create">
 		</div>
@@ -175,13 +185,22 @@
 		<li class="collection-item" style="width: 80%;"><div class="collapsible-header">close</div><div class="collapsible-body"><p></p></div></li>
 		</ul>
   </body>
-  <script type="text/javascript">
-$(".btn-floating").on("click",function(){
-    var op=$(this).data("op");
-    var index=$(this).data("index");
-	$.post("TaskOperate",{op:op,index:index},function(data,status){
-		$("#tasklist").load(location.href + " #tasklist");
-	});
+    <script type="text/javascript">
+$(document).on("click",".op",function(){
+	var op=$(this).data("op");
+    var id=$(this).data("id");
+    if(op!="run")
+    {
+		$.post("TaskOperate",{op:op,id:id},function(data,status){
+			$("#tasklist").load(location.href + " #tasklist");
+		});
+	}
+	else{
+		var duration = prompt("请输入运行时间(分钟)", "");
+		$.post("TaskOperate",{op:op,id:id,duration:duration},function(data,status){
+			$("#tasklist").load(location.href + " #tasklist");
+		});
+	}
 	
 });
 </script>
