@@ -61,9 +61,12 @@ public abstract class TaskRunner extends Thread {
 
 		@Override
 		protected void work() {
+			logger.info("start work...");
 			while (true) {
 				if (task.THIS()) {
+					logger.info("THIS satisfied");
 					task.THAT();
+					logger.info("THAT done");
 					return;
 				}
 			}

@@ -11,10 +11,24 @@ public class TimeTrigger implements Trigger {
 
 	private static final long serialVersionUID = 1L;
 
-	private final Calendar settedTime;
+	private final int hour;
+	private final int minute;
 
+	@Deprecated
 	public TimeTrigger(Calendar time) {
-		settedTime = time;
+		hour = time.get(Calendar.HOUR_OF_DAY);
+		minute = time.get(Calendar.MINUTE);
+	}
+
+	public TimeTrigger(int hour, int minute) {
+		if (hour < 0 || hour >= 24) {
+			throw new IllegalArgumentException(String.format("illgal hour %d", hour));
+		}
+		if (minute < 0 || minute >= 60) {
+			throw new IllegalArgumentException(String.format("illgal minute %d", minute));
+		}
+		this.hour = hour;
+		this.minute = minute;
 	}
 
 	@Override
@@ -24,12 +38,24 @@ public class TimeTrigger implements Trigger {
 
 	@Override
 	public boolean test() {
-		GregorianCalendar currentTime = new GregorianCalendar();
-		return currentTime.after(settedTime);
+		Calendar now = new GregorianCalendar();
+		Calendar settedTime = getSettedTime();
+		return now.after(settedTime);
+	}
+	
+	private Calendar getSettedTime() {
+		GregorianCalendar time = new GregorianCalendar();
+		time.set(Calendar.HOUR_OF_DAY, hour);
+		time.set(Calendar.MINUTE, minute);
+		return time;
 	}
 
-	public Calendar getSettedTime() {
-		return settedTime;
+	public int getMinute() {
+		return minute;
+	}
+
+	public int getSecond() {
+		return hour;
 	}
 
 	@Override
@@ -37,21 +63,15 @@ public class TimeTrigger implements Trigger {
 		return new HashMap<String, Object>() {
 			private static final long serialVersionUID = 1L;
 			{
-				put("setted time", settedTime);
+				put("minute", minute);
+				put("second", hour);
 			}
 		};
 	}
 
 	@Override
 	public String toString() {
-		int year = settedTime.get(Calendar.YEAR);
-		int month = settedTime.get(Calendar.MONTH);
-		int day = settedTime.get(Calendar.DAY_OF_MONTH);
-		int hour = settedTime.get(Calendar.HOUR_OF_DAY);
-		int minute = settedTime.get(Calendar.MINUTE);
-		int second = settedTime.get(Calendar.SECOND);
-		return String.format("TimeTrigger{%4d-%2d-%2d %2d:%2d:%2d}", year,
-				month, day, hour, minute, second);
+		return String.format("TimeTrigger{%2d:%2d:00}", hour, minute);
 	}
 
 }
