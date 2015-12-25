@@ -7,19 +7,6 @@ import database.MessageDao;
 import database.UserDao;
 import database.UserTaskDao;
 
-/**
- * Javabean class
- * <p>
- * Properties:
- * <ul>
- * <li>id
- * <li>name
- * <li>password
- * <li>balance
- * <li>score
- * </ul>
- * 
- */
 public class User {
 
 	private Integer id;
@@ -29,6 +16,10 @@ public class User {
 	private int score;
 
 	public User() {
+	}
+
+	public static User getAdmin() {
+		return UserDao.getUserById(1);
 	}
 
 	public User(Integer id, String name, String password, int balance, int score) {
@@ -59,16 +50,6 @@ public class User {
 		return score;
 	}
 
-	/**
-	 * Used by JSP
-	 * <p>
-	 * <strong>NOTE:</strong> This is not a property
-	 * <p>
-	 * Set the attributes of this user according to id
-	 * 
-	 * @param id
-	 *            the id of user
-	 */
 	public void setThisById(int id) {
 		User tempUser = UserDao.getUserById(id);
 		setThisFromUser(tempUser);
@@ -83,34 +64,40 @@ public class User {
 	}
 
 	public List<Message> getMessageList() {
-		if (id == null) {
-			throw new IllegalStateException("id not set yet");
-		}
+		checkId();
 		return MessageDao.getMessageListByUserId(id);
 	}
 
 	public int getUnopenedMessageNumber() {
-		if (id == null) {
-			throw new IllegalStateException("id not set yet");
-		}
+		checkId();
 		return MessageDao.getUnopenedMessageNumberByUserId(id);
 	}
 
 	public void setAllMessageOpened() {
+		checkId();
 		MessageDao.setAllMessageOpenedByUserId(id);
 	}
 
-	public void addTask(Task task) {
-		UserTaskDao.addUserTask(id, task);
-	}
-
 	public List<UserTask> getTaskList() {
+		checkId();
 		return UserTaskDao.getUserTaskListByUserId(id);
 	}
 
+	public void addTask(Task task) {
+		checkId();
+		UserTaskDao.addUserTask(id, task);
+	}
+
 	public List<User> getUserList() {
+		checkId();
 		verifyAdmin(this.id);
 		return UserDao.getUserList();
+	}
+
+	private void checkId() {
+		if (id == null) {
+			throw new IllegalStateException("id not set yet");
+		}
 	}
 
 	private static void verifyAdmin(int id) {
@@ -118,18 +105,6 @@ public class User {
 		if (id != adminId) {
 			throw new IllegalArgumentException(String.format("Illegal id %d",
 					id));
-		}
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (o instanceof User) {
-			User that = (User) o;
-			return id == that.id && name.equals(that.name)
-					&& password.equals(that.password)
-					&& balance == that.balance;
-		} else {
-			return false;
 		}
 	}
 

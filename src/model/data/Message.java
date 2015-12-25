@@ -46,22 +46,9 @@ public class Message {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (o instanceof Message) {
-			Message that = (Message) o;
-			return id == that.id && userId == that.userId
-					&& publishTime.equals(that.publishTime)
-					&& subject.equals(that.subject)
-					&& content.equals(that.content) && opened == that.opened;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
 	public String toString() {
 		return String
-				.format("Message(id=%d, userId=%d, publishTime=%s, content=%s, opened=%b)",
+				.format("Message{id=%d, userId=%d, publishTime=%s, content=%s, opened=%b}",
 						id, userId, publishTime, content, opened);
 	}
 

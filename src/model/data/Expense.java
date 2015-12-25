@@ -10,6 +10,7 @@ public class Expense {
 
 	private static final Logger logger = Logger.getLogger(Expense.class);
 
+	private static final int SIMPLE_AMOUNT = 5;
 	private static final int AMOUNT_SECOND_FACTOR = 1;
 	private static final int SCORE_AMOUNT_FACTOR = 1;
 
@@ -24,7 +25,7 @@ public class Expense {
 	}
 
 	public static Expense getSimpleExpense(Integer userTaskId) {
-		return new Expense(null, userTaskId, 5);
+		return new Expense(null, userTaskId, SIMPLE_AMOUNT);
 	}
 
 	public static Expense getDurationExpense(Integer userTaskId, int seconds) {
@@ -43,11 +44,13 @@ public class Expense {
 		return amount;
 	}
 
+	/**
+	 * Expense take effect
+	 */
 	public void effect() {
 		ExpenseDao.addExpense(userTaskId, amount);
 		// TODO test
-		UserTask userTask = UserTaskDao.getUserTaskById(userTaskId);
-		int userId = userTask.getId();
+		int userId = UserTaskDao.getUserTaskById(userTaskId).getId();
 		UserDao.payExpense(userId, amount);
 		UserDao.addScore(userId, amount * SCORE_AMOUNT_FACTOR);
 		logger.info("expense effected");
@@ -55,7 +58,8 @@ public class Expense {
 
 	@Override
 	public String toString() {
-		return String.format("Expense[%d]{userTaskId=%d, amount=%d}", id, userTaskId, amount);
+		return String.format("Expense[%d]{userTaskId=%d, amount=%d}", id,
+				userTaskId, amount);
 	}
 
 }

@@ -14,6 +14,7 @@ import task.action.HelloAction;
 import task.trigger.InstantTrigger;
 import task.trigger.TimeTrigger;
 
+@Deprecated
 public class UserTest {
 
 	private static User user;
