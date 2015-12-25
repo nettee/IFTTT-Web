@@ -48,7 +48,7 @@ public class Task implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("Task{%s, %s}", trigger.toString(),
+		return String.format("Task{\"%s\", %s, %s}", name, trigger.toString(),
 				action.toString());
 	}
 

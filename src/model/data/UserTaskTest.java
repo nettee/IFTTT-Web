@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import database.UserTaskDao;
+
 import task.action.HelloAction;
 import task.trigger.InstantTrigger;
 
@@ -38,6 +40,20 @@ public class UserTaskTest {
 	@Test
 	public void testStartOnce() {
 		userTask.startOnce();
+	}
+	
+	@Test
+	public void testEditTask() {
+		Task task = new Task();
+		task.setTrigger(new InstantTrigger());
+		task.setAction(new HelloAction());
+		userTask.editTask(task);
+	}
+	
+	@Test
+	public void testDelete() {
+		UserTask userTask2 = UserTaskDao.getUserTaskById(2);
+		userTask2.delete();
 	}
 
 }

@@ -30,14 +30,15 @@ public class UserTaskDao {
 		Map<String, Object> line = DaoUtil.queryOneLine(sql, params);
 		return newUserTaskFromLine(line);
 	}
-	
+
 	// TODO test
 	public static int getUserIdById(int id) {
 		String sql = "SELECT userId FROM usertask WHERE id=?";
 		List<Integer> params = Arrays.asList(id);
 		Object result = DaoUtil.queryOneObject(sql, params);
 		int userId = (Integer) result;
-		logger.info(String.format("getUserIdById: id=%d, returns %d", id, userId));
+		logger.info(String.format("getUserIdById: id=%d, returns %d", id,
+				userId));
 		return userId;
 	}
 
@@ -75,4 +76,21 @@ public class UserTaskDao {
 				task.toString()));
 	}
 
+	public static void editUserTaskTaskById(Integer id, Task task) {
+		if (task == null) {
+			throw new NullPointerException("task == null");
+		}
+		String sql = "UPDATE usertask SET task=? WHERE id=?";
+		List<Object> params = Arrays.asList((Object) id, (Object) task);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("edit usertask's task: id=%d, task=%s", id,
+				task.toString()));
+	}
+
+	public static void deleteUserTaskById(Integer id) {
+		String sql = "DELETE FROM usertask WHERE id=?";
+		List<Integer> params = Arrays.asList(id);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("delete usertask: id=%d", id));
+	}
 }
