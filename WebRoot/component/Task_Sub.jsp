@@ -18,7 +18,9 @@
 	<div class="demo-card-wide" id="tasklist">
 		<ul class="collection" style="width: 80%">
 		<%@page import="model.*" %>
-		<%for(UserTask t:subuser.getTaskList()) { Task tb=t.getTask();%>
+		<% List<UserTask> tasklist=subuser.getTaskList();
+		for(UserTask t:tasklist) { Task tb=t.getTask();
+		%>
 		<li class="collection-item avatar">
 			<i class="material-icons circle">view_headline</i>
 			
@@ -30,10 +32,10 @@
     </a>
     <ul>
     
-      <li><a class="btn-floating red" data-op="1" data-id=<%=t.getId()%> ><i class="material-icons">play_arrow</i></a></li>
-      <li><a class="btn-floating yellow darken-1" data-op="2" data-id=<%=t.getId()%> ><i class="material-icons">pause</i></a></li>
-      <li><a class="btn-floating green" data-op="3" data-id=<%=t.getId()%> ><i class="material-icons">stop</i></a></li>
-      <li><a class="btn-floating blue" data-op="4" data-id=<%=t.getId()%> ><i class="material-icons">delete</i></a></li>
+      <li><a class="btn-floating red" data-op="1" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">play_arrow</i></a></li>
+      <li><a class="btn-floating yellow darken-1" data-op="2" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">replay</i></a></li>
+      <li><a class="btn-floating green" data-op="3" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">stop</i></a></li>
+      <li><a class="btn-floating blue" data-op="4" data-index=<%=tasklist.indexOf(t)%> ><i class="material-icons">delete</i></a></li>
    			 </ul>
  			 </div>
 			<%=tb.toString() %>
@@ -176,8 +178,8 @@
   <script type="text/javascript">
 $(".btn-floating").on("click",function(){
     var op=$(this).data("op");
-    var id=$(this).data("id");
-	$.post("TaskOperate",{op:op,id:id},function(data,status){
+    var index=$(this).data("index");
+	$.post("TaskOperate",{op:op,index:index},function(data,status){
 		$("#tasklist").load(location.href + " #tasklist");
 	});
 	

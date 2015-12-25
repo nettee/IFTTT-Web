@@ -51,15 +51,16 @@ public class TaskOperateServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String op=request.getParameter("op");
-		String id=request.getParameter("id");
+		int index=Integer.parseInt(request.getParameter("index"));
 		User user=new User();
 		user.setThisById((Integer)request.getSession().getAttribute("userId"));
 		if(op=="1")//Run
 		{
+			user.getTaskList().get(index).startRepeated(0);
 			
-		}else if(op=="2")//Pause
+		}else if(op=="2")//Run Once
 		{
-			
+			user.getTaskList().get(index).startOnce();
 		}else if(op=="3")//Stop
 		{
 			
