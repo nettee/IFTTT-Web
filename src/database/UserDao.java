@@ -42,7 +42,7 @@ public final class UserDao {
 	}
 
 	public static List<Integer> getUserIdList() {
-		String sql = "SELECT id FROM user";
+		String sql = "SELECT id FROM user ORDER BY id";
 		List<String> params = Collections.emptyList();
 		List<Map<String, Object>> lines = DaoUtil.query(sql, params);
 		List<Integer> idList = new ArrayList<Integer>();
