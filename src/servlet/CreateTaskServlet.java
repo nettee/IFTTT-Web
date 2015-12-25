@@ -162,6 +162,8 @@ public class CreateTaskServlet extends HttpServlet {
 					Judge = false;
 					tempInfo.append("<div>No Addresss For Post</div>");
 				}
+			} else if(option_that.equals("o7")){
+				action=new HelloAction();
 			}
 		} else {
 			Judge = false;
