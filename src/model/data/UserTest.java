@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import task.action.HelloAction;
 import task.trigger.InstantTrigger;
-import task.trigger.TimeTrigger;
 
 public class UserTest {
 

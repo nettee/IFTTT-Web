@@ -61,8 +61,6 @@ public class UserTaskDao {
 		Integer userId = (Integer) line.get("userId");
 		Task task = (Task) line.get("task");
 
-		logger.debug(String.format("id=%d, userId=%d, task=%s", id, userId,
-				task.toString()));
 		return new UserTask(id, userId, task);
 	}
 
