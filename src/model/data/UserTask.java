@@ -21,7 +21,7 @@ public class UserTask {
 		this.userId = userId;
 		this.task = task;
 	}
-	
+
 	public static UserTask getUserTask(int id) {
 		return UserTaskDao.getUserTaskById(id);
 	}
@@ -36,6 +36,12 @@ public class UserTask {
 
 	public Task getTask() {
 		return task;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("UserTask[%d]{userId=%d, %s}", id, userId,
+				task.toString());
 	}
 
 	public void startOnce() {
@@ -97,7 +103,7 @@ public class UserTask {
 		logger.info(String.format("edit usertask[%d]...", id));
 
 		UserTaskDao.editUserTaskTaskById(id, task);
-		
+
 		logger.info(String.format("usertask[%d] edited to %s", id,
 				task.toString()));
 
@@ -105,7 +111,7 @@ public class UserTask {
 
 	public void delete() {
 		logger.info(String.format("delete usertask[%d]...", id));
-		
+
 		UserTaskDao.deleteUserTaskById(id);
 
 		logger.info(String.format("usertask[%d] deleted", id));

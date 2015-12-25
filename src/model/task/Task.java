@@ -2,6 +2,9 @@ package model.task;
 
 import java.io.Serializable;
 
+import task.action.HelloAction;
+import task.trigger.InstantTrigger;
+
 public class Task implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,6 +19,13 @@ public class Task implements Serializable {
 
 	public Task(String name) {
 		this.name = name;
+	}
+
+	public static Task getDefaultTask() {
+		Task task = new Task();
+		task.setAction(new HelloAction());
+		task.setTrigger(new InstantTrigger());
+		return task;
 	}
 
 	public String getName() {
