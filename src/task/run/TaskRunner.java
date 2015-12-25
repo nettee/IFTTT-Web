@@ -1,5 +1,8 @@
 package task.run;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import model.task.Task;
 
 import org.apache.log4j.Logger;
@@ -48,59 +51,81 @@ public abstract class TaskRunner extends Thread {
 
 	protected abstract void work();
 
-	private static class OnceTaskRunner extends TaskRunner {
+}
 
-		public OnceTaskRunner(Task task) {
-			super(task);
+class OnceTaskRunner extends TaskRunner {
+
+	private static final Logger logger = Logger.getLogger(OnceTaskRunner.class);
+
+	public OnceTaskRunner(Task task) {
+		super(task);
+	}
+
+	@Override
+	public int getMode() {
+		return ONCE;
+	}
+
+	@Override
+	protected void work() {
+		logger.info("start work...");
+		while (true) {
+			if (task.THIS()) {
+				logger.info("THIS satisfied");
+				task.THAT();
+				logger.info("THAT done");
+				logger.info("work done");
+				return;
+			}
 		}
+	}
 
-		@Override
-		public int getMode() {
-			return ONCE;
-		}
+}
 
-		@Override
-		protected void work() {
-			logger.info("start work...");
-			while (true) {
+class RepeatedTaskRunner extends TaskRunner {
+
+	private static final Logger logger = Logger
+			.getLogger(RepeatedTaskRunner.class);
+
+	private Integer seconds;
+
+	public RepeatedTaskRunner(Task task, int seconds) {
+		super(task);
+		this.seconds = seconds;
+	}
+
+	@Override
+	public int getMode() {
+		return REPEATED;
+	}
+
+	@Override
+	protected void work() {
+		logger.info("start work...");
+		Calendar startTime = new GregorianCalendar();
+		Calendar time = new GregorianCalendar();
+		time.add(Calendar.SECOND, seconds);
+		Calendar endTime = time;
+		logger.info(String.format(
+				"starts at %02d:%02d:%02d, ends at %02d:%02d:%02d",
+				startTime.get(Calendar.HOUR_OF_DAY),
+				startTime.get(Calendar.MINUTE), startTime.get(Calendar.SECOND),
+				endTime.get(Calendar.HOUR_OF_DAY),
+				endTime.get(Calendar.MINUTE), endTime.get(Calendar.SECOND)));
+
+		try {
+			while (new GregorianCalendar().before(endTime)) {
+				Thread.sleep(1000);
 				if (task.THIS()) {
 					logger.info("THIS satisfied");
 					task.THAT();
 					logger.info("THAT done");
-					return;
 				}
 			}
+			logger.info("work done");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-
 	}
 
-	private static class RepeatedTaskRunner extends TaskRunner {
-
-		private Integer seconds;
-
-		public RepeatedTaskRunner(Task task, int seconds) {
-			super(task);
-			this.seconds = seconds;
-		}
-
-		@Override
-		public int getMode() {
-			return REPEATED;
-		}
-
-		@Override
-		protected void work() {
-			try {
-				for (int i = 0; i < seconds; i++) {
-					Thread.sleep(1000);
-				}
-				if (task.THIS()) {
-					task.THAT();
-				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
 }
