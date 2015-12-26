@@ -1,3 +1,4 @@
+<%@page import="model.data.Admin"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
 <head>
@@ -18,14 +19,17 @@
 		</div>
 		<div class="collapsible-body center">
 		<div class="mdl-textfield mdl-js-textfield">
-            	<input class="mdl-textfield__input"type="text">
+            	<input class="mdl-textfield__input"type="text" name="An">
               	<label class="mdl-textfield__label">公告</label>
         </div>
-        <a class="btn">Send</a>
+        <a class="btn sendAn">Send</a>
         </div>
 	</li>
 		<%
-			for (User u : subuser.getUserList()) {
+			List<User> userlist=null;
+			Admin admin=null;
+			if(subId==1) admin=new Admin(subuser);
+			for (User u : admin.getUserList()){
 		%>
 		<li class="collection-item avatar">
 			<div class="collapsible-header ">
@@ -43,4 +47,12 @@
 		%>
 		
 	</ul>
+	<script type="text/javascript">
+		$(document).on("click",".sendAn",function(){
+			var content=$("[name='An']").val();
+			$.post("send",{content:content},function(){
+			location.reload();
+			});
+		});
+	</script>
 </body>

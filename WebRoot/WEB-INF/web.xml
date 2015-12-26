@@ -55,6 +55,11 @@
     <servlet-name>ChargeServlet</servlet-name>
     <servlet-class>servlet.ChargeServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>SendMessageServlet</servlet-name>
+    <servlet-class>servlet.SendMessageServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -94,6 +99,10 @@
   <servlet-mapping>
     <servlet-name>ChargeServlet</servlet-name>
     <url-pattern>/charge</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendMessageServlet</servlet-name>
+    <url-pattern>/send</url-pattern>
   </servlet-mapping>
 
 	<context-param>

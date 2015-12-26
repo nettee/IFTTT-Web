@@ -36,7 +36,7 @@
 						<h2 class="mdl-card__title-text">Announcement</h2>
 					</div>
 					<div class="mdl-card__supporting-text mdl-color-text--grey-600">
-						<%=subuser.getMessageList().get(subuser.getMessageList().size()-1).getContent() %></div>
+						<%=subuser.getMessageList().get(0).getContent() %></div>
 					<div class="mdl-card__actions mdl-card--border">
 						<a href="?page=Inbox" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read
 							More</a>

@@ -6,25 +6,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import model.data.Admin;
+import model.data.User;
 
 import org.apache.log4j.Logger;
 
-import task.weibo.Auth;
-import weibo4j.http.AccessToken;
-
-public class WeiboServlet extends HttpServlet {
+public class SendMessageServlet extends HttpServlet {
 	private static final Logger logger = Logger
-			.getLogger(WeiboServlet.class);
+			.getLogger(SendMessageServlet.class);
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2307835113833198475L;
+	private static final long serialVersionUID = 5629804702661383414L;
 
 	/**
 	 * Constructor of the object.
 	 */
-	public WeiboServlet() {
+	public SendMessageServlet() {
 		super();
 	}
 
@@ -37,9 +36,10 @@ public class WeiboServlet extends HttpServlet {
 	}
 
 	/**
-	 * The doGet method of the servlet. <br>
+	 * The doPost method of the servlet. <br>
 	 * 
-	 * This method is called when a form has its tag value method equals to get.
+	 * This method is called when a form has its tag value method equals to
+	 * post.
 	 * 
 	 * @param request
 	 *            the request send by the client to the server
@@ -50,17 +50,19 @@ public class WeiboServlet extends HttpServlet {
 	 * @throws IOException
 	 *             if an error occurred
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("code") == null) {
-			response.sendRedirect(Auth.getCodeUrL());	
-		} else {
-			AccessToken accessToken = Auth.getAccessToken(request.getParameter("code"));
-			logger.info("get accessToken:"+accessToken);
-			HttpSession session = request.getSession();
-			session.setAttribute("accessToken", accessToken.getAccessToken());
-			response.sendRedirect("dashboard.jsp?page=Task");
+		String content=request.getParameter("content");
+		int id=(Integer)request.getSession().getAttribute("userId");
+		User user=new User();
+		user.setThisById(id);
+		
+		if(content!=null){
+			logger.info("send message:"+content);
+			Admin admin=new Admin(user);
+			admin.sendMessageToAll("ȫվ֪ͨ", content);
 		}
+		
 	}
 
 	/**
