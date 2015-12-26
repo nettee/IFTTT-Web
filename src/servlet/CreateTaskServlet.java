@@ -180,8 +180,7 @@ public class CreateTaskServlet extends HttpServlet {
 			task.setAction(action);
 			task.setTrigger(trigger);
 			if (submit_type.equals("create")
-					&& request.getSession().getAttribute("Edit") == null) {
-
+					|| request.getSession().getAttribute("Edit") == null) {
 				user.addTask(task);
 				logger.info("Add Task:" + task.toString());
 				response.sendRedirect("dashboard.jsp?page=Task");
