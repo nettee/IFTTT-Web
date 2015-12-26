@@ -12,8 +12,6 @@ public class Expense {
 
 	private static final int SIMPLE_AMOUNT = 5;
 	private static final int AMOUNT_SECOND_FACTOR = 1;
-	private static final int SCORE_AMOUNT_FACTOR = 1;
-
 	private final Integer id;
 	private final Integer userTaskId;
 	private final int amount;
@@ -48,11 +46,37 @@ public class Expense {
 	 * Expense take effect
 	 */
 	public void effect() {
+		
 		ExpenseDao.addExpense(userTaskId, amount);
-		int userId = UserTaskDao.getUserTaskById(userTaskId).getUserId();
-		UserDao.subtractBalance(userId, amount);
-		UserDao.addScore(userId, amount * SCORE_AMOUNT_FACTOR);
-		logger.info("expense effected");
+		UserTask userTask = UserTaskDao.getUserTaskById(userTaskId);
+		
+		User user = UserDao.getUserById(userTask.getUserId());
+		
+		int discountedAmount = discount(user, amount);
+		UserDao.subtractBalance(userTask.getUserId(), discountedAmount);
+		
+		int points = convert2point(user, amount);
+		UserDao.addScore(userTask.getUserId(), points);
+		logger.info(String.format(
+				"expense effected, amount discount from %d to %d, points=%d",
+				amount, discountedAmount, points));
+	}
+
+	// returns the discounted amount	
+	private int discount(User user, int amount) {
+		int level = user.getLevel();
+		double ratio = (100.0 - level * 2) / 100.0;
+		int discountedAmount = (int) Math.round(amount * ratio);
+		logger.info(String.format("user level %d, discount ratio %.0f%%", level, ratio * 100, discountedAmount));
+		return discountedAmount;
+	}
+	
+	// convert from amount to point
+	private int convert2point(User user, int amount) {
+		int level = user.getLevel();
+		double ratio = 2.0 + level * 0.1;
+		int point = (int) Math.round(amount * ratio);
+		return point;
 	}
 
 	@Override
