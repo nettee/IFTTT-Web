@@ -109,6 +109,18 @@ public class UserTask {
 		return runner;
 	}
 
+	// for test only
+	void joinRunner() {
+		UserTaskRunner runner = RunnerBoard.getInstance().getRunner(this);
+		if (runner != null) {
+			try {
+				runner.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public void editTask(Task task) {
 		if (task == null) {
 			throw new NullPointerException("task == null");

@@ -23,8 +23,8 @@ public class Task implements Serializable {
 
 	public static Task getDefaultTask() {
 		Task task = new Task();
-		task.setAction(new HelloAction());
 		task.setTrigger(new InstantTrigger());
+		task.setAction(new HelloAction());
 		return task;
 	}
 

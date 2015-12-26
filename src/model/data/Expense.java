@@ -49,8 +49,7 @@ public class Expense {
 	 */
 	public void effect() {
 		ExpenseDao.addExpense(userTaskId, amount);
-		// TODO test
-		int userId = UserTaskDao.getUserTaskById(userTaskId).getId();
+		int userId = UserTaskDao.getUserTaskById(userTaskId).getUserId();
 		UserDao.payExpense(userId, amount);
 		UserDao.addScore(userId, amount * SCORE_AMOUNT_FACTOR);
 		logger.info("expense effected");
