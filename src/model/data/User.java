@@ -9,11 +9,11 @@ import database.UserTaskDao;
 
 public class User {
 
-	private Integer id;
-	private String name;
-	private String password;
-	private int balance;
-	private int score;
+	protected Integer id;
+	protected String name;
+	protected String password;
+	protected int balance;
+	protected int score;
 
 	public User() {
 	}
@@ -55,12 +55,18 @@ public class User {
 		setThisFromUser(tempUser);
 	}
 
-	private void setThisFromUser(User that) {
+	protected void setThisFromUser(User that) {
 		this.id = that.id;
 		this.name = that.name;
 		this.password = that.password;
 		this.balance = that.balance;
 		this.score = that.score;
+	}
+
+	private void checkId() {
+		if (id == null) {
+			throw new IllegalStateException("id not set yet");
+		}
 	}
 
 	public List<Message> getMessageList() {
@@ -88,26 +94,6 @@ public class User {
 		UserTaskDao.addUserTask(id, task);
 	}
 
-	public List<User> getUserList() {
-		checkId();
-		verifyAdmin(this.id);
-		return UserDao.getUserList();
-	}
-
-	private void checkId() {
-		if (id == null) {
-			throw new IllegalStateException("id not set yet");
-		}
-	}
-
-	private static void verifyAdmin(int id) {
-		final int adminId = 1;
-		if (id != adminId) {
-			throw new IllegalArgumentException(String.format("Illegal id %d",
-					id));
-		}
-	}
-	
 	public void recharge(int amount) {
 		UserDao.addBalance(id, amount);
 	}

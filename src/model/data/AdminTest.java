@@ -1,0 +1,43 @@
+package model.data;
+
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import database.UserDao;
+
+public class AdminTest {
+
+	private static Admin admin;
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		User dog = UserDao.getUserByName("dog");
+		admin = new Admin(dog);
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testGetUserList() {
+		List<User> userList = admin.getUserList();
+		for (User user : userList) {
+			System.out.println(user);
+		}
+	}
+
+}
