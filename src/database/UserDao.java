@@ -130,8 +130,7 @@ public final class UserDao {
 				username, password));
 	}
 
-	// TODO test
-	public static void payExpense(int userId, int amount) {
+	public static void subtractBalance(int userId, int amount) {
 		if (amount <= 0) {
 			throw new IllegalArgumentException("amount <= 0");
 		}
@@ -139,6 +138,17 @@ public final class UserDao {
 		List<Integer> params = Arrays.asList(amount, userId);
 		DaoUtil.execute(sql, params);
 		logger.info(String.format("payExpense: userId=%d, amount=%d", userId,
+				amount));
+	}
+	
+	public static void addBalance(int userId, int amount) {
+		if (amount <= 0) {
+			throw new IllegalArgumentException("amount <= 0");
+		}
+		String sql = "UPDATE user SET balance=balance+? WHERE id=?";
+		List<Integer> params = Arrays.asList(amount, userId);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("addBalance: userId=%d, amount=%d", userId,
 				amount));
 	}
 

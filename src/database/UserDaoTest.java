@@ -84,12 +84,18 @@ public class UserDaoTest {
 
 	@Ignore
 	@Test
-	public void testPayExpense() {
+	public void testSubtractBalance() {
 		for (int i = 0; i < 10; i++) {
 			String username = "ÄÄß¸" + i + "ºÅ";
 			User user = UserDao.getUserByName(username);
-			UserDao.payExpense(user.getId(), (i + 1) * 100);
+			UserDao.subtractBalance(user.getId(), (i + 1) * 100);
 		}
+	}
+	
+	@Test
+	public void testAddBalance() {
+		User jay = UserDao.getUserByName("jay");
+		UserDao.addBalance(jay.getId(), 1000);
 	}
 
 	@Ignore

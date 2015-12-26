@@ -107,6 +107,10 @@ public class User {
 					id));
 		}
 	}
+	
+	public void recharge(int amount) {
+		UserDao.addBalance(id, amount);
+	}
 
 	@Override
 	public String toString() {
