@@ -57,6 +57,10 @@ public abstract class UserTaskRunner extends Thread {
 	public UserTaskStatus getStatus() {
 		return status;
 	}
+	
+	protected void setStatus(UserTaskStatus status) {
+		this.status = status;
+	}
 
 	public abstract int getMode();
 
@@ -154,8 +158,25 @@ class OnceTaskRunner extends UserTaskRunner {
 	@Override
 	protected void work() {
 		logger.info("start work...");
+
+		Task task = userTask.getTask();
 		while (true) {
-			Task task = userTask.getTask();
+
+			// not tested
+			UserTaskStatus st = getStatus();
+			if (st.equals(UserTaskStatus.NEW)) {
+				throw new IllegalStateException("Illegal runner status "
+						+ st.name());
+			} else if (st.equals(UserTaskStatus.RUNNING)) {
+				;
+			} else if (st.equals(UserTaskStatus.SUSPEND)) {
+				continue;
+			} else if (st.equals(UserTaskStatus.END)) {
+				break;
+			} else {
+				throw new IllegalStateException();
+			}
+
 			if (task.THIS()) {
 				if (debug) {
 					logger.info(String.format("THIS satisfied: %s", task
@@ -166,6 +187,8 @@ class OnceTaskRunner extends UserTaskRunner {
 					logger.info(String.format("THAT done: %s", task.getAction()
 							.toString()));
 				}
+
+				setStatus(UserTaskStatus.END);
 				logger.info("work done");
 				return;
 			}
@@ -199,21 +222,39 @@ class RepeatedTaskRunner extends UserTaskRunner {
 	@Override
 	protected void work() {
 		logger.info("start work...");
+
 		Calendar startTime = new GregorianCalendar();
-		Calendar time = new GregorianCalendar();
-		time.add(Calendar.SECOND, seconds);
-		Calendar endTime = time;
+		Calendar endTime = new GregorianCalendar();
+		endTime.add(Calendar.SECOND, seconds);
+
 		logger.info(String.format(
-				"starts at %02d:%02d:%02d, ends at %02d:%02d:%02d",
+				"starts at %02d:%02d:%02d, lasting %d seconds",
 				startTime.get(Calendar.HOUR_OF_DAY),
 				startTime.get(Calendar.MINUTE), startTime.get(Calendar.SECOND),
-				endTime.get(Calendar.HOUR_OF_DAY),
-				endTime.get(Calendar.MINUTE), endTime.get(Calendar.SECOND)));
+				seconds));
 
+		Task task = userTask.getTask();
 		try {
 			while (new GregorianCalendar().before(endTime)) {
-				Thread.sleep(1000);
-				Task task = userTask.getTask();
+
+				UserTaskStatus st = getStatus();
+				if (st.equals(UserTaskStatus.NEW)) {
+					throw new IllegalStateException("Illegal runner status "
+							+ st.name());
+				} else if (st.equals(UserTaskStatus.RUNNING)) {
+					Thread.sleep(1000);
+				} else if (st.equals(UserTaskStatus.SUSPEND)) {
+					Thread.sleep(1000);
+					// delay one second to end
+					endTime.add(Calendar.SECOND, 1);
+					continue;
+				} else if (st.equals(UserTaskStatus.END)) {
+					endTime = new GregorianCalendar();
+					continue;
+				} else {
+					throw new IllegalStateException();
+				}
+
 				if (task.THIS()) {
 					if (debug) {
 						logger.info(String.format("THIS satisfied: %s", task
@@ -226,10 +267,17 @@ class RepeatedTaskRunner extends UserTaskRunner {
 					}
 				}
 			}
-			logger.info("work done");
+
+			setStatus(UserTaskStatus.END);
+			logger.info(String.format(
+					"work done, from %02d:%02d:%02d to %02d:%02d:%02d",
+					startTime.get(Calendar.HOUR_OF_DAY),
+					startTime.get(Calendar.MINUTE),
+					startTime.get(Calendar.SECOND),
+					endTime.get(Calendar.HOUR_OF_DAY),
+					endTime.get(Calendar.MINUTE), endTime.get(Calendar.SECOND)));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

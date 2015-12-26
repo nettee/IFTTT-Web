@@ -40,7 +40,7 @@ public class TimeTrigger implements Trigger {
 	public boolean test() {
 		Calendar now = new GregorianCalendar();
 		Calendar settedTime = getSettedTime();
-		return now.after(settedTime);
+		return !now.before(settedTime);
 	}
 	
 	private Calendar getSettedTime() {
@@ -71,7 +71,7 @@ public class TimeTrigger implements Trigger {
 
 	@Override
 	public String toString() {
-		return String.format("TimeTrigger{%2d:%2d:00}", hour, minute);
+		return String.format("TimeTrigger{%02d:%02d:00}", hour, minute);
 	}
 
 }
