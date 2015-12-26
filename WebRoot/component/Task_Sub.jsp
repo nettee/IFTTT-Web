@@ -215,7 +215,7 @@ $(document).on("click",".op",function(){
     {    	
     var $li=$(this).parent().parent().parent().parent();
     $li.css("backgroundColor", "#00BCD4");
-		$.post("TaskOperate",{op:op,id:id},function(data,status){
+			$.post("TaskOperate",{op:op,id:id},function(data,status){
 				if(op=="delete"){
               $li.slideToggle(300, function() {
                 $li.remove();
@@ -231,7 +231,9 @@ $(document).on("click",".op",function(){
                });
                
             }
-			$("#tasklist").load(location.href + " #tasklist");
+            else{
+            	location.reload();
+            }
 				
 		});
 	}
