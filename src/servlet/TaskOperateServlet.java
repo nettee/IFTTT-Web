@@ -80,10 +80,16 @@ public class TaskOperateServlet extends HttpServlet {
 				}
 			} else if (op.equals("pause"))// Pause
 			{
-
+				if (task != null) {
+					task.pause();
+					logger.info(task.getTask().getName() + " Pause");
+				}
 			} else if (op.equals("stop"))// Stop
 			{
-
+				if (task != null) {
+					task.stop();
+					logger.info(task.getTask().getName() + " Stop");
+				}
 			} else if (op.equals("edit"))// Edit
 			{
 				if(task!=null){

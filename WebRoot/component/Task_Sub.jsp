@@ -1,3 +1,4 @@
+<%@page import="task.run.UserTaskStatus"%>
 <%@page import="model.data.UserTask"%>
 <%@page import="model.task.Task"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
@@ -19,11 +20,20 @@
 		<ul class="collection" style="width: 80%">
 		<%@page import="model.*" %>
 		<% List<UserTask> tasklist=subuser.getTaskList();
+		int Status=-1;
 		for(UserTask t:tasklist) { Task tb=t.getTask();
+		Status=t.getStatus();
 		%>
 		<li class="collection-item avatar">
-			<i class="material-icons circle">view_headline</i>
-			
+		<%if(Status==0) {%>
+			<i class="material-icons circle red tooltipped" data-tooltip="End">stop</i>
+		<%} %>
+		<%if(Status==1) {%>
+			<i class="material-icons circle green tooltipped" data-tooltip="Running">play_arrow</i>
+		<%} %>
+		<%if(Status==2) {%>
+			<i class="material-icons circle yellow tooltipped" data-tooltip="Suspend">pause</i>
+		<%} %>
 			<span class="title"><%=tb.getName()%></span>
 			<p>
 			 <div style="position: relative;float: right" class="fixed-action-btn horizontal">
@@ -31,13 +41,24 @@
       <i class="material-icons">mode_edit</i>
     </a>
     <ul>
-    
+	  <%if(Status==2) {%>
+	  <li><a class="op btn-floating green tooltipped" data-tooltip="Resume" data-op="resume" data-id=<%=t.getId()%> ><i class="material-icons">trending_flat</i></a></li>
+	   <%} %>   
+	   <%if(Status==0) {%>
       <li><a class="op btn-floating green lighten-2 tooltipped" data-tooltip="Run task repeatly" data-op="run" data-id=<%=t.getId()%> ><i class="material-icons">repeat</i></a></li>
       <li><a class="op btn-floating green darken-2 tooltipped" data-tooltip="Run task once" data-op="run_once" data-id=<%=t.getId()%> ><i class="material-icons">play_arrow</i></a></li>
+      <%} %>
+      <%if(Status==1) {%>
       <li><a class="op btn-floating yellow darken-1 tooltipped" data-tooltip="Pause task" data-op="pause" data-id=<%=t.getId()%> ><i class="material-icons">pause</i></a></li>
+      <%} %>
+       <%if(Status==1||Status==2) {%>
       <li><a class="op btn-floating red tooltipped" data-tooltip="Stop task" data-op="stop" data-id=<%=t.getId()%> ><i class="material-icons">stop</i></a></li>
+      <%} %>
+      <%if(Status==0){ %>
       <li><a class="op btn-floating purple tooltipped" data-tooltip="Edit task" data-op="edit" data-id=<%=t.getId()%> ><i class="material-icons">mode_edit</i></a></li>
       <li><a class="op btn-floating blue tooltipped" data-tooltip="Delete task" data-op="delete" data-id=<%=t.getId()%> ><i class="material-icons">delete</i></a></li>
+      <%} %>
+      
    			 </ul>
  			 </div>
 			<%=tb.toString() %>
