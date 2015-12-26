@@ -13,6 +13,10 @@ public class UserTask {
 
 	private static final Logger logger = Logger.getLogger(UserTask.class);
 
+	public static final int END = 0;
+	public static final int RUNNING = 1;
+	public static final int SUSPEND = 2;
+
 	private final Integer id;
 	private final Integer userId;
 	private final Task task;
@@ -39,8 +43,23 @@ public class UserTask {
 		return task;
 	}
 
-	public UserTaskStatus getStatus() {
-		return getRunner().getStatus();
+	public int getStatus() {
+		UserTaskRunner runner = RunnerBoard.getInstance().getRunner(this);
+		if (runner == null) {
+			return END;
+		} else {
+			UserTaskStatus status = runner.getStatus();
+			if (status.equals(UserTaskStatus.RUNNING)) {
+				return RUNNING;
+			} else if (status.equals(UserTaskStatus.SUSPEND)) {
+				return SUSPEND;
+			} else if (status.equals(UserTaskStatus.END)) {
+				return END;
+			} else {
+				throw new IllegalStateException("Illegal runner status "
+						+ status.name());
+			}
+		}
 	}
 
 	@Override
