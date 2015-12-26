@@ -19,7 +19,7 @@
             <div class="col s10">
               <span class="black-text">
               	<h4>Welcome user <a href="?page=Setting"><jsp:getProperty name="subuser" property="name"/></a>!</h4>
-              	<span>积分:<%=subuser.getScore() %> </span>
+              	<span>等级:<%=subuser.getLevel()%> 积分:<%=subuser.getScore() %> </span>
               	<span>余额:<a href="?page=Purchase" class="tooltipped mdl-color-text--pink" data-tooltip="充值"><jsp:getProperty name="subuser" property="balance"/></a></span>
               </span>
             </div>

@@ -239,6 +239,7 @@ $(document).on("click",".op",function(){
 	}
 	else {
 		var duration = prompt("请输入运行时间(秒)", "");
+		if(duration!=null&&duration!="")
 		$.post("TaskOperate",{op:op,id:id,duration:duration},function(data,status){
 			location.reload();
 		});

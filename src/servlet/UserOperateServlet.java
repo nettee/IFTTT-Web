@@ -12,9 +12,9 @@ import model.data.User;
 
 import org.apache.log4j.Logger;
 
-public class SendMessageServlet extends HttpServlet {
+public class UserOperateServlet extends HttpServlet {
 	private static final Logger logger = Logger
-			.getLogger(SendMessageServlet.class);
+			.getLogger(UserOperateServlet.class);
 	/**
 	 * 
 	 */
@@ -23,7 +23,7 @@ public class SendMessageServlet extends HttpServlet {
 	/**
 	 * Constructor of the object.
 	 */
-	public SendMessageServlet() {
+	public UserOperateServlet() {
 		super();
 	}
 
@@ -54,13 +54,39 @@ public class SendMessageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String content=request.getParameter("content");
 		int id=(Integer)request.getSession().getAttribute("userId");
-		User user=new User();
-		user.setThisById(id);
-		
-		if(content!=null){
+		String operate_id_str=request.getParameter("id");
+		String level_str=request.getParameter("level");
+		String password=request.getParameter("password");
+		if(content!=null&&operate_id_str==null){
+			User user=new User();
+			user.setThisById(id);
 			logger.info("send message:"+content);
 			Admin admin=new Admin(user);
 			admin.sendMessageToAll("全站通知", content);
+		}
+		else if(content!=null&&operate_id_str!=null){
+			logger.info("send message:"+content+"to user"+operate_id_str);
+			int op_id=Integer.valueOf(operate_id_str);
+			User user=new User();
+			user.setThisById(id);
+			Admin admin=new Admin(user);
+			admin.sendMessageTo(op_id,"私信", content);
+		}else if(content==null&&operate_id_str!=null){
+			logger.info("change user "+operate_id_str+"to level"+level_str);
+			int op_id=Integer.valueOf(operate_id_str);
+			int level=Integer.valueOf(level_str);
+			User user=new User();
+			user.setThisById(id);
+			Admin admin=new Admin(user);
+			admin.setUserLevel(op_id, level);
+		}
+		else if(password!=null){
+			logger.info("user "+id+"change password to"+password);
+			User user=new User();
+			user.setThisById(id);
+			user.changePassword(password);
+		}else{
+			logger.info("error oprate in Userlist page");
 		}
 		
 	}

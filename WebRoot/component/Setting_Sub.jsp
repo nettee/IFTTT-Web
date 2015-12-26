@@ -12,24 +12,41 @@
 	background: url('') center/cover;
 }
 </style>
-<script type="text/javascript">
- $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-  });
-     
-</script>
- <!-- Modal Trigger -->
-  <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-    </div>
-  </div>
-</html>
+  <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="assets/user.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              <span class="black-text">
+              	<h4>Welcome user <a href="?page=Setting"><jsp:getProperty name="subuser" property="name"/></a>!</h4>
+              	<span>等级:<%=subuser.getLevel()%> 积分:<%=subuser.getScore() %> </span>
+              	<span>余额:<a href="?page=Purchase" class="tooltipped mdl-color-text--pink" data-tooltip="充值"><jsp:getProperty name="subuser" property="balance"/></a></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="card-panel grey lighten-5 z-depth-1">
+        <div class="row valign-wrapper">
+            <div class="col s2">
+            change password
+            </div>
+            
+       <div class="col s10">
+        <div class="col s6"><input type="password" name="changed"></div>
+        <a   class="btn center changePassword">change</a>
+      </div>
+      </div>
+        </div>
+        <script type="text/javascript">
+		$(document).on("click",".changePassword",function(){
+			var password=$("[name='changed']").val();
+			if(password.length<6)
+				alert("password too short");
+			else{
+				$.post("send",{password:password},function(){
+					location.reload();
+				});
+			}
+		});
+		</script>

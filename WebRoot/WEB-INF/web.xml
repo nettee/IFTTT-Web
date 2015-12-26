@@ -56,9 +56,14 @@
     <servlet-class>servlet.ChargeServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>SendMessageServlet</servlet-name>
-    <servlet-class>servlet.SendMessageServlet</servlet-class>
+    <servlet-name>UserOperateServlet</servlet-name>
+    <servlet-class>servlet.UserOperateServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AboutServlet</servlet-name>
+    <servlet-class>servlet.AboutServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -101,8 +106,12 @@
     <url-pattern>/charge</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>SendMessageServlet</servlet-name>
+    <servlet-name>UserOperateServlet</servlet-name>
     <url-pattern>/send</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AboutServlet</servlet-name>
+    <url-pattern>/about</url-pattern>
   </servlet-mapping>
 
 	<context-param>

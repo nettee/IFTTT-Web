@@ -34,13 +34,18 @@
 		<li class="collection-item avatar">
 			<div class="collapsible-header ">
 				<i class="material-icons circle">account_circle</i>
-				ID:<%=u.getId()%>&nbsp;&nbsp;用户名:<%=u.getName()%>
-				<div class="btn" style="float: right;">Send</div>	
-				<br>
-				余额:<%=u.getBalance() %>
-				 
+				ID:<%=u.getId()%>&nbsp;&nbsp;用户名:<%=u.getName()%>			 
 			</div>
-			<div class="collapsible-body"><p>任务列表</p></div>
+			<div class="collapsible-body"><div>
+			<a type="button" class="btn sendMessage" style="float: right;" data-id=<%=u.getId()%>>Send Message</a>
+			<a type="button" class="btn levelChange" style="float: right;" data-id=<%=u.getId()%>>Level Change</a>
+			<div>余额:<%=u.getBalance() %></div>
+			<div>积分:<%=u.getScore() %></div>
+			<div>等级:<%=u.getLevel() %></div>
+			<div></div>
+		
+			</div>
+			</div>
 		</li> 
 		<%
 			}
@@ -51,6 +56,22 @@
 		$(document).on("click",".sendAn",function(){
 			var content=$("[name='An']").val();
 			$.post("send",{content:content},function(){
+			location.reload();
+			});
+		});
+		$(document).on("click",".levelChange",function(){
+			var id=$(this).data("id");
+			var level = prompt("修改等级为", "");
+			if(level!=null&&level!="")
+			$.post("send",{level:level,id:id},function(){
+			location.reload();
+			});
+		});
+		$(document).on("click",".sendMessage",function(){
+			var id=$(this).data("id");
+			var content = prompt("私信内容", "");
+			if(content!=null&&content!="")
+			$.post("send",{content:content,id:id},function(){
 			location.reload();
 			});
 		});
