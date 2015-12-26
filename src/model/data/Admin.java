@@ -25,9 +25,17 @@ public class Admin extends User {
 	public List<User> getUserList() {
 		return UserDao.getUserList();
 	}
-
+	
+	public void sendMessageTo(int userId, String subject, String content) {
+		MessageDao.sendMessageTo(userId, subject, content);
+	}
+	
 	public void sendMessageToAll(String subject, String content) {
 		MessageDao.sendMessageToAll(subject, content);
 	}
+	
+	public void setUserLevel(int userId, int level) {
+		UserDao.setLevel(userId, level);
+	}	
 
 }

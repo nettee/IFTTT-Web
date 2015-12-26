@@ -49,6 +49,10 @@ public class User {
 	public int getLevel() {
 		return Math.min(score / 50, 20);
 	}
+	
+	public void setLevel(int level) {
+		this.score = level * 50 + 25;
+	}
 
 	public void setThisById(int id) {
 		User tempUser = UserDao.getUserById(id);

@@ -23,7 +23,7 @@ public final class UserDao {
 	private UserDao() {
 
 	}
-	
+
 	// ============== read daos ================
 
 	public static List<User> getUserList() {
@@ -119,7 +119,7 @@ public final class UserDao {
 				password, password2, (confirms ? "Yes" : "No")));
 		return confirms;
 	}
-	
+
 	// ============== write daos ================
 
 	public static void addUser(String username, String password) {
@@ -140,7 +140,7 @@ public final class UserDao {
 		logger.info(String.format("payExpense: userId=%d, amount=%d", userId,
 				amount));
 	}
-	
+
 	public static void addBalance(int userId, int amount) {
 		if (amount <= 0) {
 			throw new IllegalArgumentException("amount <= 0");
@@ -161,6 +161,22 @@ public final class UserDao {
 		DaoUtil.execute(sql, params);
 		logger.info(String.format("addScore: userId=%d, points=%d", userId,
 				points));
+	}
+
+	public static void setLevel(int userId, int newLevel) {
+		User user = getUserById(userId);
+		if (user.getLevel() >= newLevel) {
+			logger.info(String.format(
+					"setLevel: user[%d] already has level %d", userId, newLevel));
+			return;
+		}
+		user.setLevel(newLevel);
+		int newScore = user.getScore();
+		String sql = "UPDATE user SET score=? WHERE id=?";
+		List<Integer> params = Arrays.asList(newScore, userId);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("setLevel: userId=%d, newLevel=%d", userId,
+				newLevel));
 	}
 
 }

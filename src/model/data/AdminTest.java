@@ -39,12 +39,28 @@ public class AdminTest {
 			System.out.println(user);
 		}
 	}
-	
+
+	@Test
+	public void testSendMessageTo() {
+		User user = UserDao.getUserByName("nettis");
+		int userId = user.getId();
+		String subject = "Hello nettis";
+		String content = "Long time no see!";
+		admin.sendMessageTo(userId, subject, content);
+	}
+
 	@Test
 	public void testSendMessageToAll() {
 		String subject = "Late Greeting";
 		String content = "Merry Christmas!";
 		admin.sendMessageToAll(subject, content);
+	}
+	
+	@Test
+	public void testSetUserLevel() {
+		User user = UserDao.getUserByName("jay");
+		int userId = user.getId();
+		admin.setUserLevel(userId, 20);
 	}
 
 }
