@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ UserTaskRunnerRunningTest.class, UserTaskRunnerStatusTest.class })
-public class UserTaskRunnerTest {
+@SuiteClasses({ UserTaskRunnerTest.class })
+public class AllTests {
 
 }
