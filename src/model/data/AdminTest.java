@@ -39,5 +39,12 @@ public class AdminTest {
 			System.out.println(user);
 		}
 	}
+	
+	@Test
+	public void testSendMessageToAll() {
+		String subject = "Late Greeting";
+		String content = "Merry Christmas!";
+		admin.sendMessageToAll(subject, content);
+	}
 
 }

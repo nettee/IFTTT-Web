@@ -2,6 +2,7 @@ package model.data;
 
 import java.util.List;
 
+import database.MessageDao;
 import database.UserDao;
 
 public class Admin extends User {
@@ -23,6 +24,10 @@ public class Admin extends User {
 
 	public List<User> getUserList() {
 		return UserDao.getUserList();
+	}
+
+	public void sendMessageToAll(String subject, String content) {
+		MessageDao.sendMessageToAll(subject, content);
 	}
 
 }
