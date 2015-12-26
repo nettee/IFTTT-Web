@@ -14,18 +14,19 @@
             <div class="card-content white-text">
               <span class="card-title">会员充值</span>
               <p>
-              
-              		当前余额：<%=subuser.getBalance()%>
-              		
+              		当前余额：<%=subuser.getBalance()%>          		
               </p>
             </div>
             <div class="card-action">
+            <form method="post" action="/charge">
             <div class="col s6 mdl-textfield mdl-js-textfield">
-            	<input class="mdl-textfield__input"type="text">
-              	<label class="mdl-textfield__label center">输入要充值的金额</label>
+            	<input class="mdl-textfield__input" type="text" name="charge_num">
+            	
+              	<label class="mdl-textfield__label center"><span class="mdl-color-text--white">输入要充值的金额</span></label>
             </div>
               
-              	<a class="btn"> 支付</a>
+              	<button type="submit" class="btn"><span class="mdl-color-text--white"> 支付</span></button>
+              	</form>
             </div>
           </div>
         </div>

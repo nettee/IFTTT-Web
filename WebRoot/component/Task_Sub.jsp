@@ -26,13 +26,13 @@
 		%>
 		<li class="collection-item avatar">
 		<%if(Status==0) {%>
-			<i class="material-icons circle red tooltipped" data-tooltip="End">stop</i>
+			<i class="material-icons circle red tooltipped" data-tooltip="End">lens</i>
 		<%} %>
 		<%if(Status==1) {%>
-			<i class="material-icons circle green tooltipped" data-tooltip="Running">play_arrow</i>
+			<i class="material-icons circle green tooltipped" data-tooltip="Running">lens</i>
 		<%} %>
 		<%if(Status==2) {%>
-			<i class="material-icons circle yellow tooltipped" data-tooltip="Suspend">pause</i>
+			<i class="material-icons circle yellow tooltipped" data-tooltip="Suspend">lens</i>
 		<%} %>
 			<span class="title"><%=tb.getName()%></span>
 			<p>
@@ -240,7 +240,7 @@ $(document).on("click",".op",function(){
 	else {
 		var duration = prompt("请输入运行时间(秒)", "");
 		$.post("TaskOperate",{op:op,id:id,duration:duration},function(data,status){
-			$("#tasklist").load(location.href + " #tasklist");
+			location.reload();
 		});
 	}
 	
