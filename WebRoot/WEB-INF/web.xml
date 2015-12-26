@@ -51,6 +51,11 @@
     <servlet-name>TaskOperateServlet</servlet-name>
     <servlet-class>servlet.TaskOperateServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ChargeServlet</servlet-name>
+    <servlet-class>servlet.ChargeServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -85,6 +90,10 @@
   <servlet-mapping>
     <servlet-name>TaskOperateServlet</servlet-name>
     <url-pattern>/TaskOperate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChargeServlet</servlet-name>
+    <url-pattern>/charge</url-pattern>
   </servlet-mapping>
 
 	<context-param>
