@@ -16,18 +16,38 @@ public abstract class UserTaskRunner extends Thread {
 	public static final int REPEATED = 1;
 
 	protected final UserTask userTask;
-	private UserTaskStatus status = UserTaskStatus.END;
+	protected final boolean debug;
+	private UserTaskStatus status = UserTaskStatus.NEW;
 
 	protected UserTaskRunner(UserTask userTask) {
+		this(userTask, false);
+	}
+
+	protected UserTaskRunner(UserTask userTask, boolean debug) {
 		this.userTask = userTask;
+		this.debug = debug;
 	}
 
 	public static UserTaskRunner getOnceRunner(UserTask userTask) {
 		return new OnceTaskRunner(userTask);
 	}
 
-	public static UserTaskRunner getRepeatedRunner(UserTask userTask, int seconds) {
+	public static UserTaskRunner getRepeatedRunner(UserTask userTask,
+			int seconds) {
 		return new RepeatedTaskRunner(userTask, seconds);
+	}
+
+	public static class Debug {
+
+		public static UserTaskRunner getOnceRunner(UserTask userTask) {
+			return new OnceTaskRunner(userTask, true);
+		}
+
+		public static UserTaskRunner getRepeatedRunner(UserTask userTask,
+				int seconds) {
+			return new RepeatedTaskRunner(userTask, seconds, true);
+		}
+
 	}
 
 	public Task getTask() {
@@ -48,10 +68,11 @@ public abstract class UserTaskRunner extends Thread {
 		return getMode() == REPEATED;
 	}
 
+	// FIXME a thread cannot be started twice
 	public void start_() {
-		checkStatus(UserTaskStatus.END);
+		checkStatus(UserTaskStatus.NEW);
 		logger.info(String.format("runner start: %s", userTask.toString()));
-		
+
 		status = UserTaskStatus.RUNNING;
 		start();
 	}
@@ -75,6 +96,15 @@ public abstract class UserTaskRunner extends Thread {
 		logger.info(String.format("runner stop: %s", userTask.toString()));
 
 		status = UserTaskStatus.END;
+	}
+
+	// only for test
+	void join_() {
+		try {
+			this.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void checkStatus(UserTaskStatus expectedStatus) {
@@ -108,8 +138,12 @@ class OnceTaskRunner extends UserTaskRunner {
 
 	private static final Logger logger = Logger.getLogger(OnceTaskRunner.class);
 
-	public OnceTaskRunner(UserTask userTask) {
+	OnceTaskRunner(UserTask userTask) {
 		super(userTask);
+	}
+
+	OnceTaskRunner(UserTask userTask, boolean debug) {
+		super(userTask, debug);
 	}
 
 	@Override
@@ -121,10 +155,17 @@ class OnceTaskRunner extends UserTaskRunner {
 	protected void work() {
 		logger.info("start work...");
 		while (true) {
-			if (userTask.getTask().THIS()) {
-				logger.info("THIS satisfied");
-				userTask.getTask().THAT();
-				logger.info("THAT done");
+			Task task = userTask.getTask();
+			if (task.THIS()) {
+				if (debug) {
+					logger.info(String.format("THIS satisfied: %s", task
+							.getTrigger().toString()));
+				}
+				task.THAT();
+				if (debug) {
+					logger.info(String.format("THAT done: %s", task.getAction()
+							.toString()));
+				}
 				logger.info("work done");
 				return;
 			}
@@ -140,8 +181,13 @@ class RepeatedTaskRunner extends UserTaskRunner {
 
 	private Integer seconds;
 
-	public RepeatedTaskRunner(UserTask userTask, int seconds) {
+	RepeatedTaskRunner(UserTask userTask, int seconds) {
 		super(userTask);
+		this.seconds = seconds;
+	}
+
+	RepeatedTaskRunner(UserTask userTask, int seconds, boolean debug) {
+		super(userTask, debug);
 		this.seconds = seconds;
 	}
 
@@ -167,10 +213,17 @@ class RepeatedTaskRunner extends UserTaskRunner {
 		try {
 			while (new GregorianCalendar().before(endTime)) {
 				Thread.sleep(1000);
-				if (userTask.getTask().THIS()) {
-					logger.info("THIS satisfied");
-					userTask.getTask().THAT();
-					logger.info("THAT done");
+				Task task = userTask.getTask();
+				if (task.THIS()) {
+					if (debug) {
+						logger.info(String.format("THIS satisfied: %s", task
+								.getTrigger().toString()));
+					}
+					task.THAT();
+					if (debug) {
+						logger.info(String.format("THAT done: %s", task
+								.getAction().toString()));
+					}
 				}
 			}
 			logger.info("work done");

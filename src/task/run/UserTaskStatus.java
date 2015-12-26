@@ -1,7 +1,8 @@
 package task.run;
 
 public enum UserTaskStatus {
-	END,
+	NEW,
 	RUNNING,
 	SUSPEND,
+	END,
 }
