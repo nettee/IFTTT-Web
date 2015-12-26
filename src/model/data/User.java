@@ -18,10 +18,6 @@ public class User {
 	public User() {
 	}
 
-	public static User getAdmin() {
-		return UserDao.getUserById(1);
-	}
-
 	public User(Integer id, String name, String password, int balance, int score) {
 		this.id = id;
 		this.name = name;
@@ -49,7 +45,7 @@ public class User {
 	public int getScore() {
 		return score;
 	}
-	
+
 	public int getLevel() {
 		return Math.min(score / 50, 20);
 	}
