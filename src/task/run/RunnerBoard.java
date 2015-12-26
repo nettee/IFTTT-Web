@@ -24,21 +24,27 @@ public class RunnerBoard {
 	private Map<Integer, UserTaskRunner> map = new HashMap<Integer, UserTaskRunner>();
 
 	public UserTaskRunner getRunner(UserTask userTask) {
-		int userTaskId = userTask.getId();
-		return getRunner(userTaskId);
+		return get(userTask.getId());
 	}
 
-	UserTaskRunner getRunner(Integer userTaskId) {
+	private UserTaskRunner get(Integer userTaskId) {
 		return map.get(userTaskId);
 	}
 
-	public void putRunner(UserTask userTask, UserTaskRunner runner) {
-		int userTaskId = userTask.getId();
-		putRunner(userTaskId, runner);
+	public void putUserTask(UserTask userTask, UserTaskRunner runner) {
+		put(userTask.getId(), runner);
 	}
 
-	void putRunner(Integer userTaskId, UserTaskRunner runner) {
+	private void put(Integer userTaskId, UserTaskRunner runner) {
 		map.put(userTaskId, runner);
+	}
+	
+	public void removeUserTask(UserTask userTask) {
+		remove(userTask.getId());
+	}
+	
+	private void remove(Integer userTaskId) {
+		map.remove(userTaskId);
 	}
 
 }
