@@ -206,7 +206,9 @@ $(document).on("click",".op",function(){
                list.load("component/DynEdit.jsp",function(){
                $('.collapsible').collapsible();
                $('.collapsible').collapsible();
+               $("main").animate({scrollTop:$(document).height()}, 'slow');
                });
+               
             }
 			$("#tasklist").load(location.href + " #tasklist");
 				

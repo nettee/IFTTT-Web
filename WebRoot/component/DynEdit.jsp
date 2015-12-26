@@ -200,7 +200,7 @@
 		</div>
 	</form>
 </div>
-<script>
+<script type="text/javascript">
 //填充表单
 	$(document).ready(function(){
 	<%if (edit_task.getTrigger().getType()==Trigger.WEIBO_PUSHED) {%>$("[id='oo1']").attr("checked","checked");<%}%>
@@ -210,5 +210,6 @@
 	<%if (edit_task.getAction().getType()==Action.WEIBO_PUSHING) {%>$("[id='oo5']").attr("checked","checked");<%}%>
 	<%if (edit_task.getAction().getType()==Action.MAIL_SENDING) {%>$("[id='oo6']").attr("checked","checked");<%}%>
 	<%if (edit_task.getAction().getType()==Action.HELLO) {%>$("[id='oo7']").attr("checked","checked");<%}%>
+	
 	});
 </script>
