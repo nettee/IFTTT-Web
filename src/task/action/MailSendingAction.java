@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.task.Action;
+import task.mail.Mail;
 
 public class MailSendingAction implements Action {
 
 	private static final long serialVersionUID = 1L;
+
+	private static final Mail mailSender = new Mail("", "");
 
 	private final String address;
 	private final String subject;
@@ -26,7 +29,7 @@ public class MailSendingAction implements Action {
 
 	@Override
 	public void perform() {
-		// TODO Auto-generated method stub
+		mailSender.sendMessage(address, subject, content);
 	}
 
 	@Override

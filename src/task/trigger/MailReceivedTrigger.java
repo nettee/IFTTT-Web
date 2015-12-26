@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.task.Trigger;
+import task.mail.Mail;
 
 public class MailReceivedTrigger implements Trigger {
 
@@ -11,10 +12,12 @@ public class MailReceivedTrigger implements Trigger {
 
 	private final String address;
 	private final String password;
+	private final Mail mailReceiver;
 
 	public MailReceivedTrigger(String address, String password) {
 		this.address = address;
 		this.password = password;
+		mailReceiver = new Mail(address, password);
 	}
 
 	@Override
@@ -24,8 +27,7 @@ public class MailReceivedTrigger implements Trigger {
 
 	@Override
 	public boolean test() {
-		// TODO
-		return false;
+		return mailReceiver.hasNewMessage();
 	}
 
 	public String getAddress() {
@@ -49,7 +51,6 @@ public class MailReceivedTrigger implements Trigger {
 
 	@Override
 	public String toString() {
-		return String.format("MailReceivedTrigger{address=%s, password=%s}",
-				address, password);
+		return String.format("MailReceivedTrigger{address=%s}", address);
 	}
 }

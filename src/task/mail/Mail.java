@@ -103,7 +103,7 @@ public class Mail {
 
 	}
 
-	public boolean sendMessage(String address, String body) {
+	public boolean sendMessage(String address, String subject, String content) {
 		Session session = Session.getDefaultInstance(props,
 				Mail_AuthenticatorGenerator
 						.getAuthenticator(userName, password));
@@ -113,8 +113,8 @@ public class Mail {
 			from = new InternetAddress(userName);
 			message.setFrom(from);
 			InternetAddress to = new InternetAddress(address);
-			message.setSubject("[IFTTT]Message");
-			message.setText(body);
+			message.setSubject("[IFTTT]" + subject);
+			message.setText(content);
 			message.setRecipient(RecipientType.TO, to);
 			Transport transport = session.getTransport("smtps");
 			transport.connect(props.getProperty("smtp.mail.host"), 465, userName, password);

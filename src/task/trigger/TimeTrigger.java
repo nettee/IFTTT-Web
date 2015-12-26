@@ -14,18 +14,14 @@ public class TimeTrigger implements Trigger {
 	private final int hour;
 	private final int minute;
 
-	@Deprecated
-	public TimeTrigger(Calendar time) {
-		hour = time.get(Calendar.HOUR_OF_DAY);
-		minute = time.get(Calendar.MINUTE);
-	}
-
 	public TimeTrigger(int hour, int minute) {
 		if (hour < 0 || hour >= 24) {
-			throw new IllegalArgumentException(String.format("illgal hour %d", hour));
+			throw new IllegalArgumentException(String.format("illgal hour %d",
+					hour));
 		}
 		if (minute < 0 || minute >= 60) {
-			throw new IllegalArgumentException(String.format("illgal minute %d", minute));
+			throw new IllegalArgumentException(String.format(
+					"illgal minute %d", minute));
 		}
 		this.hour = hour;
 		this.minute = minute;
@@ -42,7 +38,7 @@ public class TimeTrigger implements Trigger {
 		Calendar settedTime = getSettedTime();
 		return !now.before(settedTime);
 	}
-	
+
 	private Calendar getSettedTime() {
 		GregorianCalendar time = new GregorianCalendar();
 		time.set(Calendar.HOUR_OF_DAY, hour);
