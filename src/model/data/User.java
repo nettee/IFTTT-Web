@@ -49,7 +49,7 @@ public class User {
 	public int getLevel() {
 		return Math.min(score / 50, 20);
 	}
-	
+
 	public void setLevel(int level) {
 		this.score = level * 50 + 25;
 	}
@@ -98,6 +98,10 @@ public class User {
 		UserTaskDao.addUserTask(id, task);
 	}
 
+	public void changePassword(String newPassword) {
+		UserDao.changePassword(id, newPassword);
+	}
+
 	public void recharge(int amount) {
 		UserDao.addBalance(id, amount);
 	}
@@ -105,8 +109,8 @@ public class User {
 	@Override
 	public String toString() {
 		return String.format(
-				"User(id=%d, name=%s, password=%s, balance=%d, score=%d)", id,
-				name, password, balance, score);
+				"User({id=%d, name=%s, password=%s, balance=%d, score=%d(level %d)}", id,
+				name, password, balance, score, getLevel());
 	}
 
 }

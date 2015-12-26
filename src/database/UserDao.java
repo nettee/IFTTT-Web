@@ -130,6 +130,21 @@ public final class UserDao {
 				username, password));
 	}
 
+	public static void changePassword(int userId, String newPassword) {
+		if (newPassword == null) {
+			throw new NullPointerException("newPassword == null");
+		}
+		if (newPassword.length() < 6) {
+			throw new IllegalArgumentException("newPassword too short");
+		}
+		String sql = "UPDATE user SET password=? WHERE id=?";
+		List<Object> params = Arrays.asList((Object) newPassword,
+				(Object) userId);
+		DaoUtil.execute(sql, params);
+		logger.info(String.format("changePassword: usreId=%d, newPassword=%s",
+				userId, newPassword));
+	}
+
 	public static void subtractBalance(int userId, int amount) {
 		if (amount <= 0) {
 			throw new IllegalArgumentException("amount <= 0");
@@ -166,8 +181,9 @@ public final class UserDao {
 	public static void setLevel(int userId, int newLevel) {
 		User user = getUserById(userId);
 		if (user.getLevel() >= newLevel) {
-			logger.info(String.format(
-					"setLevel: user[%d] already has level %d", userId, newLevel));
+			logger.info(String
+					.format("setLevel: user[%d] already has level %d", userId,
+							newLevel));
 			return;
 		}
 		user.setLevel(newLevel);
