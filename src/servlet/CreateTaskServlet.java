@@ -191,6 +191,7 @@ public class CreateTaskServlet extends HttpServlet {
 				edit_task.editTask(task);
 				request.getSession().removeAttribute("Edit");
 				logger.info("Edit Task to:"+task.toString());
+				response.sendRedirect("dashboard.jsp?page=Task");
 			}
 		} else {
 			response.setContentType("text/html");
