@@ -84,7 +84,7 @@ public class CreateTaskServlet extends HttpServlet {
 				String content = request.getParameter("weibo_content");
 				// 允许判定内容为空 即只要发送微博就触发
 				if (accessToken != null)
-					trigger = new WeiboPostedTrigger(accessToken, content);
+					trigger = new WeiboPostedTrigger(user.getName(), accessToken, content);
 				else {
 					tempInfo.append("<div>No Authority for weibo</div>");
 					logger.info("No Authority For Weibo");

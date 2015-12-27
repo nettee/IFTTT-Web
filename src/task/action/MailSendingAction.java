@@ -10,8 +10,6 @@ public class MailSendingAction implements Action {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Mail mailSender = new Mail("", "");
-
 	private final String address;
 	private final String subject;
 	private final String content;
@@ -29,7 +27,7 @@ public class MailSendingAction implements Action {
 
 	@Override
 	public void perform() {
-		mailSender.sendMessage(address, subject, content);
+		// TODO
 	}
 
 	@Override

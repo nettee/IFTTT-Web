@@ -10,10 +10,12 @@ public class WeiboPostedTrigger implements Trigger {
 	private static final long serialVersionUID = 1L;
 	
 	private final String user;
+	private final String code;
 	private final String pattern;
 
-	public WeiboPostedTrigger(String user, String pattern) {
+	public WeiboPostedTrigger(String user, String code, String pattern) {
 		this.user = user;
+		this.code = code;
 		this.pattern = pattern;
 	}
 

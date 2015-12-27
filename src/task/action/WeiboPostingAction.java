@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.task.Action;
-import task.weibo.Auth;
-import task.weibo.UpdateStatus;
 
 public class WeiboPostingAction implements Action {
 
@@ -28,8 +26,7 @@ public class WeiboPostingAction implements Action {
 
 	@Override
 	public void perform() {
-		String token = Auth.getAccessToken(code).getAccessToken();
-		UpdateStatus.postStatus(token, content);
+		// TODO
 	}
 
 	@Override

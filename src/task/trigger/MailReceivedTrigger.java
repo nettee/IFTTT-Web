@@ -12,12 +12,10 @@ public class MailReceivedTrigger implements Trigger {
 
 	private final String address;
 	private final String password;
-	private final Mail mailReceiver;
 
 	public MailReceivedTrigger(String address, String password) {
 		this.address = address;
 		this.password = password;
-		mailReceiver = new Mail(address, password);
 	}
 
 	@Override
@@ -27,7 +25,8 @@ public class MailReceivedTrigger implements Trigger {
 
 	@Override
 	public boolean test() {
-		return mailReceiver.hasNewMessage();
+		// TODO
+		return false;
 	}
 
 	public String getAddress() {
