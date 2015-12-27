@@ -3,13 +3,15 @@ package task.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import model.task.Action;
-import task.mail.Mail;
+import task.mail.IFTTT_Mail;
 
 public class MailSendingAction implements Action {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final Logger logger = Logger.getLogger(MailSendingAction.class);
 	private final String address;
 	private final String subject;
 	private final String content;
@@ -27,7 +29,8 @@ public class MailSendingAction implements Action {
 
 	@Override
 	public void perform() {
-		// TODO
+		logger.info("send mail to "+address);
+		IFTTT_Mail.getPublicMail().sendMessage(address, subject, content);
 	}
 
 	@Override

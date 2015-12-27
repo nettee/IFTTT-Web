@@ -82,9 +82,10 @@ public class CreateTaskServlet extends HttpServlet {
 		if (option_this != null) {
 			if (option_this.equals("o1")) {
 				String content = request.getParameter("weibo_content");
-				// 允许判定内容为空 即只要发送微博就触发
+				// pattern鍙互涓虹┖
 				if (accessToken != null)
-					trigger = new WeiboPostedTrigger(user.getName(), accessToken, content);
+					trigger = new WeiboPostedTrigger(user.getName(),
+							accessToken, content);
 				else {
 					tempInfo.append("<div>No Authority for weibo</div>");
 					logger.info("No Authority For Weibo");
@@ -94,6 +95,9 @@ public class CreateTaskServlet extends HttpServlet {
 				String weibo_time = request.getParameter("weibo_time");
 				if (accessToken != null && weibo_time != null
 						&& !weibo_time.equals("")) {
+					int hour = Integer.valueOf(weibo_time.split(":")[0]);
+					int minute = Integer.valueOf(weibo_time.split(":")[1]);
+					trigger = new WeiboSilentTrigger(accessToken, hour, minute);
 				} else {
 					Judge = false;
 					if (accessToken != null) {
@@ -142,8 +146,8 @@ public class CreateTaskServlet extends HttpServlet {
 						.getParameter("post_sweibo_content");
 				if (accessToken != null && post_weibo_content != null
 						&& !post_weibo_content.equals(""))
-					action = new WeiboPostingAction(accessToken, null,
-							post_weibo_content);
+					action = new WeiboPostingAction(user.getName(),
+							accessToken, post_weibo_content);
 				else {
 					Judge = false;
 					if (accessToken == null) {
@@ -184,13 +188,13 @@ public class CreateTaskServlet extends HttpServlet {
 				user.addTask(task);
 				logger.info("Add Task:" + task.toString());
 				response.sendRedirect("dashboard.jsp?page=Task");
-			} else if (submit_type.equals("edit")){
+			} else if (submit_type.equals("edit")) {
 				Integer edit_id = (Integer) request.getSession().getAttribute(
 						"Edit");
 				UserTask edit_task = UserTask.getUserTask(edit_id);
 				edit_task.editTask(task);
 				request.getSession().removeAttribute("Edit");
-				logger.info("Edit Task to:"+task.toString());
+				logger.info("Edit Task to:" + task.toString());
 				response.sendRedirect("dashboard.jsp?page=Task");
 			}
 		} else {

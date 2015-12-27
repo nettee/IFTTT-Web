@@ -13,15 +13,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
-public class Mail implements Serializable{
+import org.apache.log4j.Logger;
+public class Mail implements Serializable {
 	/**
 	 * 
 	 */
+	private static final Logger logger = Logger.getLogger(Mail.class);
 	private static final long serialVersionUID = 2672111673108677695L;
 	Properties props;
 	String userName, password;
 	Mail_Host mail_Host;
-	int mail_count;
+	int mail_count = 0;
+	boolean first;
 	public boolean connect = false;
 
 	public boolean isConnect() {
@@ -29,10 +32,11 @@ public class Mail implements Serializable{
 	}
 
 	public Mail(String arg_name, String arg_password) {
+		mail_count = 0;
+		first = true;
 		String mail_end = arg_name.split("@")[1];
 		userName = arg_name;
 		password = arg_password;
-		mail_count = 0;
 		if (mail_end.equals("qq.com")) {
 			mail_Host = Mail_Host.TENCENT;
 			props = mail_Host.getProperties();
@@ -51,7 +55,7 @@ public class Mail implements Serializable{
 		try {
 			if (folder.exists()) {
 				connect = true;
-				mail_count = folder.getMessageCount();
+				logger.info("New Mail Connect " + arg_name);
 			} else
 				connect = false;
 		} catch (MessagingException e) {
@@ -91,21 +95,29 @@ public class Mail implements Serializable{
 			Folder folder = fetchInbox(props,
 					Mail_AuthenticatorGenerator.getAuthenticator(userName,
 							password));
-			newAllMessage = folder.getNewMessageCount();
+			newAllMessage = folder.getMessageCount();
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		} catch (MailException e) {
 			e.printStackTrace();
 		}
-
-		if (newAllMessage > mail_count) {
-			mail_count = newAllMessage;
-			return true;
+		if (!first) {
+			logger.info("Mail :before " + mail_count + " now " + newAllMessage);
+			if (newAllMessage > mail_count) {
+				mail_count = newAllMessage;
+				return true;
+			} else {
+				mail_count = newAllMessage;
+				return false;
+			}
 		} else {
 			mail_count = newAllMessage;
+			logger.info("Initial Mail " + mail_count);
+			first = false;
 			return false;
 		}
 	}
+
 	public boolean sendMessage(String address, String subject, String content) {
 		Session session = Session.getDefaultInstance(props,
 				Mail_AuthenticatorGenerator
@@ -120,8 +132,8 @@ public class Mail implements Serializable{
 			message.setText(content);
 			message.setRecipient(RecipientType.TO, to);
 			Transport transport = session.getTransport("smtps");
-			transport.connect(props.getProperty("mail.smtp.host"), 465, userName, password);
-			
+			transport.connect(props.getProperty("mail.smtp.host"), 465,
+					userName, password);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 			return true;

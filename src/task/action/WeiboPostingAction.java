@@ -3,12 +3,16 @@ package task.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
+import task.weibo.UpdateStatus;
+
 import model.task.Action;
 
 public class WeiboPostingAction implements Action {
 
 	private static final long serialVersionUID = 1L;
-	
+	private static final Logger logger = Logger.getLogger(WeiboPostingAction.class);
 	private final String user;
 	private final String code;
 	private final String content;
@@ -26,7 +30,8 @@ public class WeiboPostingAction implements Action {
 
 	@Override
 	public void perform() {
-		// TODO
+		logger.info("Post Weibo Status"+content);
+		UpdateStatus.postStatus(code, content);
 	}
 
 	@Override

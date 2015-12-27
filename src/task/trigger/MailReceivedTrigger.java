@@ -3,19 +3,23 @@ package task.trigger;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import model.task.Trigger;
 import task.mail.Mail;
 
 public class MailReceivedTrigger implements Trigger {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final Logger logger = Logger.getLogger(MailReceivedTrigger.class);
 	private final String address;
 	private final String password;
+	private final Mail mailReceiver;
 
 	public MailReceivedTrigger(String address, String password) {
 		this.address = address;
 		this.password = password;
+		mailReceiver = new Mail(address, password);
 	}
 
 	@Override
@@ -25,8 +29,15 @@ public class MailReceivedTrigger implements Trigger {
 
 	@Override
 	public boolean test() {
-		// TODO
-		return false;
+		if (mailReceiver.isConnect()) {
+			if (mailReceiver.hasNewMessage())
+				return true;
+			else
+				return false;
+		} else {
+			logger.info("Can't connect to Receive Mail Address:"+address);
+			return false;
+		}
 	}
 
 	public String getAddress() {

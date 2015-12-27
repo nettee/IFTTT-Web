@@ -3,12 +3,16 @@ package task.trigger;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
+import task.weibo.GetNewStatus;
+
 import model.task.Trigger;
 
 public class WeiboPostedTrigger implements Trigger {
 
 	private static final long serialVersionUID = 1L;
-	
+	private static final Logger logger = Logger.getLogger(WeiboPostedTrigger.class);
 	private final String user;
 	private final String code;
 	private final String pattern;
@@ -26,8 +30,10 @@ public class WeiboPostedTrigger implements Trigger {
 
 	@Override
 	public boolean test() {
-		// TODO Auto-generated method stub
-		return false;
+		String content=GetNewStatus.getNewStatus(code);
+		logger.info("Latest Status: "+content+" test if contains"+pattern);
+		if(content.contains(pattern)) return true;
+		else return false;
 	}
 
 	@Override
