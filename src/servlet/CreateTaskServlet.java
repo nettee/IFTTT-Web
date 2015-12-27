@@ -82,7 +82,6 @@ public class CreateTaskServlet extends HttpServlet {
 		if (option_this != null) {
 			if (option_this.equals("o1")) {
 				String content = request.getParameter("weibo_content");
-				// pattern可以为空
 				if (accessToken != null)
 					trigger = new WeiboPostedTrigger(user.getName(),
 							accessToken, content);
