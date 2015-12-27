@@ -1,5 +1,6 @@
 package task.mail;
 
+import java.io.Serializable;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Folder;
@@ -12,7 +13,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
-public class Mail {
+public class Mail implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2672111673108677695L;
 	Properties props;
 	String userName, password;
 	Mail_Host mail_Host;
@@ -100,9 +105,7 @@ public class Mail {
 			mail_count = newAllMessage;
 			return false;
 		}
-
 	}
-
 	public boolean sendMessage(String address, String subject, String content) {
 		Session session = Session.getDefaultInstance(props,
 				Mail_AuthenticatorGenerator
@@ -117,7 +120,8 @@ public class Mail {
 			message.setText(content);
 			message.setRecipient(RecipientType.TO, to);
 			Transport transport = session.getTransport("smtps");
-			transport.connect(props.getProperty("smtp.mail.host"), 465, userName, password);
+			transport.connect(props.getProperty("mail.smtp.host"), 465, userName, password);
+			
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 			return true;
