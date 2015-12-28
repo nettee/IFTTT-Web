@@ -50,7 +50,8 @@
 					<h2 class="mdl-card__title-text">Announcement</h2>
 				</div>
 				<div class="mdl-card__supporting-text mdl-color-text--grey-600">
-					<%=subuser.getMessageList().get(0).getContent()%></div>
+					<%if(subuser.getMessageList().size()>0) {%>
+					<%=subuser.getMessageList().get(0).getContent()%><%} %></div>
 				<div class="mdl-card__actions mdl-card--border">
 					<a href="?page=Inbox"
 						class="mdl-button mdl-js-button mdl-js-ripple-effect">Read
@@ -65,13 +66,20 @@
 					<ul>
 						<li>最近任务:
 							<div class="center">
-								<h6><%=subuser.getTaskList()
+								<h6>
+								<%if(subuser.getTaskList().size() - 1>=0){ %>
+								<%=
+								
+								subuser.getTaskList()
 					.get(subuser.getTaskList().size() - 1).getTask().getName()%></h6>
+					<%} %>
 							</div>
 						</li>
 
 						<li>任务状态: <br> <%
- 	int status = subuser.getTaskList()
+	int status=-1;
+	if(subuser.getTaskList().size() - 1>=0)
+ 	status = subuser.getTaskList()
  			.get(subuser.getTaskList().size() - 1).getStatus();
  	String Dis = null;
  	switch (status) {
