@@ -1,3 +1,5 @@
+<%@page import="model.task.Action"%>
+<%@page import="model.task.Trigger"%>
 <%@page import="task.run.UserTaskStatus"%>
 <%@page import="model.data.UserTask"%>
 <%@page import="model.task.Task"%>
@@ -61,13 +63,35 @@
       
    			 </ul>
  			 </div>
-			<%=tb.toString() %>
-				<br>
+ 			 <div class="row"style="margin-bottom: 0px!important;">
+			<div class="col s1 blue-text">&nbsp;&nbsp;&nbsp;&nbsp;IF</div> 
+			<div class="col s3 brown-text"><%=Trigger.names.get(tb.getTrigger().getType()) %></div>
+			<div class="col s1 blue-text">THEN</div>
+			<div class="col s3 brown-text"><%=Action.names.get(tb.getAction().getType()) %></div>
+			</div>
+			<div class="row" style="margin-bottom: 0px!important;"> 
+			<div class="col s1">&nbsp;</div>
+			<div class="col s3">
+			<%
+				for(String i:tb.getTrigger().getProperties().keySet()){
+				%><%=i%>:<%=tb.getTrigger().getProperties().get(i)%><br><%
+				}
+			%>
+			</div>
+			<div class="col s1">&nbsp;</div>
+			<div class="col s3">
+			<%
+				for(String i:tb.getAction().getProperties().keySet()){
+				%><%=i%>:<%=tb.getAction().getProperties().get(i)%><br><%
+				}
+			%>
+			</div>
+			</div>
 		</li>
 		<%} %>
 		</ul>
 	</div>
-<ul class="collapsible" data-collapsible="expandable" style="width: 80%">
+<ul class="collapsible" data-collapsible="accordion" style="width: 80%">
 <li class="collection-item createform" style="width: 80%;">
 <div class="collapsible-header">Create Task</div>
 <div class="collapsible-body">
