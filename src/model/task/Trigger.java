@@ -9,7 +9,7 @@ public interface Trigger extends Serializable {
 	int INSTANT = 0;
 	int TIME = 1;
 	int MAIL_RECEIVED = 2;
-	int WEIBO_PUSHED = 3;
+	int WEIBO_POSTED = 3;
 	int WEIBO_SILENT = 4;
 	
 	Map<Integer, String> names = new HashMap<Integer, String>() {
@@ -18,7 +18,7 @@ public interface Trigger extends Serializable {
 			put(INSTANT, "Instant Trigger");
 			put(TIME, "Time Trigger");
 			put(MAIL_RECEIVED, "Mail Received Trigger");
-			put(WEIBO_PUSHED, "Weibo Pushed Trigger");
+			put(WEIBO_POSTED, "Weibo Posted Trigger");
 			put(WEIBO_SILENT, "Weibo Silent Trigger");
 		}
 	};

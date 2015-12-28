@@ -46,12 +46,12 @@ public class TimeTrigger implements Trigger {
 		return time;
 	}
 
-	public int getMinute() {
-		return minute;
+	public int getHour() {
+		return hour;
 	}
 
-	public int getSecond() {
-		return hour;
+	public int getMinute() {
+		return minute;
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class TimeTrigger implements Trigger {
 		return new HashMap<String, Object>() {
 			private static final long serialVersionUID = 1L;
 			{
+				put("hour", hour);
 				put("minute", minute);
-				put("second", hour);
 			}
 		};
 	}

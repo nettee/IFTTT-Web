@@ -25,7 +25,7 @@ public class WeiboPostingAction implements Action {
 
 	@Override
 	public int getType() {
-		return WEIBO_PUSHING;
+		return WEIBO_POSTING;
 	}
 
 	@Override

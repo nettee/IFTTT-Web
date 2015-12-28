@@ -25,7 +25,7 @@ public class WeiboPostedTrigger implements Trigger {
 
 	@Override
 	public int getType() {
-		return WEIBO_PUSHED;
+		return WEIBO_POSTED;
 	}
 
 	@Override
