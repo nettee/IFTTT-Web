@@ -128,7 +128,6 @@ a {
 		 else if(pageName.equals("Inbox")){%><jsp:include page="component/Inbox_Sub.jsp"></jsp:include><% } 
 		 else if(pageName.equals("Setting")){%><jsp:include page="component/Setting_Sub.jsp"></jsp:include><% }
 		 else if(pageName.equals("Purchase")){%><jsp:include page="component/Purch_Sub.jsp"></jsp:include><% }
-		 else if(pageName.equals("Help")){%><jsp:include page="component/Help_Sub.jsp"></jsp:include><% }
 		 else if(pageName.equals("UserList")){%><jsp:include page="component/UserList_Sub.jsp"></jsp:include><% }
 		 else {%><jsp:include page="component/Home_Sub.jsp"></jsp:include><% }
 		}else{ %><jsp:include page="component/Home_Sub.jsp"></jsp:include><%}%>
