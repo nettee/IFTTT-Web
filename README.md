@@ -25,3 +25,17 @@ mysql ifttt -u root -p
 ```Shell
 mysql ifttt < src/main/resources/schema.sql -u root -p
 ```
+
+## Run
+
+```Shell
+mvn jetty:run
+```
+
+## Deploy
+
+```Shell
+mvn package
+```
+
+Copy target/ifttt-web.war to Tomcat webapps/ directory.
