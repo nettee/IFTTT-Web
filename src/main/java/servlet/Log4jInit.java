@@ -15,12 +15,13 @@ public class Log4jInit extends HttpServlet {
 	 * @throws ServletException if an error occurs
 	 */
 	public void init() throws ServletException {
-		String prefix = getServletContext().getRealPath("/");
-		String file = getInitParameter("log4j");
+//		String prefix = getServletContext().getRealPath("/");
+//		String file = getInitParameter("log4j");
 
-		if (file != null) {
+		String path = Thread.currentThread().getContextClassLoader().getResource("log4j.properties").getPath();
+		if (path != null) {
+			PropertyConfigurator.configure(path);
 			System.out.println("log4j successfully initialized");
-			PropertyConfigurator.configure(prefix + file);
 		} else {
 			System.out.println("log4j initialization failed");
 		}

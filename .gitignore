@@ -5,3 +5,6 @@
 
 # Maven build files
 /target/
+
+# Log files
+*.log
