@@ -6,6 +6,6 @@ public class DriverTest {
 	
 	@Test
 	public void testDriver() throws ClassNotFoundException {
-		Class.forName("org.sqlite.JDBC");
+		Class.forName("com.mysql.jdbc.Driver");
 	}
 }

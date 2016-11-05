@@ -11,10 +11,10 @@ class DatabaseUtil {
 
 	private static final Logger logger = Logger.getLogger(DatabaseUtil.class);
 
-	private static final String DRIVER = "org.sqlite.JDBC";
-	private static final String DB_URL = "jdbc:sqlite:/home/william/.ifttt-web/data.db";
-//	private static final String DB_USER = "checkyh";
-//	private static final String DB_PASSWORD = "123456";
+	private static final String DRIVER = "com.mysql.jdbc.Driver";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/ifttt?autoDeserialize=true";
+	private static final String DB_USER = "root";
+	private static final String DB_PASSWORD = "123456";
 
 	private static Connection connection;
 
@@ -33,7 +33,7 @@ class DatabaseUtil {
 	public static Connection getConnection() {
 		if (connection == null) {
 			try {
-				connection = DriverManager.getConnection(DB_URL);
+				connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
